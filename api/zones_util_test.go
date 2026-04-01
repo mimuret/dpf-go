@@ -31,7 +31,7 @@ func TestGetZoneByDomainName(t *testing.T) {
 			}
 
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(GetZones{
+			_ = json.NewEncoder(w).Encode(GetZones{
 				RequestId: "test-req-id",
 				Results:   results,
 			})

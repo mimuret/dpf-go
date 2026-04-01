@@ -16,7 +16,7 @@ func RunImport(ctx context.Context, client *api.APIClient, zoneId string, zoneNa
 	if err != nil {
 		return fmt.Errorf("failed to open file: %w", err)
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	zp := dns.NewZoneParser(f, zoneName, zoneFile)
 

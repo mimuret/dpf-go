@@ -29,7 +29,7 @@ func TestExportZone(t *testing.T) {
 					},
 				},
 			}
-			json.NewEncoder(w).Encode(res)
+			_ = json.NewEncoder(w).Encode(res)
 			return
 		}
 		w.WriteHeader(http.StatusNotFound)
@@ -42,7 +42,7 @@ func TestExportZone(t *testing.T) {
 	ctx := context.WithValue(context.Background(), api.ContextAccessToken, "test-token")
 
 	outputFile := "test_export.zone"
-	defer os.Remove(outputFile)
+	defer func() { _ = os.Remove(outputFile) }()
 
 	if err := RunExport(ctx, client, zoneId, outputFile); err != nil {
 		t.Fatalf("RunExport failed: %v", err)

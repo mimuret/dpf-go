@@ -17,12 +17,12 @@ func TestSyncWaitSuccessful(t *testing.T) {
 			w.Header().Set("Content-Type", "application/json")
 			count++
 			if count < 2 {
-				json.NewEncoder(w).Encode(GetJobs{
+				_ = json.NewEncoder(w).Encode(GetJobs{
 					RequestId: reqID,
 					Status:    "RUNNING",
 				})
 			} else {
-				json.NewEncoder(w).Encode(GetJobs{
+				_ = json.NewEncoder(w).Encode(GetJobs{
 					RequestId: reqID,
 					Status:    "SUCCESSFUL",
 				})
@@ -69,7 +69,7 @@ func TestSyncWaitFailed(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/jobs/"+reqID {
 			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(GetJobs{
+			_ = json.NewEncoder(w).Encode(GetJobs{
 				RequestId:    reqID,
 				Status:       "FAILED",
 				ErrorType:    PtrString("TestError"),

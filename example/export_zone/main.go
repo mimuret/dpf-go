@@ -21,7 +21,7 @@ func RunExport(ctx context.Context, client *api.APIClient, zoneId string, output
 	if err != nil {
 		return fmt.Errorf("failed to create file: %w", err)
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	for _, record := range res.Results {
 		ttl := uint32(record.GetTtl())
@@ -32,7 +32,9 @@ func RunExport(ctx context.Context, client *api.APIClient, zoneId string, output
 				log.Printf("Warning: failed to parse RR %s: %v", rrStr, err)
 				continue
 			}
-			fmt.Fprintln(f, rr.String())
+			if _, err := fmt.Fprintln(f, rr.String()); err != nil {
+				return fmt.Errorf("failed to write record: %w", err)
+			}
 		}
 	}
 	return nil

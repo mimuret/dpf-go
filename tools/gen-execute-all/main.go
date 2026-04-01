@@ -88,7 +88,7 @@ func (r {{ .RequestStruct }}) ExecuteAll() (res *{{ .ModelStruct }}, lastResp *h
 
 func main() {
 	fset := token.NewFileSet()
-	pkgs, err := parser.ParseDir(fset, apiDir, nil, 0)
+	pkgs, err := parser.ParseDir(fset, apiDir, nil, 0) //nolint:staticcheck // deprecated but fine for this tool
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -177,7 +177,7 @@ func main() {
 	fmt.Printf("Generated %d ExecuteAll methods in %s\n", len(requests), outputFile)
 }
 
-func findExecuteInfo(pkg *ast.Package, requestStruct string) (string, string, string) {
+func findExecuteInfo(pkg *ast.Package, requestStruct string) (string, string, string) { //nolint:staticcheck // deprecated but fine for this tool
 	var modelStruct string
 	for _, file := range pkg.Files {
 		ast.Inspect(file, func(n ast.Node) bool {

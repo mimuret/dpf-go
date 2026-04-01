@@ -48,7 +48,7 @@ func TestGetRecordByName(t *testing.T) {
 
 			w.Header().Set("Content-Type", "application/json")
 			w.Header().Set("X-Request-Id", "test-req-id")
-			json.NewEncoder(w).Encode(GetRecords{
+			_ = json.NewEncoder(w).Encode(GetRecords{
 				RequestId: "test-req-id",
 				Results:   results,
 			})

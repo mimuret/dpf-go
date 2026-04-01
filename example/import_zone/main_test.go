@@ -26,7 +26,7 @@ func TestImportZone(t *testing.T) {
 				JobsUrl:   "http://localhost/jobs/" + reqID,
 			}
 			w.WriteHeader(http.StatusAccepted)
-			json.NewEncoder(w).Encode(res)
+			_ = json.NewEncoder(w).Encode(res)
 			return
 		}
 
@@ -36,7 +36,7 @@ func TestImportZone(t *testing.T) {
 				RequestId: reqID,
 				Status:    "SUCCESSFUL",
 			}
-			json.NewEncoder(w).Encode(res)
+			_ = json.NewEncoder(w).Encode(res)
 			return
 		}
 
@@ -54,7 +54,7 @@ func TestImportZone(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create test zone file: %v", err)
 	}
-	defer os.Remove(zoneFile)
+	defer func() { _ = os.Remove(zoneFile) }()
 
 	if err := RunImport(ctx, client, zoneId, zoneName, zoneFile); err != nil {
 		t.Fatalf("RunImport failed: %v", err)
