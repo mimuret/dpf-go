@@ -34,6 +34,7 @@ import (
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -171,6 +172,11 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ZonesContractsAPI = (*ZonesContractsAPIService)(&c.common)
 
 	return c
+}
+
+// SetTracer sets the tracer for the APIClient
+func (c *APIClient) SetTracer(t trace.Tracer) {
+	c.tracer = t
 }
 
 func atoi(in string) (int, error) {
@@ -355,6 +361,23 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	}
 	if resp.StatusCode >= 400 {
 		span.SetStatus(codes.Error, resp.Status)
+	}
+
+	// Extract request_id from JSON body
+	if resp.Body != nil && JsonCheck.MatchString(resp.Header.Get("Content-Type")) {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return resp, err
+		}
+		resp.Body.Close()
+		resp.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
+
+		var partial struct {
+			RequestID string "json:\"request_id\""
+		}
+		if err := json.Unmarshal(bodyBytes, &partial); err == nil && partial.RequestID != "" {
+			span.SetAttributes(attribute.String("dpf.request_id", partial.RequestID))
+		}
 	}
 
 	if c.cfg.Debug {

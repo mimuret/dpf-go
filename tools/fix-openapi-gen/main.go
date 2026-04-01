@@ -83,7 +83,7 @@ func addOtelImports(path string, content []byte) []byte {
 		return content
 	}
 
-	otelImports := "\t\"go.opentelemetry.io/otel\"\n\t\"go.opentelemetry.io/otel/trace\"\n\t\"go.opentelemetry.io/otel/codes\"\n"
+	otelImports := "\t\"go.opentelemetry.io/otel\"\n\t\"go.opentelemetry.io/otel/trace\"\n\t\"go.opentelemetry.io/otel/codes\"\n\t\"go.opentelemetry.io/otel/attribute\"\n"
 	if filepath.Base(path) == "client.go" {
 		otelImports += "\t\"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp\"\n"
 	}
@@ -116,6 +116,16 @@ func fixClient(content []byte) []byte {
 	content = assignTracerRe.ReplaceAll(content, []byte(`c := &APIClient{}
 	c.tracer = otel.Tracer("github.com/mimuret/dpf-go/api")`))
 
+	// Add SetTracer method
+	newClientEndRe := regexp.MustCompile(`(?m)^	return c\n\}`)
+	content = newClientEndRe.ReplaceAll(content, []byte(`	return c
+}
+
+// SetTracer sets the tracer for the APIClient
+func (c *APIClient) SetTracer(t trace.Tracer) {
+	c.tracer = t
+}`))
+
 	// Instrument callAPI
 	callApiRe := regexp.MustCompile(`(?m)func \(c \*APIClient\) callAPI\(request \*http\.Request\) \(\*http\.Response, error\) \{`)
 	content = callApiRe.ReplaceAll(content, []byte(`func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
@@ -130,6 +140,23 @@ func fixClient(content []byte) []byte {
 	}
 	if resp.StatusCode >= 400 {
 		span.SetStatus(codes.Error, resp.Status)
+	}
+
+	// Extract request_id from JSON body
+	if resp.Body != nil && JsonCheck.MatchString(resp.Header.Get("Content-Type")) {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return resp, err
+		}
+		resp.Body.Close()
+		resp.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
+
+		var partial struct {
+			RequestID string "json:\"request_id\""
+		}
+		if err := json.Unmarshal(bodyBytes, &partial); err == nil && partial.RequestID != "" {
+			span.SetAttributes(attribute.String("dpf.request_id", partial.RequestID))
+		}
 	}`))
 	// Add DPFError helper to GenericOpenAPIError
 	genericErrorRe := regexp.MustCompile(`(?m)// Body returns the raw bytes of the response\nfunc \(e GenericOpenAPIError\) Body\(\) \[\]byte \{\n\treturn e\.body\n\}\n\n// Model returns the unpacked model of the error\nfunc \(e GenericOpenAPIError\) Model\(\) interface\{\} \{\n\treturn e\.model\n\}`)
