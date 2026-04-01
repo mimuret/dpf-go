@@ -1,0 +1,13 @@
+# OpenAPI Generator Ignore
+# 
+# The files listed below will not be overwritten by the generator.
+# Since we are generating code into an existing Go module, we do not want
+# the generator to overwrite or create module-level files inside "api".
+
+go.mod
+go.sum
+README.md
+git_push.sh
+.travis.yml
+.gitlab-ci.yml
+api/openapi.yaml
