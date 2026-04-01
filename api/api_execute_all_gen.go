@@ -12,11 +12,11 @@ import (
 // 一つのモデルに集約して返します。
 //
 // 戻り値:
-//   - *GetZonesLogs: 全件の結果を保持するモデル。
+//   - *GetCommonConfigs: 全件の結果を保持するモデル。
 //   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
 //   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetZonesLogListRequest) ExecuteAll() (res *GetZonesLogs, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetZonesLogListRequest.ExecuteAll")
+func (r ApiGetCommonConfigListRequest) ExecuteAll() (res *GetCommonConfigs, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetCommonConfigListRequest.ExecuteAll")
 	defer func() {
 		if err != nil {
 			span.RecordError(err)
@@ -25,60 +25,13 @@ func (r ApiGetZonesLogListRequest) ExecuteAll() (res *GetZonesLogs, lastResp *ht
 		span.End()
 	}()
 	r.ctx = ctx
-	var allResults []ZonesLog
-	offset := int32(0)
-	limit := int32(100)
-	for {
-		r = r.Offset(offset)
-		r = r.Limit(limit)
-		var resp *GetZonesLogs
-		var httpResp *http.Response
-		resp, httpResp, err = r.Execute()
-		if err != nil {
-			return nil, httpResp, err
-		}
-		lastResp = httpResp
-		if resp != nil && resp.Results != nil {
-			allResults = append(allResults, resp.Results...)
-			if int32(len(resp.Results)) < limit {
-				break
-			}
-		} else {
-			break
-		}
-		offset += limit
-	}
-	res = &GetZonesLogs{
-		RequestId: lastResp.Header.Get("X-Request-Id"),
-		Results:   allResults,
-	}
-	return res, lastResp, nil
-}
-
-// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
-// 一つのモデルに集約して返します。
-//
-// 戻り値:
-//   - *GetContracts: 全件の結果を保持するモデル。
-//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
-//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetContractListRequest) ExecuteAll() (res *GetContracts, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetContractListRequest.ExecuteAll")
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, err.Error())
-		}
-		span.End()
-	}()
-	r.ctx = ctx
-	var allResults []Contract
+	var allResults []CommonConfig
 	offset := int32(0)
 	limit := int32(10000)
 	for {
 		r = r.Offset(offset)
 		r = r.Limit(limit)
-		var resp *GetContracts
+		var resp *GetCommonConfigs
 		var httpResp *http.Response
 		resp, httpResp, err = r.Execute()
 		if err != nil {
@@ -95,7 +48,7 @@ func (r ApiGetContractListRequest) ExecuteAll() (res *GetContracts, lastResp *ht
 		}
 		offset += limit
 	}
-	res = &GetContracts{
+	res = &GetCommonConfigs{
 		RequestId: lastResp.Header.Get("X-Request-Id"),
 		Results:   allResults,
 	}
@@ -153,6 +106,100 @@ func (r ApiGetLbDomainListRequest) ExecuteAll() (res *GetLbDomains, lastResp *ht
 // 一つのモデルに集約して返します。
 //
 // 戻り値:
+//   - *GetZones: 全件の結果を保持するモデル。
+//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
+//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
+func (r ApiGetContractsZoneListRequest) ExecuteAll() (res *GetZones, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetContractsZoneListRequest.ExecuteAll")
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+	}()
+	r.ctx = ctx
+	var allResults []Zone
+	offset := int32(0)
+	limit := int32(10000)
+	for {
+		r = r.Offset(offset)
+		r = r.Limit(limit)
+		var resp *GetZones
+		var httpResp *http.Response
+		resp, httpResp, err = r.Execute()
+		if err != nil {
+			return nil, httpResp, err
+		}
+		lastResp = httpResp
+		if resp != nil && resp.Results != nil {
+			allResults = append(allResults, resp.Results...)
+			if int32(len(resp.Results)) < limit {
+				break
+			}
+		} else {
+			break
+		}
+		offset += limit
+	}
+	res = &GetZones{
+		RequestId: lastResp.Header.Get("X-Request-Id"),
+		Results:   allResults,
+	}
+	return res, lastResp, nil
+}
+
+// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
+// 一つのモデルに集約して返します。
+//
+// 戻り値:
+//   - *GetZones: 全件の結果を保持するモデル。
+//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
+//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
+func (r ApiGetZoneListRequest) ExecuteAll() (res *GetZones, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetZoneListRequest.ExecuteAll")
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+	}()
+	r.ctx = ctx
+	var allResults []Zone
+	offset := int32(0)
+	limit := int32(10000)
+	for {
+		r = r.Offset(offset)
+		r = r.Limit(limit)
+		var resp *GetZones
+		var httpResp *http.Response
+		resp, httpResp, err = r.Execute()
+		if err != nil {
+			return nil, httpResp, err
+		}
+		lastResp = httpResp
+		if resp != nil && resp.Results != nil {
+			allResults = append(allResults, resp.Results...)
+			if int32(len(resp.Results)) < limit {
+				break
+			}
+		} else {
+			break
+		}
+		offset += limit
+	}
+	res = &GetZones{
+		RequestId: lastResp.Header.Get("X-Request-Id"),
+		Results:   allResults,
+	}
+	return res, lastResp, nil
+}
+
+// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
+// 一つのモデルに集約して返します。
+//
+// 戻り値:
 //   - *GetLbDomains: 全件の結果を保持するモデル。
 //   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
 //   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
@@ -190,6 +237,53 @@ func (r ApiGetContractsLbDomainListRequest) ExecuteAll() (res *GetLbDomains, las
 		offset += limit
 	}
 	res = &GetLbDomains{
+		RequestId: lastResp.Header.Get("X-Request-Id"),
+		Results:   allResults,
+	}
+	return res, lastResp, nil
+}
+
+// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
+// 一つのモデルに集約して返します。
+//
+// 戻り値:
+//   - *GetContractsLogs: 全件の結果を保持するモデル。
+//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
+//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
+func (r ApiGetContractsLogListRequest) ExecuteAll() (res *GetContractsLogs, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetContractsLogListRequest.ExecuteAll")
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+	}()
+	r.ctx = ctx
+	var allResults []ContractsLog
+	offset := int32(0)
+	limit := int32(100)
+	for {
+		r = r.Offset(offset)
+		r = r.Limit(limit)
+		var resp *GetContractsLogs
+		var httpResp *http.Response
+		resp, httpResp, err = r.Execute()
+		if err != nil {
+			return nil, httpResp, err
+		}
+		lastResp = httpResp
+		if resp != nil && resp.Results != nil {
+			allResults = append(allResults, resp.Results...)
+			if int32(len(resp.Results)) < limit {
+				break
+			}
+		} else {
+			break
+		}
+		offset += limit
+	}
+	res = &GetContractsLogs{
 		RequestId: lastResp.Header.Get("X-Request-Id"),
 		Results:   allResults,
 	}
@@ -341,11 +435,11 @@ func (r ApiGetRecordListRequest) ExecuteAll() (res *GetRecords, lastResp *http.R
 // 一つのモデルに集約して返します。
 //
 // 戻り値:
-//   - *GetContractsLogs: 全件の結果を保持するモデル。
+//   - *GetLbDomainsLogs: 全件の結果を保持するモデル。
 //   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
 //   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetContractsLogListRequest) ExecuteAll() (res *GetContractsLogs, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetContractsLogListRequest.ExecuteAll")
+func (r ApiGetLbDomainsLogListRequest) ExecuteAll() (res *GetLbDomainsLogs, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetLbDomainsLogListRequest.ExecuteAll")
 	defer func() {
 		if err != nil {
 			span.RecordError(err)
@@ -354,13 +448,13 @@ func (r ApiGetContractsLogListRequest) ExecuteAll() (res *GetContractsLogs, last
 		span.End()
 	}()
 	r.ctx = ctx
-	var allResults []ContractsLog
+	var allResults []LbDomainsLog
 	offset := int32(0)
 	limit := int32(100)
 	for {
 		r = r.Offset(offset)
 		r = r.Limit(limit)
-		var resp *GetContractsLogs
+		var resp *GetLbDomainsLogs
 		var httpResp *http.Response
 		resp, httpResp, err = r.Execute()
 		if err != nil {
@@ -377,101 +471,7 @@ func (r ApiGetContractsLogListRequest) ExecuteAll() (res *GetContractsLogs, last
 		}
 		offset += limit
 	}
-	res = &GetContractsLogs{
-		RequestId: lastResp.Header.Get("X-Request-Id"),
-		Results:   allResults,
-	}
-	return res, lastResp, nil
-}
-
-// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
-// 一つのモデルに集約して返します。
-//
-// 戻り値:
-//   - *GetCommonConfigs: 全件の結果を保持するモデル。
-//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
-//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetCommonConfigListRequest) ExecuteAll() (res *GetCommonConfigs, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetCommonConfigListRequest.ExecuteAll")
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, err.Error())
-		}
-		span.End()
-	}()
-	r.ctx = ctx
-	var allResults []CommonConfig
-	offset := int32(0)
-	limit := int32(10000)
-	for {
-		r = r.Offset(offset)
-		r = r.Limit(limit)
-		var resp *GetCommonConfigs
-		var httpResp *http.Response
-		resp, httpResp, err = r.Execute()
-		if err != nil {
-			return nil, httpResp, err
-		}
-		lastResp = httpResp
-		if resp != nil && resp.Results != nil {
-			allResults = append(allResults, resp.Results...)
-			if int32(len(resp.Results)) < limit {
-				break
-			}
-		} else {
-			break
-		}
-		offset += limit
-	}
-	res = &GetCommonConfigs{
-		RequestId: lastResp.Header.Get("X-Request-Id"),
-		Results:   allResults,
-	}
-	return res, lastResp, nil
-}
-
-// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
-// 一つのモデルに集約して返します。
-//
-// 戻り値:
-//   - *GetDelegations: 全件の結果を保持するモデル。
-//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
-//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetDelegationListRequest) ExecuteAll() (res *GetDelegations, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetDelegationListRequest.ExecuteAll")
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, err.Error())
-		}
-		span.End()
-	}()
-	r.ctx = ctx
-	var allResults []Delegation
-	offset := int32(0)
-	limit := int32(10000)
-	for {
-		r = r.Offset(offset)
-		r = r.Limit(limit)
-		var resp *GetDelegations
-		var httpResp *http.Response
-		resp, httpResp, err = r.Execute()
-		if err != nil {
-			return nil, httpResp, err
-		}
-		lastResp = httpResp
-		if resp != nil && resp.Results != nil {
-			allResults = append(allResults, resp.Results...)
-			if int32(len(resp.Results)) < limit {
-				break
-			}
-		} else {
-			break
-		}
-		offset += limit
-	}
-	res = &GetDelegations{
+	res = &GetLbDomainsLogs{
 		RequestId: lastResp.Header.Get("X-Request-Id"),
 		Results:   allResults,
 	}
@@ -529,11 +529,11 @@ func (r ApiGetZoneHistoryListRequest) ExecuteAll() (res *GetZoneHistories, lastR
 // 一つのモデルに集約して返します。
 //
 // 戻り値:
-//   - *GetZones: 全件の結果を保持するモデル。
+//   - *GetContracts: 全件の結果を保持するモデル。
 //   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
 //   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetContractsZoneListRequest) ExecuteAll() (res *GetZones, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetContractsZoneListRequest.ExecuteAll")
+func (r ApiGetContractListRequest) ExecuteAll() (res *GetContracts, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetContractListRequest.ExecuteAll")
 	defer func() {
 		if err != nil {
 			span.RecordError(err)
@@ -542,13 +542,13 @@ func (r ApiGetContractsZoneListRequest) ExecuteAll() (res *GetZones, lastResp *h
 		span.End()
 	}()
 	r.ctx = ctx
-	var allResults []Zone
+	var allResults []Contract
 	offset := int32(0)
 	limit := int32(10000)
 	for {
 		r = r.Offset(offset)
 		r = r.Limit(limit)
-		var resp *GetZones
+		var resp *GetContracts
 		var httpResp *http.Response
 		resp, httpResp, err = r.Execute()
 		if err != nil {
@@ -565,54 +565,7 @@ func (r ApiGetContractsZoneListRequest) ExecuteAll() (res *GetZones, lastResp *h
 		}
 		offset += limit
 	}
-	res = &GetZones{
-		RequestId: lastResp.Header.Get("X-Request-Id"),
-		Results:   allResults,
-	}
-	return res, lastResp, nil
-}
-
-// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
-// 一つのモデルに集約して返します。
-//
-// 戻り値:
-//   - *GetLbDomainsLogs: 全件の結果を保持するモデル。
-//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
-//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetLbDomainsLogListRequest) ExecuteAll() (res *GetLbDomainsLogs, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetLbDomainsLogListRequest.ExecuteAll")
-	defer func() {
-		if err != nil {
-			span.RecordError(err)
-			span.SetStatus(codes.Error, err.Error())
-		}
-		span.End()
-	}()
-	r.ctx = ctx
-	var allResults []LbDomainsLog
-	offset := int32(0)
-	limit := int32(100)
-	for {
-		r = r.Offset(offset)
-		r = r.Limit(limit)
-		var resp *GetLbDomainsLogs
-		var httpResp *http.Response
-		resp, httpResp, err = r.Execute()
-		if err != nil {
-			return nil, httpResp, err
-		}
-		lastResp = httpResp
-		if resp != nil && resp.Results != nil {
-			allResults = append(allResults, resp.Results...)
-			if int32(len(resp.Results)) < limit {
-				break
-			}
-		} else {
-			break
-		}
-		offset += limit
-	}
-	res = &GetLbDomainsLogs{
+	res = &GetContracts{
 		RequestId: lastResp.Header.Get("X-Request-Id"),
 		Results:   allResults,
 	}
@@ -717,11 +670,11 @@ func (r ApiGetTsigListRequest) ExecuteAll() (res *GetTsigs, lastResp *http.Respo
 // 一つのモデルに集約して返します。
 //
 // 戻り値:
-//   - *GetZones: 全件の結果を保持するモデル。
+//   - *GetZonesLogs: 全件の結果を保持するモデル。
 //   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
 //   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
-func (r ApiGetZoneListRequest) ExecuteAll() (res *GetZones, lastResp *http.Response, err error) {
-	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetZoneListRequest.ExecuteAll")
+func (r ApiGetZonesLogListRequest) ExecuteAll() (res *GetZonesLogs, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetZonesLogListRequest.ExecuteAll")
 	defer func() {
 		if err != nil {
 			span.RecordError(err)
@@ -730,13 +683,13 @@ func (r ApiGetZoneListRequest) ExecuteAll() (res *GetZones, lastResp *http.Respo
 		span.End()
 	}()
 	r.ctx = ctx
-	var allResults []Zone
+	var allResults []ZonesLog
 	offset := int32(0)
-	limit := int32(10000)
+	limit := int32(100)
 	for {
 		r = r.Offset(offset)
 		r = r.Limit(limit)
-		var resp *GetZones
+		var resp *GetZonesLogs
 		var httpResp *http.Response
 		resp, httpResp, err = r.Execute()
 		if err != nil {
@@ -753,7 +706,54 @@ func (r ApiGetZoneListRequest) ExecuteAll() (res *GetZones, lastResp *http.Respo
 		}
 		offset += limit
 	}
-	res = &GetZones{
+	res = &GetZonesLogs{
+		RequestId: lastResp.Header.Get("X-Request-Id"),
+		Results:   allResults,
+	}
+	return res, lastResp, nil
+}
+
+// ExecuteAll は、ページネーションを利用して全件のリストを自動的に取得し、
+// 一つのモデルに集約して返します。
+//
+// 戻り値:
+//   - *GetDelegations: 全件の結果を保持するモデル。
+//   - *http.Response: 最後に成功（または失敗）した API リクエストの HTTP レスポンス。
+//   - error: 途中の API 呼び出しでエラーが発生した場合に返されます。
+func (r ApiGetDelegationListRequest) ExecuteAll() (res *GetDelegations, lastResp *http.Response, err error) {
+	ctx, span := r.ApiService.client.tracer.Start(r.ctx, "ApiGetDelegationListRequest.ExecuteAll")
+	defer func() {
+		if err != nil {
+			span.RecordError(err)
+			span.SetStatus(codes.Error, err.Error())
+		}
+		span.End()
+	}()
+	r.ctx = ctx
+	var allResults []Delegation
+	offset := int32(0)
+	limit := int32(10000)
+	for {
+		r = r.Offset(offset)
+		r = r.Limit(limit)
+		var resp *GetDelegations
+		var httpResp *http.Response
+		resp, httpResp, err = r.Execute()
+		if err != nil {
+			return nil, httpResp, err
+		}
+		lastResp = httpResp
+		if resp != nil && resp.Results != nil {
+			allResults = append(allResults, resp.Results...)
+			if int32(len(resp.Results)) < limit {
+				break
+			}
+		} else {
+			break
+		}
+		offset += limit
+	}
+	res = &GetDelegations{
 		RequestId: lastResp.Header.Get("X-Request-Id"),
 		Results:   allResults,
 	}

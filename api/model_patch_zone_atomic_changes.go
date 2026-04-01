@@ -21,13 +21,13 @@ var _ MappedNullable = &PatchZoneAtomicChanges{}
 
 // PatchZoneAtomicChanges struct for PatchZoneAtomicChanges
 type PatchZoneAtomicChanges struct {
-	Records []OverwriteRecordsInner `json:"records"`
 	// コメント
 	Description *string `json:"description,omitempty"`
 	// 指定されたSOAレコードを取り込むためのフラグ
 	OverwriteSoa *bool `json:"overwrite_soa,omitempty"`
 	// 指定されたZone Apex NSレコードを取り込むためのフラグ
-	OverwriteZoneApexNs *bool `json:"overwrite_zone_apex_ns,omitempty"`
+	OverwriteZoneApexNs *bool                   `json:"overwrite_zone_apex_ns,omitempty"`
+	Records             []OverwriteRecordsInner `json:"records"`
 }
 
 type _PatchZoneAtomicChanges PatchZoneAtomicChanges
@@ -38,13 +38,13 @@ type _PatchZoneAtomicChanges PatchZoneAtomicChanges
 // will change when the set of required properties is changed
 func NewPatchZoneAtomicChanges(records []OverwriteRecordsInner) *PatchZoneAtomicChanges {
 	this := PatchZoneAtomicChanges{}
-	this.Records = records
 	var description string = ""
 	this.Description = &description
 	var overwriteSoa bool = true
 	this.OverwriteSoa = &overwriteSoa
 	var overwriteZoneApexNs bool = true
 	this.OverwriteZoneApexNs = &overwriteZoneApexNs
+	this.Records = records
 	return &this
 }
 
@@ -60,30 +60,6 @@ func NewPatchZoneAtomicChangesWithDefaults() *PatchZoneAtomicChanges {
 	var overwriteZoneApexNs bool = true
 	this.OverwriteZoneApexNs = &overwriteZoneApexNs
 	return &this
-}
-
-// GetRecords returns the Records field value
-func (o *PatchZoneAtomicChanges) GetRecords() []OverwriteRecordsInner {
-	if o == nil {
-		var ret []OverwriteRecordsInner
-		return ret
-	}
-
-	return o.Records
-}
-
-// GetRecordsOk returns a tuple with the Records field value
-// and a boolean to check if the value has been set.
-func (o *PatchZoneAtomicChanges) GetRecordsOk() ([]OverwriteRecordsInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Records, true
-}
-
-// SetRecords sets field value
-func (o *PatchZoneAtomicChanges) SetRecords(v []OverwriteRecordsInner) {
-	o.Records = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -182,6 +158,30 @@ func (o *PatchZoneAtomicChanges) SetOverwriteZoneApexNs(v bool) {
 	o.OverwriteZoneApexNs = &v
 }
 
+// GetRecords returns the Records field value
+func (o *PatchZoneAtomicChanges) GetRecords() []OverwriteRecordsInner {
+	if o == nil {
+		var ret []OverwriteRecordsInner
+		return ret
+	}
+
+	return o.Records
+}
+
+// GetRecordsOk returns a tuple with the Records field value
+// and a boolean to check if the value has been set.
+func (o *PatchZoneAtomicChanges) GetRecordsOk() ([]OverwriteRecordsInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Records, true
+}
+
+// SetRecords sets field value
+func (o *PatchZoneAtomicChanges) SetRecords(v []OverwriteRecordsInner) {
+	o.Records = v
+}
+
 func (o PatchZoneAtomicChanges) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -192,7 +192,6 @@ func (o PatchZoneAtomicChanges) MarshalJSON() ([]byte, error) {
 
 func (o PatchZoneAtomicChanges) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["records"] = o.Records
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -202,6 +201,7 @@ func (o PatchZoneAtomicChanges) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OverwriteZoneApexNs) {
 		toSerialize["overwrite_zone_apex_ns"] = o.OverwriteZoneApexNs
 	}
+	toSerialize["records"] = o.Records
 	return toSerialize, nil
 }
 

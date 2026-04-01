@@ -19,10 +19,10 @@ var _ MappedNullable = &PatchCcPrimary{}
 
 // PatchCcPrimary struct for PatchCcPrimary
 type PatchCcPrimary struct {
-	TsigId NullableInt64 `json:"tsig_id,omitempty"`
 	// IPアドレス
 	Address *string           `json:"address,omitempty"`
 	Enabled *CcPrimaryEnabled `json:"enabled,omitempty"`
+	TsigId  NullableInt64     `json:"tsig_id,omitempty"`
 }
 
 // NewPatchCcPrimary instantiates a new PatchCcPrimary object
@@ -40,49 +40,6 @@ func NewPatchCcPrimary() *PatchCcPrimary {
 func NewPatchCcPrimaryWithDefaults() *PatchCcPrimary {
 	this := PatchCcPrimary{}
 	return &this
-}
-
-// GetTsigId returns the TsigId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PatchCcPrimary) GetTsigId() int64 {
-	if o == nil || IsNil(o.TsigId.Get()) {
-		var ret int64
-		return ret
-	}
-	return *o.TsigId.Get()
-}
-
-// GetTsigIdOk returns a tuple with the TsigId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PatchCcPrimary) GetTsigIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.TsigId.Get(), o.TsigId.IsSet()
-}
-
-// HasTsigId returns a boolean if a field has been set.
-func (o *PatchCcPrimary) HasTsigId() bool {
-	if o != nil && o.TsigId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTsigId gets a reference to the given NullableInt64 and assigns it to the TsigId field.
-func (o *PatchCcPrimary) SetTsigId(v int64) {
-	o.TsigId.Set(&v)
-}
-
-// SetTsigIdNil sets the value for TsigId to be an explicit nil
-func (o *PatchCcPrimary) SetTsigIdNil() {
-	o.TsigId.Set(nil)
-}
-
-// UnsetTsigId ensures that no value is present for TsigId, not even an explicit nil
-func (o *PatchCcPrimary) UnsetTsigId() {
-	o.TsigId.Unset()
 }
 
 // GetAddress returns the Address field value if set, zero value otherwise.
@@ -149,6 +106,49 @@ func (o *PatchCcPrimary) SetEnabled(v CcPrimaryEnabled) {
 	o.Enabled = &v
 }
 
+// GetTsigId returns the TsigId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PatchCcPrimary) GetTsigId() int64 {
+	if o == nil || IsNil(o.TsigId.Get()) {
+		var ret int64
+		return ret
+	}
+	return *o.TsigId.Get()
+}
+
+// GetTsigIdOk returns a tuple with the TsigId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PatchCcPrimary) GetTsigIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TsigId.Get(), o.TsigId.IsSet()
+}
+
+// HasTsigId returns a boolean if a field has been set.
+func (o *PatchCcPrimary) HasTsigId() bool {
+	if o != nil && o.TsigId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTsigId gets a reference to the given NullableInt64 and assigns it to the TsigId field.
+func (o *PatchCcPrimary) SetTsigId(v int64) {
+	o.TsigId.Set(&v)
+}
+
+// SetTsigIdNil sets the value for TsigId to be an explicit nil
+func (o *PatchCcPrimary) SetTsigIdNil() {
+	o.TsigId.Set(nil)
+}
+
+// UnsetTsigId ensures that no value is present for TsigId, not even an explicit nil
+func (o *PatchCcPrimary) UnsetTsigId() {
+	o.TsigId.Unset()
+}
+
 func (o PatchCcPrimary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -159,14 +159,14 @@ func (o PatchCcPrimary) MarshalJSON() ([]byte, error) {
 
 func (o PatchCcPrimary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TsigId.IsSet() {
-		toSerialize["tsig_id"] = o.TsigId.Get()
-	}
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
+	}
+	if o.TsigId.IsSet() {
+		toSerialize["tsig_id"] = o.TsigId.Get()
 	}
 	return toSerialize, nil
 }

@@ -21,14 +21,14 @@ var _ MappedNullable = &PostMonitoringPing{}
 
 // PostMonitoringPing struct for PostMonitoringPing
 type PostMonitoringPing struct {
+	// コメント
+	Description *string `json:"description,omitempty"`
+	Mtype       string  `json:"mtype"`
+	// 監視名
+	Name  string                    `json:"name"`
+	Props *PatchMonitoringPingProps `json:"props,omitempty"`
 	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
 	ResourceName *string `json:"resource_name,omitempty"`
-	// 監視名
-	Name  string `json:"name"`
-	Mtype string `json:"mtype"`
-	// コメント
-	Description *string                   `json:"description,omitempty"`
-	Props       *PatchMonitoringPingProps `json:"props,omitempty"`
 }
 
 type _PostMonitoringPing PostMonitoringPing
@@ -37,12 +37,12 @@ type _PostMonitoringPing PostMonitoringPing
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPostMonitoringPing(name string, mtype string) *PostMonitoringPing {
+func NewPostMonitoringPing(mtype string, name string) *PostMonitoringPing {
 	this := PostMonitoringPing{}
-	this.Name = name
-	this.Mtype = mtype
 	var description string = ""
 	this.Description = &description
+	this.Mtype = mtype
+	this.Name = name
 	return &this
 }
 
@@ -54,86 +54,6 @@ func NewPostMonitoringPingWithDefaults() *PostMonitoringPing {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
-func (o *PostMonitoringPing) GetResourceName() string {
-	if o == nil || IsNil(o.ResourceName) {
-		var ret string
-		return ret
-	}
-	return *o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PostMonitoringPing) GetResourceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceName) {
-		return nil, false
-	}
-	return o.ResourceName, true
-}
-
-// HasResourceName returns a boolean if a field has been set.
-func (o *PostMonitoringPing) HasResourceName() bool {
-	if o != nil && !IsNil(o.ResourceName) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
-func (o *PostMonitoringPing) SetResourceName(v string) {
-	o.ResourceName = &v
-}
-
-// GetName returns the Name field value
-func (o *PostMonitoringPing) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostMonitoringPing) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostMonitoringPing) SetName(v string) {
-	o.Name = v
-}
-
-// GetMtype returns the Mtype field value
-func (o *PostMonitoringPing) GetMtype() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Mtype
-}
-
-// GetMtypeOk returns a tuple with the Mtype field value
-// and a boolean to check if the value has been set.
-func (o *PostMonitoringPing) GetMtypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Mtype, true
-}
-
-// SetMtype sets field value
-func (o *PostMonitoringPing) SetMtype(v string) {
-	o.Mtype = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -168,6 +88,54 @@ func (o *PostMonitoringPing) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetMtype returns the Mtype field value
+func (o *PostMonitoringPing) GetMtype() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Mtype
+}
+
+// GetMtypeOk returns a tuple with the Mtype field value
+// and a boolean to check if the value has been set.
+func (o *PostMonitoringPing) GetMtypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Mtype, true
+}
+
+// SetMtype sets field value
+func (o *PostMonitoringPing) SetMtype(v string) {
+	o.Mtype = v
+}
+
+// GetName returns the Name field value
+func (o *PostMonitoringPing) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostMonitoringPing) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostMonitoringPing) SetName(v string) {
+	o.Name = v
+}
+
 // GetProps returns the Props field value if set, zero value otherwise.
 func (o *PostMonitoringPing) GetProps() PatchMonitoringPingProps {
 	if o == nil || IsNil(o.Props) {
@@ -200,6 +168,38 @@ func (o *PostMonitoringPing) SetProps(v PatchMonitoringPingProps) {
 	o.Props = &v
 }
 
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *PostMonitoringPing) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostMonitoringPing) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
+		return nil, false
+	}
+	return o.ResourceName, true
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *PostMonitoringPing) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *PostMonitoringPing) SetResourceName(v string) {
+	o.ResourceName = &v
+}
+
 func (o PostMonitoringPing) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -210,16 +210,16 @@ func (o PostMonitoringPing) MarshalJSON() ([]byte, error) {
 
 func (o PostMonitoringPing) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResourceName) {
-		toSerialize["resource_name"] = o.ResourceName
-	}
-	toSerialize["name"] = o.Name
-	toSerialize["mtype"] = o.Mtype
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	toSerialize["mtype"] = o.Mtype
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Props) {
 		toSerialize["props"] = o.Props
+	}
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
 	}
 	return toSerialize, nil
 }
@@ -229,8 +229,8 @@ func (o *PostMonitoringPing) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"mtype",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})

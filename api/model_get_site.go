@@ -22,8 +22,8 @@ var _ MappedNullable = &GetSite{}
 // GetSite struct for GetSite
 type GetSite struct {
 	// 処理の問い合わせの際のキーになる文字列
-	RequestId string               `json:"request_id"`
-	Result    GetSitesResultsInner `json:"result"`
+	RequestId string        `json:"request_id"`
+	Result    GetSiteResult `json:"result"`
 }
 
 type _GetSite GetSite
@@ -32,7 +32,7 @@ type _GetSite GetSite
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSite(requestId string, result GetSitesResultsInner) *GetSite {
+func NewGetSite(requestId string, result GetSiteResult) *GetSite {
 	this := GetSite{}
 	this.RequestId = requestId
 	this.Result = result
@@ -72,9 +72,9 @@ func (o *GetSite) SetRequestId(v string) {
 }
 
 // GetResult returns the Result field value
-func (o *GetSite) GetResult() GetSitesResultsInner {
+func (o *GetSite) GetResult() GetSiteResult {
 	if o == nil {
-		var ret GetSitesResultsInner
+		var ret GetSiteResult
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *GetSite) GetResult() GetSitesResultsInner {
 
 // GetResultOk returns a tuple with the Result field value
 // and a boolean to check if the value has been set.
-func (o *GetSite) GetResultOk() (*GetSitesResultsInner, bool) {
+func (o *GetSite) GetResultOk() (*GetSiteResult, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *GetSite) GetResultOk() (*GetSitesResultsInner, bool) {
 }
 
 // SetResult sets field value
-func (o *GetSite) SetResult(v GetSitesResultsInner) {
+func (o *GetSite) SetResult(v GetSiteResult) {
 	o.Result = v
 }
 

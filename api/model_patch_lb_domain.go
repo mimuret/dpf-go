@@ -19,9 +19,9 @@ var _ MappedNullable = &PatchLbDomain{}
 
 // PatchLbDomain struct for PatchLbDomain
 type PatchLbDomain struct {
-	Favorite *LbDomainFavorite `json:"favorite,omitempty"`
 	// コメント
-	Description *string `json:"description,omitempty"`
+	Description *string           `json:"description,omitempty"`
+	Favorite    *LbDomainFavorite `json:"favorite,omitempty"`
 	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
 	RuleResourceName *string `json:"rule_resource_name,omitempty"`
 }
@@ -45,38 +45,6 @@ func NewPatchLbDomainWithDefaults() *PatchLbDomain {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetFavorite returns the Favorite field value if set, zero value otherwise.
-func (o *PatchLbDomain) GetFavorite() LbDomainFavorite {
-	if o == nil || IsNil(o.Favorite) {
-		var ret LbDomainFavorite
-		return ret
-	}
-	return *o.Favorite
-}
-
-// GetFavoriteOk returns a tuple with the Favorite field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchLbDomain) GetFavoriteOk() (*LbDomainFavorite, bool) {
-	if o == nil || IsNil(o.Favorite) {
-		return nil, false
-	}
-	return o.Favorite, true
-}
-
-// HasFavorite returns a boolean if a field has been set.
-func (o *PatchLbDomain) HasFavorite() bool {
-	if o != nil && !IsNil(o.Favorite) {
-		return true
-	}
-
-	return false
-}
-
-// SetFavorite gets a reference to the given LbDomainFavorite and assigns it to the Favorite field.
-func (o *PatchLbDomain) SetFavorite(v LbDomainFavorite) {
-	o.Favorite = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -109,6 +77,38 @@ func (o *PatchLbDomain) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *PatchLbDomain) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetFavorite returns the Favorite field value if set, zero value otherwise.
+func (o *PatchLbDomain) GetFavorite() LbDomainFavorite {
+	if o == nil || IsNil(o.Favorite) {
+		var ret LbDomainFavorite
+		return ret
+	}
+	return *o.Favorite
+}
+
+// GetFavoriteOk returns a tuple with the Favorite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchLbDomain) GetFavoriteOk() (*LbDomainFavorite, bool) {
+	if o == nil || IsNil(o.Favorite) {
+		return nil, false
+	}
+	return o.Favorite, true
+}
+
+// HasFavorite returns a boolean if a field has been set.
+func (o *PatchLbDomain) HasFavorite() bool {
+	if o != nil && !IsNil(o.Favorite) {
+		return true
+	}
+
+	return false
+}
+
+// SetFavorite gets a reference to the given LbDomainFavorite and assigns it to the Favorite field.
+func (o *PatchLbDomain) SetFavorite(v LbDomainFavorite) {
+	o.Favorite = &v
 }
 
 // GetRuleResourceName returns the RuleResourceName field value if set, zero value otherwise.
@@ -153,11 +153,11 @@ func (o PatchLbDomain) MarshalJSON() ([]byte, error) {
 
 func (o PatchLbDomain) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Favorite) {
-		toSerialize["favorite"] = o.Favorite
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Favorite) {
+		toSerialize["favorite"] = o.Favorite
 	}
 	if !IsNil(o.RuleResourceName) {
 		toSerialize["rule_resource_name"] = o.RuleResourceName

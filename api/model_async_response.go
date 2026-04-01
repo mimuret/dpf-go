@@ -21,9 +21,9 @@ var _ MappedNullable = &AsyncResponse{}
 
 // AsyncResponse struct for AsyncResponse
 type AsyncResponse struct {
+	JobsUrl string `json:"jobs_url"`
 	// 処理の問い合わせの際のキーになる文字列
 	RequestId string `json:"request_id"`
-	JobsUrl   string `json:"jobs_url"`
 }
 
 type _AsyncResponse AsyncResponse
@@ -32,10 +32,10 @@ type _AsyncResponse AsyncResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAsyncResponse(requestId string, jobsUrl string) *AsyncResponse {
+func NewAsyncResponse(jobsUrl string, requestId string) *AsyncResponse {
 	this := AsyncResponse{}
-	this.RequestId = requestId
 	this.JobsUrl = jobsUrl
+	this.RequestId = requestId
 	return &this
 }
 
@@ -45,30 +45,6 @@ func NewAsyncResponse(requestId string, jobsUrl string) *AsyncResponse {
 func NewAsyncResponseWithDefaults() *AsyncResponse {
 	this := AsyncResponse{}
 	return &this
-}
-
-// GetRequestId returns the RequestId field value
-func (o *AsyncResponse) GetRequestId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RequestId
-}
-
-// GetRequestIdOk returns a tuple with the RequestId field value
-// and a boolean to check if the value has been set.
-func (o *AsyncResponse) GetRequestIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RequestId, true
-}
-
-// SetRequestId sets field value
-func (o *AsyncResponse) SetRequestId(v string) {
-	o.RequestId = v
 }
 
 // GetJobsUrl returns the JobsUrl field value
@@ -95,6 +71,30 @@ func (o *AsyncResponse) SetJobsUrl(v string) {
 	o.JobsUrl = v
 }
 
+// GetRequestId returns the RequestId field value
+func (o *AsyncResponse) GetRequestId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RequestId
+}
+
+// GetRequestIdOk returns a tuple with the RequestId field value
+// and a boolean to check if the value has been set.
+func (o *AsyncResponse) GetRequestIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RequestId, true
+}
+
+// SetRequestId sets field value
+func (o *AsyncResponse) SetRequestId(v string) {
+	o.RequestId = v
+}
+
 func (o AsyncResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -105,8 +105,8 @@ func (o AsyncResponse) MarshalJSON() ([]byte, error) {
 
 func (o AsyncResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["request_id"] = o.RequestId
 	toSerialize["jobs_url"] = o.JobsUrl
+	toSerialize["request_id"] = o.RequestId
 	return toSerialize, nil
 }
 
@@ -115,8 +115,8 @@ func (o *AsyncResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"request_id",
 		"jobs_url",
+		"request_id",
 	}
 
 	allProperties := make(map[string]interface{})

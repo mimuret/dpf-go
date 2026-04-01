@@ -22,14 +22,14 @@ var _ MappedNullable = &Delegation{}
 
 // Delegation struct for Delegation
 type Delegation struct {
-	Id          string `json:"id"`
-	ServiceCode string `json:"service_code"`
-	// name
-	Name    string         `json:"name"`
-	Network NullableString `json:"network"`
-	// コメント
-	Description           string    `json:"description"`
 	DelegationRequestedAt time.Time `json:"delegation_requested_at"`
+	// コメント
+	Description string `json:"description"`
+	Id          string `json:"id"`
+	// name
+	Name        string         `json:"name"`
+	Network     NullableString `json:"network"`
+	ServiceCode string         `json:"service_code"`
 }
 
 type _Delegation Delegation
@@ -38,14 +38,14 @@ type _Delegation Delegation
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDelegation(id string, serviceCode string, name string, network NullableString, description string, delegationRequestedAt time.Time) *Delegation {
+func NewDelegation(delegationRequestedAt time.Time, description string, id string, name string, network NullableString, serviceCode string) *Delegation {
 	this := Delegation{}
+	this.DelegationRequestedAt = delegationRequestedAt
+	this.Description = description
 	this.Id = id
-	this.ServiceCode = serviceCode
 	this.Name = name
 	this.Network = network
-	this.Description = description
-	this.DelegationRequestedAt = delegationRequestedAt
+	this.ServiceCode = serviceCode
 	return &this
 }
 
@@ -57,6 +57,54 @@ func NewDelegationWithDefaults() *Delegation {
 	var description string = ""
 	this.Description = description
 	return &this
+}
+
+// GetDelegationRequestedAt returns the DelegationRequestedAt field value
+func (o *Delegation) GetDelegationRequestedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.DelegationRequestedAt
+}
+
+// GetDelegationRequestedAtOk returns a tuple with the DelegationRequestedAt field value
+// and a boolean to check if the value has been set.
+func (o *Delegation) GetDelegationRequestedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DelegationRequestedAt, true
+}
+
+// SetDelegationRequestedAt sets field value
+func (o *Delegation) SetDelegationRequestedAt(v time.Time) {
+	o.DelegationRequestedAt = v
+}
+
+// GetDescription returns the Description field value
+func (o *Delegation) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *Delegation) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *Delegation) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetId returns the Id field value
@@ -81,30 +129,6 @@ func (o *Delegation) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *Delegation) SetId(v string) {
 	o.Id = v
-}
-
-// GetServiceCode returns the ServiceCode field value
-func (o *Delegation) GetServiceCode() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ServiceCode
-}
-
-// GetServiceCodeOk returns a tuple with the ServiceCode field value
-// and a boolean to check if the value has been set.
-func (o *Delegation) GetServiceCodeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ServiceCode, true
-}
-
-// SetServiceCode sets field value
-func (o *Delegation) SetServiceCode(v string) {
-	o.ServiceCode = v
 }
 
 // GetName returns the Name field value
@@ -157,52 +181,28 @@ func (o *Delegation) SetNetwork(v string) {
 	o.Network.Set(&v)
 }
 
-// GetDescription returns the Description field value
-func (o *Delegation) GetDescription() string {
+// GetServiceCode returns the ServiceCode field value
+func (o *Delegation) GetServiceCode() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Description
+	return o.ServiceCode
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetServiceCodeOk returns a tuple with the ServiceCode field value
 // and a boolean to check if the value has been set.
-func (o *Delegation) GetDescriptionOk() (*string, bool) {
+func (o *Delegation) GetServiceCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Description, true
+	return &o.ServiceCode, true
 }
 
-// SetDescription sets field value
-func (o *Delegation) SetDescription(v string) {
-	o.Description = v
-}
-
-// GetDelegationRequestedAt returns the DelegationRequestedAt field value
-func (o *Delegation) GetDelegationRequestedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.DelegationRequestedAt
-}
-
-// GetDelegationRequestedAtOk returns a tuple with the DelegationRequestedAt field value
-// and a boolean to check if the value has been set.
-func (o *Delegation) GetDelegationRequestedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DelegationRequestedAt, true
-}
-
-// SetDelegationRequestedAt sets field value
-func (o *Delegation) SetDelegationRequestedAt(v time.Time) {
-	o.DelegationRequestedAt = v
+// SetServiceCode sets field value
+func (o *Delegation) SetServiceCode(v string) {
+	o.ServiceCode = v
 }
 
 func (o Delegation) MarshalJSON() ([]byte, error) {
@@ -215,12 +215,12 @@ func (o Delegation) MarshalJSON() ([]byte, error) {
 
 func (o Delegation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["delegation_requested_at"] = o.DelegationRequestedAt
+	toSerialize["description"] = o.Description
 	toSerialize["id"] = o.Id
-	toSerialize["service_code"] = o.ServiceCode
 	toSerialize["name"] = o.Name
 	toSerialize["network"] = o.Network.Get()
-	toSerialize["description"] = o.Description
-	toSerialize["delegation_requested_at"] = o.DelegationRequestedAt
+	toSerialize["service_code"] = o.ServiceCode
 	return toSerialize, nil
 }
 
@@ -229,12 +229,12 @@ func (o *Delegation) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"delegation_requested_at",
+		"description",
 		"id",
-		"service_code",
 		"name",
 		"network",
-		"description",
-		"delegation_requested_at",
+		"service_code",
 	}
 
 	allProperties := make(map[string]interface{})

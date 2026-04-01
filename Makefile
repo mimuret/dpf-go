@@ -7,6 +7,6 @@ generate:
 		--package-name api \
 		--additional-properties=enumClassPrefix=true \
 		--global-property apiTests=false,modelTests=false,apiDocs=false,modelDocs=false
-	go run ./tools/gen-execute-all/main.go
 	go run ./tools/fix-openapi-gen/main.go
+	go run ./tools/gen-execute-all/main.go
 	goimports -w ./api

@@ -21,13 +21,13 @@ var _ MappedNullable = &Contract{}
 
 // Contract struct for Contract
 type Contract struct {
+	// コメント
+	Description string           `json:"description"`
+	Favorite    ContractFavorite `json:"favorite"`
 	Id          string           `json:"id"`
+	Plan        ContractPlan     `json:"plan"`
 	ServiceCode string           `json:"service_code"`
 	State       ContractState    `json:"state"`
-	Favorite    ContractFavorite `json:"favorite"`
-	Plan        ContractPlan     `json:"plan"`
-	// コメント
-	Description string `json:"description"`
 }
 
 type _Contract Contract
@@ -36,14 +36,14 @@ type _Contract Contract
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContract(id string, serviceCode string, state ContractState, favorite ContractFavorite, plan ContractPlan, description string) *Contract {
+func NewContract(description string, favorite ContractFavorite, id string, plan ContractPlan, serviceCode string, state ContractState) *Contract {
 	this := Contract{}
+	this.Description = description
+	this.Favorite = favorite
 	this.Id = id
+	this.Plan = plan
 	this.ServiceCode = serviceCode
 	this.State = state
-	this.Favorite = favorite
-	this.Plan = plan
-	this.Description = description
 	return &this
 }
 
@@ -55,6 +55,54 @@ func NewContractWithDefaults() *Contract {
 	var description string = ""
 	this.Description = description
 	return &this
+}
+
+// GetDescription returns the Description field value
+func (o *Contract) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *Contract) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *Contract) SetDescription(v string) {
+	o.Description = v
+}
+
+// GetFavorite returns the Favorite field value
+func (o *Contract) GetFavorite() ContractFavorite {
+	if o == nil {
+		var ret ContractFavorite
+		return ret
+	}
+
+	return o.Favorite
+}
+
+// GetFavoriteOk returns a tuple with the Favorite field value
+// and a boolean to check if the value has been set.
+func (o *Contract) GetFavoriteOk() (*ContractFavorite, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Favorite, true
+}
+
+// SetFavorite sets field value
+func (o *Contract) SetFavorite(v ContractFavorite) {
+	o.Favorite = v
 }
 
 // GetId returns the Id field value
@@ -79,6 +127,30 @@ func (o *Contract) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *Contract) SetId(v string) {
 	o.Id = v
+}
+
+// GetPlan returns the Plan field value
+func (o *Contract) GetPlan() ContractPlan {
+	if o == nil {
+		var ret ContractPlan
+		return ret
+	}
+
+	return o.Plan
+}
+
+// GetPlanOk returns a tuple with the Plan field value
+// and a boolean to check if the value has been set.
+func (o *Contract) GetPlanOk() (*ContractPlan, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Plan, true
+}
+
+// SetPlan sets field value
+func (o *Contract) SetPlan(v ContractPlan) {
+	o.Plan = v
 }
 
 // GetServiceCode returns the ServiceCode field value
@@ -129,78 +201,6 @@ func (o *Contract) SetState(v ContractState) {
 	o.State = v
 }
 
-// GetFavorite returns the Favorite field value
-func (o *Contract) GetFavorite() ContractFavorite {
-	if o == nil {
-		var ret ContractFavorite
-		return ret
-	}
-
-	return o.Favorite
-}
-
-// GetFavoriteOk returns a tuple with the Favorite field value
-// and a boolean to check if the value has been set.
-func (o *Contract) GetFavoriteOk() (*ContractFavorite, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Favorite, true
-}
-
-// SetFavorite sets field value
-func (o *Contract) SetFavorite(v ContractFavorite) {
-	o.Favorite = v
-}
-
-// GetPlan returns the Plan field value
-func (o *Contract) GetPlan() ContractPlan {
-	if o == nil {
-		var ret ContractPlan
-		return ret
-	}
-
-	return o.Plan
-}
-
-// GetPlanOk returns a tuple with the Plan field value
-// and a boolean to check if the value has been set.
-func (o *Contract) GetPlanOk() (*ContractPlan, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Plan, true
-}
-
-// SetPlan sets field value
-func (o *Contract) SetPlan(v ContractPlan) {
-	o.Plan = v
-}
-
-// GetDescription returns the Description field value
-func (o *Contract) GetDescription() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value
-// and a boolean to check if the value has been set.
-func (o *Contract) GetDescriptionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// SetDescription sets field value
-func (o *Contract) SetDescription(v string) {
-	o.Description = v
-}
-
 func (o Contract) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -211,12 +211,12 @@ func (o Contract) MarshalJSON() ([]byte, error) {
 
 func (o Contract) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["description"] = o.Description
+	toSerialize["favorite"] = o.Favorite
 	toSerialize["id"] = o.Id
+	toSerialize["plan"] = o.Plan
 	toSerialize["service_code"] = o.ServiceCode
 	toSerialize["state"] = o.State
-	toSerialize["favorite"] = o.Favorite
-	toSerialize["plan"] = o.Plan
-	toSerialize["description"] = o.Description
 	return toSerialize, nil
 }
 
@@ -225,12 +225,12 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"description",
+		"favorite",
 		"id",
+		"plan",
 		"service_code",
 		"state",
-		"favorite",
-		"plan",
-		"description",
 	}
 
 	allProperties := make(map[string]interface{})

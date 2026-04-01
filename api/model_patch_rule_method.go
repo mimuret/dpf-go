@@ -19,9 +19,9 @@ var _ MappedNullable = &PatchRuleMethod{}
 
 // PatchRuleMethod struct for PatchRuleMethod
 type PatchRuleMethod struct {
+	Method *PatchRuleMethodMethod `json:"method,omitempty"`
 	// 優先度（親メソッドが failover の場合のみ指定）
-	Priority *int32                 `json:"priority,omitempty"`
-	Method   *PatchRuleMethodMethod `json:"method,omitempty"`
+	Priority *int32 `json:"priority,omitempty"`
 }
 
 // NewPatchRuleMethod instantiates a new PatchRuleMethod object
@@ -39,38 +39,6 @@ func NewPatchRuleMethod() *PatchRuleMethod {
 func NewPatchRuleMethodWithDefaults() *PatchRuleMethod {
 	this := PatchRuleMethod{}
 	return &this
-}
-
-// GetPriority returns the Priority field value if set, zero value otherwise.
-func (o *PatchRuleMethod) GetPriority() int32 {
-	if o == nil || IsNil(o.Priority) {
-		var ret int32
-		return ret
-	}
-	return *o.Priority
-}
-
-// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchRuleMethod) GetPriorityOk() (*int32, bool) {
-	if o == nil || IsNil(o.Priority) {
-		return nil, false
-	}
-	return o.Priority, true
-}
-
-// HasPriority returns a boolean if a field has been set.
-func (o *PatchRuleMethod) HasPriority() bool {
-	if o != nil && !IsNil(o.Priority) {
-		return true
-	}
-
-	return false
-}
-
-// SetPriority gets a reference to the given int32 and assigns it to the Priority field.
-func (o *PatchRuleMethod) SetPriority(v int32) {
-	o.Priority = &v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
@@ -105,6 +73,38 @@ func (o *PatchRuleMethod) SetMethod(v PatchRuleMethodMethod) {
 	o.Method = &v
 }
 
+// GetPriority returns the Priority field value if set, zero value otherwise.
+func (o *PatchRuleMethod) GetPriority() int32 {
+	if o == nil || IsNil(o.Priority) {
+		var ret int32
+		return ret
+	}
+	return *o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchRuleMethod) GetPriorityOk() (*int32, bool) {
+	if o == nil || IsNil(o.Priority) {
+		return nil, false
+	}
+	return o.Priority, true
+}
+
+// HasPriority returns a boolean if a field has been set.
+func (o *PatchRuleMethod) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given int32 and assigns it to the Priority field.
+func (o *PatchRuleMethod) SetPriority(v int32) {
+	o.Priority = &v
+}
+
 func (o PatchRuleMethod) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -115,11 +115,11 @@ func (o PatchRuleMethod) MarshalJSON() ([]byte, error) {
 
 func (o PatchRuleMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Priority) {
-		toSerialize["priority"] = o.Priority
-	}
 	if !IsNil(o.Method) {
 		toSerialize["method"] = o.Method
+	}
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
 	}
 	return toSerialize, nil
 }

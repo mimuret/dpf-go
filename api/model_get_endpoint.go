@@ -22,8 +22,8 @@ var _ MappedNullable = &GetEndpoint{}
 // GetEndpoint struct for GetEndpoint
 type GetEndpoint struct {
 	// 処理の問い合わせの際のキーになる文字列
-	RequestId string                   `json:"request_id"`
-	Result    GetEndpointsResultsInner `json:"result"`
+	RequestId string                         `json:"request_id"`
+	Result    ConfigSitesInnerEndpointsInner `json:"result"`
 }
 
 type _GetEndpoint GetEndpoint
@@ -32,7 +32,7 @@ type _GetEndpoint GetEndpoint
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEndpoint(requestId string, result GetEndpointsResultsInner) *GetEndpoint {
+func NewGetEndpoint(requestId string, result ConfigSitesInnerEndpointsInner) *GetEndpoint {
 	this := GetEndpoint{}
 	this.RequestId = requestId
 	this.Result = result
@@ -72,9 +72,9 @@ func (o *GetEndpoint) SetRequestId(v string) {
 }
 
 // GetResult returns the Result field value
-func (o *GetEndpoint) GetResult() GetEndpointsResultsInner {
+func (o *GetEndpoint) GetResult() ConfigSitesInnerEndpointsInner {
 	if o == nil {
-		var ret GetEndpointsResultsInner
+		var ret ConfigSitesInnerEndpointsInner
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *GetEndpoint) GetResult() GetEndpointsResultsInner {
 
 // GetResultOk returns a tuple with the Result field value
 // and a boolean to check if the value has been set.
-func (o *GetEndpoint) GetResultOk() (*GetEndpointsResultsInner, bool) {
+func (o *GetEndpoint) GetResultOk() (*ConfigSitesInnerEndpointsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *GetEndpoint) GetResultOk() (*GetEndpointsResultsInner, bool) {
 }
 
 // SetResult sets field value
-func (o *GetEndpoint) SetResult(v GetEndpointsResultsInner) {
+func (o *GetEndpoint) SetResult(v ConfigSitesInnerEndpointsInner) {
 	o.Result = v
 }
 

@@ -737,6 +737,9 @@ type GenericOpenAPIError struct {
 
 // Error returns non-empty string if there was an error.
 func (e GenericOpenAPIError) Error() string {
+	if der := e.DPFError(); der != nil {
+		return der.Error()
+	}
 	return e.error
 }
 
@@ -748,6 +751,26 @@ func (e GenericOpenAPIError) Body() []byte {
 // Model returns the unpacked model of the error
 func (e GenericOpenAPIError) Model() interface{} {
 	return e.model
+}
+
+// DPFError returns the structured DPF error if available.
+func (e GenericOpenAPIError) DPFError() DPFError {
+	if e.model == nil {
+		return nil
+	}
+	if v, ok := e.model.(DPFError); ok {
+		return v
+	}
+	// If it's a value type, try to get a pointer to it
+	val := reflect.ValueOf(e.model)
+	if val.Kind() != reflect.Ptr {
+		ptr := reflect.New(val.Type())
+		ptr.Elem().Set(val)
+		if v, ok := ptr.Interface().(DPFError); ok {
+			return v
+		}
+	}
+	return nil
 }
 
 // format error message using title and detail when model implements rfc7807

@@ -21,17 +21,17 @@ var _ MappedNullable = &LbDomain{}
 
 // LbDomain struct for LbDomain
 type LbDomain struct {
-	Id             string           `json:"id"`
-	CommonConfigId int64            `json:"common_config_id"`
-	ServiceCode    string           `json:"service_code"`
-	State          LbDomainState    `json:"state"`
-	Favorite       LbDomainFavorite `json:"favorite"`
+	CommonConfigId int64 `json:"common_config_id"`
+	// コメント
+	Description string           `json:"description"`
+	Favorite    LbDomainFavorite `json:"favorite"`
+	Id          string           `json:"id"`
 	// LBドメイン名
 	Name string `json:"name"`
-	// コメント
-	Description string `json:"description"`
 	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	RuleResourceName string `json:"rule_resource_name"`
+	RuleResourceName string        `json:"rule_resource_name"`
+	ServiceCode      string        `json:"service_code"`
+	State            LbDomainState `json:"state"`
 }
 
 type _LbDomain LbDomain
@@ -40,16 +40,16 @@ type _LbDomain LbDomain
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLbDomain(id string, commonConfigId int64, serviceCode string, state LbDomainState, favorite LbDomainFavorite, name string, description string, ruleResourceName string) *LbDomain {
+func NewLbDomain(commonConfigId int64, description string, favorite LbDomainFavorite, id string, name string, ruleResourceName string, serviceCode string, state LbDomainState) *LbDomain {
 	this := LbDomain{}
-	this.Id = id
 	this.CommonConfigId = commonConfigId
+	this.Description = description
+	this.Favorite = favorite
+	this.Id = id
+	this.Name = name
+	this.RuleResourceName = ruleResourceName
 	this.ServiceCode = serviceCode
 	this.State = state
-	this.Favorite = favorite
-	this.Name = name
-	this.Description = description
-	this.RuleResourceName = ruleResourceName
 	return &this
 }
 
@@ -61,6 +61,78 @@ func NewLbDomainWithDefaults() *LbDomain {
 	var description string = ""
 	this.Description = description
 	return &this
+}
+
+// GetCommonConfigId returns the CommonConfigId field value
+func (o *LbDomain) GetCommonConfigId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.CommonConfigId
+}
+
+// GetCommonConfigIdOk returns a tuple with the CommonConfigId field value
+// and a boolean to check if the value has been set.
+func (o *LbDomain) GetCommonConfigIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CommonConfigId, true
+}
+
+// SetCommonConfigId sets field value
+func (o *LbDomain) SetCommonConfigId(v int64) {
+	o.CommonConfigId = v
+}
+
+// GetDescription returns the Description field value
+func (o *LbDomain) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *LbDomain) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *LbDomain) SetDescription(v string) {
+	o.Description = v
+}
+
+// GetFavorite returns the Favorite field value
+func (o *LbDomain) GetFavorite() LbDomainFavorite {
+	if o == nil {
+		var ret LbDomainFavorite
+		return ret
+	}
+
+	return o.Favorite
+}
+
+// GetFavoriteOk returns a tuple with the Favorite field value
+// and a boolean to check if the value has been set.
+func (o *LbDomain) GetFavoriteOk() (*LbDomainFavorite, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Favorite, true
+}
+
+// SetFavorite sets field value
+func (o *LbDomain) SetFavorite(v LbDomainFavorite) {
+	o.Favorite = v
 }
 
 // GetId returns the Id field value
@@ -87,28 +159,52 @@ func (o *LbDomain) SetId(v string) {
 	o.Id = v
 }
 
-// GetCommonConfigId returns the CommonConfigId field value
-func (o *LbDomain) GetCommonConfigId() int64 {
+// GetName returns the Name field value
+func (o *LbDomain) GetName() string {
 	if o == nil {
-		var ret int64
+		var ret string
 		return ret
 	}
 
-	return o.CommonConfigId
+	return o.Name
 }
 
-// GetCommonConfigIdOk returns a tuple with the CommonConfigId field value
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *LbDomain) GetCommonConfigIdOk() (*int64, bool) {
+func (o *LbDomain) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.CommonConfigId, true
+	return &o.Name, true
 }
 
-// SetCommonConfigId sets field value
-func (o *LbDomain) SetCommonConfigId(v int64) {
-	o.CommonConfigId = v
+// SetName sets field value
+func (o *LbDomain) SetName(v string) {
+	o.Name = v
+}
+
+// GetRuleResourceName returns the RuleResourceName field value
+func (o *LbDomain) GetRuleResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RuleResourceName
+}
+
+// GetRuleResourceNameOk returns a tuple with the RuleResourceName field value
+// and a boolean to check if the value has been set.
+func (o *LbDomain) GetRuleResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RuleResourceName, true
+}
+
+// SetRuleResourceName sets field value
+func (o *LbDomain) SetRuleResourceName(v string) {
+	o.RuleResourceName = v
 }
 
 // GetServiceCode returns the ServiceCode field value
@@ -159,102 +255,6 @@ func (o *LbDomain) SetState(v LbDomainState) {
 	o.State = v
 }
 
-// GetFavorite returns the Favorite field value
-func (o *LbDomain) GetFavorite() LbDomainFavorite {
-	if o == nil {
-		var ret LbDomainFavorite
-		return ret
-	}
-
-	return o.Favorite
-}
-
-// GetFavoriteOk returns a tuple with the Favorite field value
-// and a boolean to check if the value has been set.
-func (o *LbDomain) GetFavoriteOk() (*LbDomainFavorite, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Favorite, true
-}
-
-// SetFavorite sets field value
-func (o *LbDomain) SetFavorite(v LbDomainFavorite) {
-	o.Favorite = v
-}
-
-// GetName returns the Name field value
-func (o *LbDomain) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *LbDomain) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *LbDomain) SetName(v string) {
-	o.Name = v
-}
-
-// GetDescription returns the Description field value
-func (o *LbDomain) GetDescription() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value
-// and a boolean to check if the value has been set.
-func (o *LbDomain) GetDescriptionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// SetDescription sets field value
-func (o *LbDomain) SetDescription(v string) {
-	o.Description = v
-}
-
-// GetRuleResourceName returns the RuleResourceName field value
-func (o *LbDomain) GetRuleResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RuleResourceName
-}
-
-// GetRuleResourceNameOk returns a tuple with the RuleResourceName field value
-// and a boolean to check if the value has been set.
-func (o *LbDomain) GetRuleResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RuleResourceName, true
-}
-
-// SetRuleResourceName sets field value
-func (o *LbDomain) SetRuleResourceName(v string) {
-	o.RuleResourceName = v
-}
-
 func (o LbDomain) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -265,14 +265,14 @@ func (o LbDomain) MarshalJSON() ([]byte, error) {
 
 func (o LbDomain) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
 	toSerialize["common_config_id"] = o.CommonConfigId
+	toSerialize["description"] = o.Description
+	toSerialize["favorite"] = o.Favorite
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["rule_resource_name"] = o.RuleResourceName
 	toSerialize["service_code"] = o.ServiceCode
 	toSerialize["state"] = o.State
-	toSerialize["favorite"] = o.Favorite
-	toSerialize["name"] = o.Name
-	toSerialize["description"] = o.Description
-	toSerialize["rule_resource_name"] = o.RuleResourceName
 	return toSerialize, nil
 }
 
@@ -281,14 +281,14 @@ func (o *LbDomain) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"common_config_id",
+		"description",
+		"favorite",
+		"id",
+		"name",
+		"rule_resource_name",
 		"service_code",
 		"state",
-		"favorite",
-		"name",
-		"description",
-		"rule_resource_name",
 	}
 
 	allProperties := make(map[string]interface{})

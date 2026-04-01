@@ -19,11 +19,11 @@ var _ MappedNullable = &PatchMonitoringStatic{}
 
 // PatchMonitoringStatic struct for PatchMonitoringStatic
 type PatchMonitoringStatic struct {
-	// 監視名
-	Name *string `json:"name,omitempty"`
 	// コメント
-	Description *string                     `json:"description,omitempty"`
-	Props       *PatchMonitoringStaticProps `json:"props,omitempty"`
+	Description *string `json:"description,omitempty"`
+	// 監視名
+	Name  *string                     `json:"name,omitempty"`
+	Props *PatchMonitoringStaticProps `json:"props,omitempty"`
 }
 
 // NewPatchMonitoringStatic instantiates a new PatchMonitoringStatic object
@@ -45,38 +45,6 @@ func NewPatchMonitoringStaticWithDefaults() *PatchMonitoringStatic {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *PatchMonitoringStatic) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringStatic) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *PatchMonitoringStatic) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *PatchMonitoringStatic) SetName(v string) {
-	o.Name = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -109,6 +77,38 @@ func (o *PatchMonitoringStatic) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *PatchMonitoringStatic) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PatchMonitoringStatic) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringStatic) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *PatchMonitoringStatic) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PatchMonitoringStatic) SetName(v string) {
+	o.Name = &v
 }
 
 // GetProps returns the Props field value if set, zero value otherwise.
@@ -153,11 +153,11 @@ func (o PatchMonitoringStatic) MarshalJSON() ([]byte, error) {
 
 func (o PatchMonitoringStatic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	if !IsNil(o.Props) {
 		toSerialize["props"] = o.Props

@@ -19,9 +19,9 @@ var _ MappedNullable = &PatchZone{}
 
 // PatchZone struct for PatchZone
 type PatchZone struct {
-	Favorite *ZonesFavorite `json:"favorite,omitempty"`
 	// コメント
-	Description *string `json:"description,omitempty"`
+	Description *string        `json:"description,omitempty"`
+	Favorite    *ZonesFavorite `json:"favorite,omitempty"`
 }
 
 // NewPatchZone instantiates a new PatchZone object
@@ -43,38 +43,6 @@ func NewPatchZoneWithDefaults() *PatchZone {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetFavorite returns the Favorite field value if set, zero value otherwise.
-func (o *PatchZone) GetFavorite() ZonesFavorite {
-	if o == nil || IsNil(o.Favorite) {
-		var ret ZonesFavorite
-		return ret
-	}
-	return *o.Favorite
-}
-
-// GetFavoriteOk returns a tuple with the Favorite field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchZone) GetFavoriteOk() (*ZonesFavorite, bool) {
-	if o == nil || IsNil(o.Favorite) {
-		return nil, false
-	}
-	return o.Favorite, true
-}
-
-// HasFavorite returns a boolean if a field has been set.
-func (o *PatchZone) HasFavorite() bool {
-	if o != nil && !IsNil(o.Favorite) {
-		return true
-	}
-
-	return false
-}
-
-// SetFavorite gets a reference to the given ZonesFavorite and assigns it to the Favorite field.
-func (o *PatchZone) SetFavorite(v ZonesFavorite) {
-	o.Favorite = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -109,6 +77,38 @@ func (o *PatchZone) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetFavorite returns the Favorite field value if set, zero value otherwise.
+func (o *PatchZone) GetFavorite() ZonesFavorite {
+	if o == nil || IsNil(o.Favorite) {
+		var ret ZonesFavorite
+		return ret
+	}
+	return *o.Favorite
+}
+
+// GetFavoriteOk returns a tuple with the Favorite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchZone) GetFavoriteOk() (*ZonesFavorite, bool) {
+	if o == nil || IsNil(o.Favorite) {
+		return nil, false
+	}
+	return o.Favorite, true
+}
+
+// HasFavorite returns a boolean if a field has been set.
+func (o *PatchZone) HasFavorite() bool {
+	if o != nil && !IsNil(o.Favorite) {
+		return true
+	}
+
+	return false
+}
+
+// SetFavorite gets a reference to the given ZonesFavorite and assigns it to the Favorite field.
+func (o *PatchZone) SetFavorite(v ZonesFavorite) {
+	o.Favorite = &v
+}
+
 func (o PatchZone) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -119,11 +119,11 @@ func (o PatchZone) MarshalJSON() ([]byte, error) {
 
 func (o PatchZone) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Favorite) {
-		toSerialize["favorite"] = o.Favorite
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Favorite) {
+		toSerialize["favorite"] = o.Favorite
 	}
 	return toSerialize, nil
 }

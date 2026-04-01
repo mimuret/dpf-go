@@ -21,11 +21,11 @@ var _ MappedNullable = &BadRequest{}
 
 // BadRequest struct for BadRequest
 type BadRequest struct {
-	// 処理の問い合わせの際のキーになる文字列
-	RequestId    string              `json:"request_id"`
-	ErrorType    string              `json:"error_type"`
-	ErrorMessage string              `json:"error_message"`
 	ErrorDetails []ErrorDetailsInner `json:"error_details"`
+	ErrorMessage string              `json:"error_message"`
+	ErrorType    string              `json:"error_type"`
+	// 処理の問い合わせの際のキーになる文字列
+	RequestId string `json:"request_id"`
 }
 
 type _BadRequest BadRequest
@@ -34,12 +34,12 @@ type _BadRequest BadRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBadRequest(requestId string, errorType string, errorMessage string, errorDetails []ErrorDetailsInner) *BadRequest {
+func NewBadRequest(errorDetails []ErrorDetailsInner, errorMessage string, errorType string, requestId string) *BadRequest {
 	this := BadRequest{}
-	this.RequestId = requestId
-	this.ErrorType = errorType
-	this.ErrorMessage = errorMessage
 	this.ErrorDetails = errorDetails
+	this.ErrorMessage = errorMessage
+	this.ErrorType = errorType
+	this.RequestId = requestId
 	return &this
 }
 
@@ -49,78 +49,6 @@ func NewBadRequest(requestId string, errorType string, errorMessage string, erro
 func NewBadRequestWithDefaults() *BadRequest {
 	this := BadRequest{}
 	return &this
-}
-
-// GetRequestId returns the RequestId field value
-func (o *BadRequest) GetRequestId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RequestId
-}
-
-// GetRequestIdOk returns a tuple with the RequestId field value
-// and a boolean to check if the value has been set.
-func (o *BadRequest) GetRequestIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RequestId, true
-}
-
-// SetRequestId sets field value
-func (o *BadRequest) SetRequestId(v string) {
-	o.RequestId = v
-}
-
-// GetErrorType returns the ErrorType field value
-func (o *BadRequest) GetErrorType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ErrorType
-}
-
-// GetErrorTypeOk returns a tuple with the ErrorType field value
-// and a boolean to check if the value has been set.
-func (o *BadRequest) GetErrorTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ErrorType, true
-}
-
-// SetErrorType sets field value
-func (o *BadRequest) SetErrorType(v string) {
-	o.ErrorType = v
-}
-
-// GetErrorMessage returns the ErrorMessage field value
-func (o *BadRequest) GetErrorMessage() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ErrorMessage
-}
-
-// GetErrorMessageOk returns a tuple with the ErrorMessage field value
-// and a boolean to check if the value has been set.
-func (o *BadRequest) GetErrorMessageOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ErrorMessage, true
-}
-
-// SetErrorMessage sets field value
-func (o *BadRequest) SetErrorMessage(v string) {
-	o.ErrorMessage = v
 }
 
 // GetErrorDetails returns the ErrorDetails field value
@@ -147,6 +75,78 @@ func (o *BadRequest) SetErrorDetails(v []ErrorDetailsInner) {
 	o.ErrorDetails = v
 }
 
+// GetErrorMessage returns the ErrorMessage field value
+func (o *BadRequest) GetErrorMessage() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ErrorMessage
+}
+
+// GetErrorMessageOk returns a tuple with the ErrorMessage field value
+// and a boolean to check if the value has been set.
+func (o *BadRequest) GetErrorMessageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ErrorMessage, true
+}
+
+// SetErrorMessage sets field value
+func (o *BadRequest) SetErrorMessage(v string) {
+	o.ErrorMessage = v
+}
+
+// GetErrorType returns the ErrorType field value
+func (o *BadRequest) GetErrorType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ErrorType
+}
+
+// GetErrorTypeOk returns a tuple with the ErrorType field value
+// and a boolean to check if the value has been set.
+func (o *BadRequest) GetErrorTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ErrorType, true
+}
+
+// SetErrorType sets field value
+func (o *BadRequest) SetErrorType(v string) {
+	o.ErrorType = v
+}
+
+// GetRequestId returns the RequestId field value
+func (o *BadRequest) GetRequestId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RequestId
+}
+
+// GetRequestIdOk returns a tuple with the RequestId field value
+// and a boolean to check if the value has been set.
+func (o *BadRequest) GetRequestIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RequestId, true
+}
+
+// SetRequestId sets field value
+func (o *BadRequest) SetRequestId(v string) {
+	o.RequestId = v
+}
+
 func (o BadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -157,10 +157,10 @@ func (o BadRequest) MarshalJSON() ([]byte, error) {
 
 func (o BadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["request_id"] = o.RequestId
-	toSerialize["error_type"] = o.ErrorType
-	toSerialize["error_message"] = o.ErrorMessage
 	toSerialize["error_details"] = o.ErrorDetails
+	toSerialize["error_message"] = o.ErrorMessage
+	toSerialize["error_type"] = o.ErrorType
+	toSerialize["request_id"] = o.RequestId
 	return toSerialize, nil
 }
 
@@ -169,10 +169,10 @@ func (o *BadRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"request_id",
-		"error_type",
-		"error_message",
 		"error_details",
+		"error_message",
+		"error_type",
+		"request_id",
 	}
 
 	allProperties := make(map[string]interface{})

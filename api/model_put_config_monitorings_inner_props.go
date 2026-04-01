@@ -19,32 +19,32 @@ var _ MappedNullable = &PutConfigMonitoringsInnerProps{}
 
 // PutConfigMonitoringsInnerProps struct for PutConfigMonitoringsInnerProps
 type PutConfigMonitoringsInnerProps struct {
-	// 監視元ロケーション（指定可能な監視種別はping,tcp,http）
-	Location *string `json:"location,omitempty"`
-	// 監視間隔（s）（指定可能な監視種別はping,tcp,http）
-	Interval *int32 `json:"interval,omitempty"`
+	// Hostヘッダー（指定可能な監視種別はhttp）
+	Headers []PutConfigMonitoringsInnerPropsHeadersInner `json:"headers,omitempty"`
 	// 保留時間（s）（指定可能な監視種別はping,tcp,http）
 	Holdtime *int32 `json:"holdtime,omitempty"`
-	// タイムアウト（s）（指定可能な監視種別はping,tcp,http）
-	Timeout *int32 `json:"timeout,omitempty"`
+	// HTTPS利用（指定可能な監視種別はhttp）
+	Https *bool `json:"https,omitempty"`
+	// 監視間隔（s）（指定可能な監視種別はping,tcp,http）
+	Interval *int32 `json:"interval,omitempty"`
+	// 監視元ロケーション（指定可能な監視種別はping,tcp,http）
+	Location *string `json:"location,omitempty"`
+	// パス（先頭に「/」は不要。指定可能な監視種別はhttp）
+	Path *string `json:"path,omitempty"`
 	// ポート番号（指定可能な監視種別はtcp,http）
 	Port *int32 `json:"port,omitempty"`
+	// レスポンスボディマッチ文字列（指定可能な監視種別はhttp）
+	ResponseMatch *string `json:"response_match,omitempty"`
+	// 固定値（指定可能な監視種別はstatic）
+	Result *string `json:"result,omitempty"`
+	// ステータスコード（0-9の3桁の文字列のみ指定可能。指定可能な監視種別はhttp）
+	StatusCodes []string `json:"status_codes,omitempty"`
+	// タイムアウト（s）（指定可能な監視種別はping,tcp,http）
+	Timeout *int32 `json:"timeout,omitempty"`
 	// TLS監視（指定可能な監視種別はtcp）
 	TlsEnabled *bool `json:"tls_enabled,omitempty"`
 	// TLS SNI（指定可能な監視種別はtcp,http）
 	TlsSni *string `json:"tls_sni,omitempty"`
-	// レスポンスボディマッチ文字列（指定可能な監視種別はhttp）
-	ResponseMatch *string `json:"response_match,omitempty"`
-	// HTTPS利用（指定可能な監視種別はhttp）
-	Https *bool `json:"https,omitempty"`
-	// Hostヘッダー（指定可能な監視種別はhttp）
-	Headers []PutConfigMonitoringsInnerPropsHeadersInner `json:"headers,omitempty"`
-	// パス（先頭に「/」は不要。指定可能な監視種別はhttp）
-	Path *string `json:"path,omitempty"`
-	// ステータスコード（0-9の3桁の文字列のみ指定可能。指定可能な監視種別はhttp）
-	StatusCodes []string `json:"status_codes,omitempty"`
-	// 固定値（指定可能な監視種別はstatic）
-	Result *string `json:"result,omitempty"`
 }
 
 // NewPutConfigMonitoringsInnerProps instantiates a new PutConfigMonitoringsInnerProps object
@@ -64,68 +64,36 @@ func NewPutConfigMonitoringsInnerPropsWithDefaults() *PutConfigMonitoringsInnerP
 	return &this
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetLocation() string {
-	if o == nil || IsNil(o.Location) {
-		var ret string
+// GetHeaders returns the Headers field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetHeaders() []PutConfigMonitoringsInnerPropsHeadersInner {
+	if o == nil || IsNil(o.Headers) {
+		var ret []PutConfigMonitoringsInnerPropsHeadersInner
 		return ret
 	}
-	return *o.Location
+	return o.Headers
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetLocationOk() (*string, bool) {
-	if o == nil || IsNil(o.Location) {
+func (o *PutConfigMonitoringsInnerProps) GetHeadersOk() ([]PutConfigMonitoringsInnerPropsHeadersInner, bool) {
+	if o == nil || IsNil(o.Headers) {
 		return nil, false
 	}
-	return o.Location, true
+	return o.Headers, true
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
+// HasHeaders returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasHeaders() bool {
+	if o != nil && !IsNil(o.Headers) {
 		return true
 	}
 
 	return false
 }
 
-// SetLocation gets a reference to the given string and assigns it to the Location field.
-func (o *PutConfigMonitoringsInnerProps) SetLocation(v string) {
-	o.Location = &v
-}
-
-// GetInterval returns the Interval field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetInterval() int32 {
-	if o == nil || IsNil(o.Interval) {
-		var ret int32
-		return ret
-	}
-	return *o.Interval
-}
-
-// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetIntervalOk() (*int32, bool) {
-	if o == nil || IsNil(o.Interval) {
-		return nil, false
-	}
-	return o.Interval, true
-}
-
-// HasInterval returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasInterval() bool {
-	if o != nil && !IsNil(o.Interval) {
-		return true
-	}
-
-	return false
-}
-
-// SetInterval gets a reference to the given int32 and assigns it to the Interval field.
-func (o *PutConfigMonitoringsInnerProps) SetInterval(v int32) {
-	o.Interval = &v
+// SetHeaders gets a reference to the given []PutConfigMonitoringsInnerPropsHeadersInner and assigns it to the Headers field.
+func (o *PutConfigMonitoringsInnerProps) SetHeaders(v []PutConfigMonitoringsInnerPropsHeadersInner) {
+	o.Headers = v
 }
 
 // GetHoldtime returns the Holdtime field value if set, zero value otherwise.
@@ -160,36 +128,132 @@ func (o *PutConfigMonitoringsInnerProps) SetHoldtime(v int32) {
 	o.Holdtime = &v
 }
 
-// GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetTimeout() int32 {
-	if o == nil || IsNil(o.Timeout) {
-		var ret int32
+// GetHttps returns the Https field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetHttps() bool {
+	if o == nil || IsNil(o.Https) {
+		var ret bool
 		return ret
 	}
-	return *o.Timeout
+	return *o.Https
 }
 
-// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// GetHttpsOk returns a tuple with the Https field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetTimeoutOk() (*int32, bool) {
-	if o == nil || IsNil(o.Timeout) {
+func (o *PutConfigMonitoringsInnerProps) GetHttpsOk() (*bool, bool) {
+	if o == nil || IsNil(o.Https) {
 		return nil, false
 	}
-	return o.Timeout, true
+	return o.Https, true
 }
 
-// HasTimeout returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasTimeout() bool {
-	if o != nil && !IsNil(o.Timeout) {
+// HasHttps returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasHttps() bool {
+	if o != nil && !IsNil(o.Https) {
 		return true
 	}
 
 	return false
 }
 
-// SetTimeout gets a reference to the given int32 and assigns it to the Timeout field.
-func (o *PutConfigMonitoringsInnerProps) SetTimeout(v int32) {
-	o.Timeout = &v
+// SetHttps gets a reference to the given bool and assigns it to the Https field.
+func (o *PutConfigMonitoringsInnerProps) SetHttps(v bool) {
+	o.Https = &v
+}
+
+// GetInterval returns the Interval field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetInterval() int32 {
+	if o == nil || IsNil(o.Interval) {
+		var ret int32
+		return ret
+	}
+	return *o.Interval
+}
+
+// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutConfigMonitoringsInnerProps) GetIntervalOk() (*int32, bool) {
+	if o == nil || IsNil(o.Interval) {
+		return nil, false
+	}
+	return o.Interval, true
+}
+
+// HasInterval returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasInterval() bool {
+	if o != nil && !IsNil(o.Interval) {
+		return true
+	}
+
+	return false
+}
+
+// SetInterval gets a reference to the given int32 and assigns it to the Interval field.
+func (o *PutConfigMonitoringsInnerProps) SetInterval(v int32) {
+	o.Interval = &v
+}
+
+// GetLocation returns the Location field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetLocation() string {
+	if o == nil || IsNil(o.Location) {
+		var ret string
+		return ret
+	}
+	return *o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutConfigMonitoringsInnerProps) GetLocationOk() (*string, bool) {
+	if o == nil || IsNil(o.Location) {
+		return nil, false
+	}
+	return o.Location, true
+}
+
+// HasLocation returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasLocation() bool {
+	if o != nil && !IsNil(o.Location) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocation gets a reference to the given string and assigns it to the Location field.
+func (o *PutConfigMonitoringsInnerProps) SetLocation(v string) {
+	o.Location = &v
+}
+
+// GetPath returns the Path field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetPath() string {
+	if o == nil || IsNil(o.Path) {
+		var ret string
+		return ret
+	}
+	return *o.Path
+}
+
+// GetPathOk returns a tuple with the Path field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutConfigMonitoringsInnerProps) GetPathOk() (*string, bool) {
+	if o == nil || IsNil(o.Path) {
+		return nil, false
+	}
+	return o.Path, true
+}
+
+// HasPath returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasPath() bool {
+	if o != nil && !IsNil(o.Path) {
+		return true
+	}
+
+	return false
+}
+
+// SetPath gets a reference to the given string and assigns it to the Path field.
+func (o *PutConfigMonitoringsInnerProps) SetPath(v string) {
+	o.Path = &v
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
@@ -222,6 +286,134 @@ func (o *PutConfigMonitoringsInnerProps) HasPort() bool {
 // SetPort gets a reference to the given int32 and assigns it to the Port field.
 func (o *PutConfigMonitoringsInnerProps) SetPort(v int32) {
 	o.Port = &v
+}
+
+// GetResponseMatch returns the ResponseMatch field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetResponseMatch() string {
+	if o == nil || IsNil(o.ResponseMatch) {
+		var ret string
+		return ret
+	}
+	return *o.ResponseMatch
+}
+
+// GetResponseMatchOk returns a tuple with the ResponseMatch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutConfigMonitoringsInnerProps) GetResponseMatchOk() (*string, bool) {
+	if o == nil || IsNil(o.ResponseMatch) {
+		return nil, false
+	}
+	return o.ResponseMatch, true
+}
+
+// HasResponseMatch returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasResponseMatch() bool {
+	if o != nil && !IsNil(o.ResponseMatch) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseMatch gets a reference to the given string and assigns it to the ResponseMatch field.
+func (o *PutConfigMonitoringsInnerProps) SetResponseMatch(v string) {
+	o.ResponseMatch = &v
+}
+
+// GetResult returns the Result field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetResult() string {
+	if o == nil || IsNil(o.Result) {
+		var ret string
+		return ret
+	}
+	return *o.Result
+}
+
+// GetResultOk returns a tuple with the Result field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutConfigMonitoringsInnerProps) GetResultOk() (*string, bool) {
+	if o == nil || IsNil(o.Result) {
+		return nil, false
+	}
+	return o.Result, true
+}
+
+// HasResult returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasResult() bool {
+	if o != nil && !IsNil(o.Result) {
+		return true
+	}
+
+	return false
+}
+
+// SetResult gets a reference to the given string and assigns it to the Result field.
+func (o *PutConfigMonitoringsInnerProps) SetResult(v string) {
+	o.Result = &v
+}
+
+// GetStatusCodes returns the StatusCodes field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetStatusCodes() []string {
+	if o == nil || IsNil(o.StatusCodes) {
+		var ret []string
+		return ret
+	}
+	return o.StatusCodes
+}
+
+// GetStatusCodesOk returns a tuple with the StatusCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutConfigMonitoringsInnerProps) GetStatusCodesOk() ([]string, bool) {
+	if o == nil || IsNil(o.StatusCodes) {
+		return nil, false
+	}
+	return o.StatusCodes, true
+}
+
+// HasStatusCodes returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasStatusCodes() bool {
+	if o != nil && !IsNil(o.StatusCodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusCodes gets a reference to the given []string and assigns it to the StatusCodes field.
+func (o *PutConfigMonitoringsInnerProps) SetStatusCodes(v []string) {
+	o.StatusCodes = v
+}
+
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *PutConfigMonitoringsInnerProps) GetTimeout() int32 {
+	if o == nil || IsNil(o.Timeout) {
+		var ret int32
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PutConfigMonitoringsInnerProps) GetTimeoutOk() (*int32, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *PutConfigMonitoringsInnerProps) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given int32 and assigns it to the Timeout field.
+func (o *PutConfigMonitoringsInnerProps) SetTimeout(v int32) {
+	o.Timeout = &v
 }
 
 // GetTlsEnabled returns the TlsEnabled field value if set, zero value otherwise.
@@ -288,198 +480,6 @@ func (o *PutConfigMonitoringsInnerProps) SetTlsSni(v string) {
 	o.TlsSni = &v
 }
 
-// GetResponseMatch returns the ResponseMatch field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetResponseMatch() string {
-	if o == nil || IsNil(o.ResponseMatch) {
-		var ret string
-		return ret
-	}
-	return *o.ResponseMatch
-}
-
-// GetResponseMatchOk returns a tuple with the ResponseMatch field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetResponseMatchOk() (*string, bool) {
-	if o == nil || IsNil(o.ResponseMatch) {
-		return nil, false
-	}
-	return o.ResponseMatch, true
-}
-
-// HasResponseMatch returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasResponseMatch() bool {
-	if o != nil && !IsNil(o.ResponseMatch) {
-		return true
-	}
-
-	return false
-}
-
-// SetResponseMatch gets a reference to the given string and assigns it to the ResponseMatch field.
-func (o *PutConfigMonitoringsInnerProps) SetResponseMatch(v string) {
-	o.ResponseMatch = &v
-}
-
-// GetHttps returns the Https field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetHttps() bool {
-	if o == nil || IsNil(o.Https) {
-		var ret bool
-		return ret
-	}
-	return *o.Https
-}
-
-// GetHttpsOk returns a tuple with the Https field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetHttpsOk() (*bool, bool) {
-	if o == nil || IsNil(o.Https) {
-		return nil, false
-	}
-	return o.Https, true
-}
-
-// HasHttps returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasHttps() bool {
-	if o != nil && !IsNil(o.Https) {
-		return true
-	}
-
-	return false
-}
-
-// SetHttps gets a reference to the given bool and assigns it to the Https field.
-func (o *PutConfigMonitoringsInnerProps) SetHttps(v bool) {
-	o.Https = &v
-}
-
-// GetHeaders returns the Headers field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetHeaders() []PutConfigMonitoringsInnerPropsHeadersInner {
-	if o == nil || IsNil(o.Headers) {
-		var ret []PutConfigMonitoringsInnerPropsHeadersInner
-		return ret
-	}
-	return o.Headers
-}
-
-// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetHeadersOk() ([]PutConfigMonitoringsInnerPropsHeadersInner, bool) {
-	if o == nil || IsNil(o.Headers) {
-		return nil, false
-	}
-	return o.Headers, true
-}
-
-// HasHeaders returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasHeaders() bool {
-	if o != nil && !IsNil(o.Headers) {
-		return true
-	}
-
-	return false
-}
-
-// SetHeaders gets a reference to the given []PutConfigMonitoringsInnerPropsHeadersInner and assigns it to the Headers field.
-func (o *PutConfigMonitoringsInnerProps) SetHeaders(v []PutConfigMonitoringsInnerPropsHeadersInner) {
-	o.Headers = v
-}
-
-// GetPath returns the Path field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetPath() string {
-	if o == nil || IsNil(o.Path) {
-		var ret string
-		return ret
-	}
-	return *o.Path
-}
-
-// GetPathOk returns a tuple with the Path field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetPathOk() (*string, bool) {
-	if o == nil || IsNil(o.Path) {
-		return nil, false
-	}
-	return o.Path, true
-}
-
-// HasPath returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasPath() bool {
-	if o != nil && !IsNil(o.Path) {
-		return true
-	}
-
-	return false
-}
-
-// SetPath gets a reference to the given string and assigns it to the Path field.
-func (o *PutConfigMonitoringsInnerProps) SetPath(v string) {
-	o.Path = &v
-}
-
-// GetStatusCodes returns the StatusCodes field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetStatusCodes() []string {
-	if o == nil || IsNil(o.StatusCodes) {
-		var ret []string
-		return ret
-	}
-	return o.StatusCodes
-}
-
-// GetStatusCodesOk returns a tuple with the StatusCodes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetStatusCodesOk() ([]string, bool) {
-	if o == nil || IsNil(o.StatusCodes) {
-		return nil, false
-	}
-	return o.StatusCodes, true
-}
-
-// HasStatusCodes returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasStatusCodes() bool {
-	if o != nil && !IsNil(o.StatusCodes) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatusCodes gets a reference to the given []string and assigns it to the StatusCodes field.
-func (o *PutConfigMonitoringsInnerProps) SetStatusCodes(v []string) {
-	o.StatusCodes = v
-}
-
-// GetResult returns the Result field value if set, zero value otherwise.
-func (o *PutConfigMonitoringsInnerProps) GetResult() string {
-	if o == nil || IsNil(o.Result) {
-		var ret string
-		return ret
-	}
-	return *o.Result
-}
-
-// GetResultOk returns a tuple with the Result field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PutConfigMonitoringsInnerProps) GetResultOk() (*string, bool) {
-	if o == nil || IsNil(o.Result) {
-		return nil, false
-	}
-	return o.Result, true
-}
-
-// HasResult returns a boolean if a field has been set.
-func (o *PutConfigMonitoringsInnerProps) HasResult() bool {
-	if o != nil && !IsNil(o.Result) {
-		return true
-	}
-
-	return false
-}
-
-// SetResult gets a reference to the given string and assigns it to the Result field.
-func (o *PutConfigMonitoringsInnerProps) SetResult(v string) {
-	o.Result = &v
-}
-
 func (o PutConfigMonitoringsInnerProps) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -490,44 +490,44 @@ func (o PutConfigMonitoringsInnerProps) MarshalJSON() ([]byte, error) {
 
 func (o PutConfigMonitoringsInnerProps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
-	}
-	if !IsNil(o.Interval) {
-		toSerialize["interval"] = o.Interval
+	if !IsNil(o.Headers) {
+		toSerialize["headers"] = o.Headers
 	}
 	if !IsNil(o.Holdtime) {
 		toSerialize["holdtime"] = o.Holdtime
 	}
-	if !IsNil(o.Timeout) {
-		toSerialize["timeout"] = o.Timeout
+	if !IsNil(o.Https) {
+		toSerialize["https"] = o.Https
+	}
+	if !IsNil(o.Interval) {
+		toSerialize["interval"] = o.Interval
+	}
+	if !IsNil(o.Location) {
+		toSerialize["location"] = o.Location
+	}
+	if !IsNil(o.Path) {
+		toSerialize["path"] = o.Path
 	}
 	if !IsNil(o.Port) {
 		toSerialize["port"] = o.Port
+	}
+	if !IsNil(o.ResponseMatch) {
+		toSerialize["response_match"] = o.ResponseMatch
+	}
+	if !IsNil(o.Result) {
+		toSerialize["result"] = o.Result
+	}
+	if !IsNil(o.StatusCodes) {
+		toSerialize["status_codes"] = o.StatusCodes
+	}
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
 	}
 	if !IsNil(o.TlsEnabled) {
 		toSerialize["tls_enabled"] = o.TlsEnabled
 	}
 	if !IsNil(o.TlsSni) {
 		toSerialize["tls_sni"] = o.TlsSni
-	}
-	if !IsNil(o.ResponseMatch) {
-		toSerialize["response_match"] = o.ResponseMatch
-	}
-	if !IsNil(o.Https) {
-		toSerialize["https"] = o.Https
-	}
-	if !IsNil(o.Headers) {
-		toSerialize["headers"] = o.Headers
-	}
-	if !IsNil(o.Path) {
-		toSerialize["path"] = o.Path
-	}
-	if !IsNil(o.StatusCodes) {
-		toSerialize["status_codes"] = o.StatusCodes
-	}
-	if !IsNil(o.Result) {
-		toSerialize["result"] = o.Result
 	}
 	return toSerialize, nil
 }

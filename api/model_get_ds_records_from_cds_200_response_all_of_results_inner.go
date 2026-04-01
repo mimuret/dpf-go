@@ -23,11 +23,11 @@ var _ MappedNullable = &GetDsRecordsFromCds200ResponseAllOfResultsInner{}
 type GetDsRecordsFromCds200ResponseAllOfResultsInner struct {
 	// name
 	Name string `json:"name"`
-	// TTL
-	Ttl    NullableInt32   `json:"ttl"`
-	Rrtype DsRecordsRrtype `json:"rrtype"`
 	// レコードの値
-	Rdata []RecordsRdataInner `json:"rdata"`
+	Rdata  []RecordsRdataInner `json:"rdata"`
+	Rrtype DsRecordsRrtype     `json:"rrtype"`
+	// TTL
+	Ttl NullableInt32 `json:"ttl"`
 }
 
 type _GetDsRecordsFromCds200ResponseAllOfResultsInner GetDsRecordsFromCds200ResponseAllOfResultsInner
@@ -36,12 +36,12 @@ type _GetDsRecordsFromCds200ResponseAllOfResultsInner GetDsRecordsFromCds200Resp
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDsRecordsFromCds200ResponseAllOfResultsInner(name string, ttl NullableInt32, rrtype DsRecordsRrtype, rdata []RecordsRdataInner) *GetDsRecordsFromCds200ResponseAllOfResultsInner {
+func NewGetDsRecordsFromCds200ResponseAllOfResultsInner(name string, rdata []RecordsRdataInner, rrtype DsRecordsRrtype, ttl NullableInt32) *GetDsRecordsFromCds200ResponseAllOfResultsInner {
 	this := GetDsRecordsFromCds200ResponseAllOfResultsInner{}
 	this.Name = name
-	this.Ttl = ttl
-	this.Rrtype = rrtype
 	this.Rdata = rdata
+	this.Rrtype = rrtype
+	this.Ttl = ttl
 	return &this
 }
 
@@ -77,30 +77,28 @@ func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) SetName(v string) {
 	o.Name = v
 }
 
-// GetTtl returns the Ttl field value
-// If the value is explicit nil, the zero value for int32 will be returned
-func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetTtl() int32 {
-	if o == nil || o.Ttl.Get() == nil {
-		var ret int32
+// GetRdata returns the Rdata field value
+func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetRdata() []RecordsRdataInner {
+	if o == nil {
+		var ret []RecordsRdataInner
 		return ret
 	}
 
-	return *o.Ttl.Get()
+	return o.Rdata
 }
 
-// GetTtlOk returns a tuple with the Ttl field value
+// GetRdataOk returns a tuple with the Rdata field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetTtlOk() (*int32, bool) {
+func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetRdataOk() ([]RecordsRdataInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Ttl.Get(), o.Ttl.IsSet()
+	return o.Rdata, true
 }
 
-// SetTtl sets field value
-func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) SetTtl(v int32) {
-	o.Ttl.Set(&v)
+// SetRdata sets field value
+func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) SetRdata(v []RecordsRdataInner) {
+	o.Rdata = v
 }
 
 // GetRrtype returns the Rrtype field value
@@ -127,28 +125,30 @@ func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) SetRrtype(v DsRecordsR
 	o.Rrtype = v
 }
 
-// GetRdata returns the Rdata field value
-func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetRdata() []RecordsRdataInner {
-	if o == nil {
-		var ret []RecordsRdataInner
+// GetTtl returns the Ttl field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetTtl() int32 {
+	if o == nil || o.Ttl.Get() == nil {
+		var ret int32
 		return ret
 	}
 
-	return o.Rdata
+	return *o.Ttl.Get()
 }
 
-// GetRdataOk returns a tuple with the Rdata field value
+// GetTtlOk returns a tuple with the Ttl field value
 // and a boolean to check if the value has been set.
-func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetRdataOk() ([]RecordsRdataInner, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) GetTtlOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Rdata, true
+	return o.Ttl.Get(), o.Ttl.IsSet()
 }
 
-// SetRdata sets field value
-func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) SetRdata(v []RecordsRdataInner) {
-	o.Rdata = v
+// SetTtl sets field value
+func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) SetTtl(v int32) {
+	o.Ttl.Set(&v)
 }
 
 func (o GetDsRecordsFromCds200ResponseAllOfResultsInner) MarshalJSON() ([]byte, error) {
@@ -162,9 +162,9 @@ func (o GetDsRecordsFromCds200ResponseAllOfResultsInner) MarshalJSON() ([]byte, 
 func (o GetDsRecordsFromCds200ResponseAllOfResultsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	toSerialize["ttl"] = o.Ttl.Get()
-	toSerialize["rrtype"] = o.Rrtype
 	toSerialize["rdata"] = o.Rdata
+	toSerialize["rrtype"] = o.Rrtype
+	toSerialize["ttl"] = o.Ttl.Get()
 	return toSerialize, nil
 }
 
@@ -174,9 +174,9 @@ func (o *GetDsRecordsFromCds200ResponseAllOfResultsInner) UnmarshalJSON(data []b
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"ttl",
-		"rrtype",
 		"rdata",
+		"rrtype",
+		"ttl",
 	}
 
 	allProperties := make(map[string]interface{})

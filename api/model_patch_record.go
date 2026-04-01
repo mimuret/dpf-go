@@ -19,14 +19,14 @@ var _ MappedNullable = &PatchRecord{}
 
 // PatchRecord struct for PatchRecord
 type PatchRecord struct {
-	// TTL
-	Ttl NullableInt32 `json:"ttl,omitempty"`
-	// レコードの値
-	Rdata []RecordsRdataInner `json:"rdata,omitempty"`
-	// ラベル
-	Labels *map[string]string `json:"labels,omitempty"`
 	// コメント
 	Description *string `json:"description,omitempty"`
+	// ラベル
+	Labels *map[string]string `json:"labels,omitempty"`
+	// レコードの値
+	Rdata []RecordsRdataInner `json:"rdata,omitempty"`
+	// TTL
+	Ttl NullableInt32 `json:"ttl,omitempty"`
 }
 
 // NewPatchRecord instantiates a new PatchRecord object
@@ -48,6 +48,102 @@ func NewPatchRecordWithDefaults() *PatchRecord {
 	var description string = ""
 	this.Description = &description
 	return &this
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *PatchRecord) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchRecord) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *PatchRecord) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *PatchRecord) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetLabels returns the Labels field value if set, zero value otherwise.
+func (o *PatchRecord) GetLabels() map[string]string {
+	if o == nil || IsNil(o.Labels) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Labels
+}
+
+// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchRecord) GetLabelsOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Labels) {
+		return nil, false
+	}
+	return o.Labels, true
+}
+
+// HasLabels returns a boolean if a field has been set.
+func (o *PatchRecord) HasLabels() bool {
+	if o != nil && !IsNil(o.Labels) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
+func (o *PatchRecord) SetLabels(v map[string]string) {
+	o.Labels = &v
+}
+
+// GetRdata returns the Rdata field value if set, zero value otherwise.
+func (o *PatchRecord) GetRdata() []RecordsRdataInner {
+	if o == nil || IsNil(o.Rdata) {
+		var ret []RecordsRdataInner
+		return ret
+	}
+	return o.Rdata
+}
+
+// GetRdataOk returns a tuple with the Rdata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchRecord) GetRdataOk() ([]RecordsRdataInner, bool) {
+	if o == nil || IsNil(o.Rdata) {
+		return nil, false
+	}
+	return o.Rdata, true
+}
+
+// HasRdata returns a boolean if a field has been set.
+func (o *PatchRecord) HasRdata() bool {
+	if o != nil && !IsNil(o.Rdata) {
+		return true
+	}
+
+	return false
+}
+
+// SetRdata gets a reference to the given []RecordsRdataInner and assigns it to the Rdata field.
+func (o *PatchRecord) SetRdata(v []RecordsRdataInner) {
+	o.Rdata = v
 }
 
 // GetTtl returns the Ttl field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -93,102 +189,6 @@ func (o *PatchRecord) UnsetTtl() {
 	o.Ttl.Unset()
 }
 
-// GetRdata returns the Rdata field value if set, zero value otherwise.
-func (o *PatchRecord) GetRdata() []RecordsRdataInner {
-	if o == nil || IsNil(o.Rdata) {
-		var ret []RecordsRdataInner
-		return ret
-	}
-	return o.Rdata
-}
-
-// GetRdataOk returns a tuple with the Rdata field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchRecord) GetRdataOk() ([]RecordsRdataInner, bool) {
-	if o == nil || IsNil(o.Rdata) {
-		return nil, false
-	}
-	return o.Rdata, true
-}
-
-// HasRdata returns a boolean if a field has been set.
-func (o *PatchRecord) HasRdata() bool {
-	if o != nil && !IsNil(o.Rdata) {
-		return true
-	}
-
-	return false
-}
-
-// SetRdata gets a reference to the given []RecordsRdataInner and assigns it to the Rdata field.
-func (o *PatchRecord) SetRdata(v []RecordsRdataInner) {
-	o.Rdata = v
-}
-
-// GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *PatchRecord) GetLabels() map[string]string {
-	if o == nil || IsNil(o.Labels) {
-		var ret map[string]string
-		return ret
-	}
-	return *o.Labels
-}
-
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchRecord) GetLabelsOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.Labels) {
-		return nil, false
-	}
-	return o.Labels, true
-}
-
-// HasLabels returns a boolean if a field has been set.
-func (o *PatchRecord) HasLabels() bool {
-	if o != nil && !IsNil(o.Labels) {
-		return true
-	}
-
-	return false
-}
-
-// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
-func (o *PatchRecord) SetLabels(v map[string]string) {
-	o.Labels = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *PatchRecord) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchRecord) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *PatchRecord) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *PatchRecord) SetDescription(v string) {
-	o.Description = &v
-}
-
 func (o PatchRecord) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -199,17 +199,17 @@ func (o PatchRecord) MarshalJSON() ([]byte, error) {
 
 func (o PatchRecord) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Ttl.IsSet() {
-		toSerialize["ttl"] = o.Ttl.Get()
-	}
-	if !IsNil(o.Rdata) {
-		toSerialize["rdata"] = o.Rdata
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if !IsNil(o.Rdata) {
+		toSerialize["rdata"] = o.Rdata
+	}
+	if o.Ttl.IsSet() {
+		toSerialize["ttl"] = o.Ttl.Get()
 	}
 	return toSerialize, nil
 }

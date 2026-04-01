@@ -19,27 +19,27 @@ var _ MappedNullable = &PatchMonitoringHTTPProps{}
 
 // PatchMonitoringHTTPProps struct for PatchMonitoringHTTPProps
 type PatchMonitoringHTTPProps struct {
-	Location *MonitoringPropsLocation `json:"location,omitempty"`
-	// 監視間隔（s）
-	Interval *int32 `json:"interval,omitempty"`
-	// 保留時間（s）
-	Holdtime *int32 `json:"holdtime,omitempty"`
-	// タイムアウト（s）
-	Timeout *int32 `json:"timeout,omitempty"`
-	// ポート番号,POST時に未指定の場合はHTTPの場合は80,HTTPSの場合は443
-	Port *int32 `json:"port,omitempty"`
-	// HTTPS利用フラグ
-	Https *bool `json:"https,omitempty"`
-	// TLS SNI値、未指定の場合、監視時にSNIとして、Hostヘッダーを利用
-	TlsSni *string `json:"tls_sni,omitempty"`
-	// レスポンスボディマッチ文字列
-	ResponseMatch *string `json:"response_match,omitempty"`
 	// Hostヘッダー
 	Headers []MonitoringPropsHeader `json:"headers,omitempty"`
+	// 保留時間（s）
+	Holdtime *int32 `json:"holdtime,omitempty"`
+	// HTTPS利用フラグ
+	Https *bool `json:"https,omitempty"`
+	// 監視間隔（s）
+	Interval *int32                   `json:"interval,omitempty"`
+	Location *MonitoringPropsLocation `json:"location,omitempty"`
 	// URLのPATH部(先頭の/が補完されて利用される)
 	Path *string `json:"path,omitempty"`
+	// ポート番号,POST時に未指定の場合はHTTPの場合は80,HTTPSの場合は443
+	Port *int32 `json:"port,omitempty"`
+	// レスポンスボディマッチ文字列
+	ResponseMatch *string `json:"response_match,omitempty"`
 	// マッチするステータスコードの配列
 	StatusCodes []string `json:"status_codes,omitempty"`
+	// タイムアウト（s）
+	Timeout *int32 `json:"timeout,omitempty"`
+	// TLS SNI値、未指定の場合、監視時にSNIとして、Hostヘッダーを利用
+	TlsSni *string `json:"tls_sni,omitempty"`
 }
 
 // NewPatchMonitoringHTTPProps instantiates a new PatchMonitoringHTTPProps object
@@ -48,18 +48,18 @@ type PatchMonitoringHTTPProps struct {
 // will change when the set of required properties is changed
 func NewPatchMonitoringHTTPProps() *PatchMonitoringHTTPProps {
 	this := PatchMonitoringHTTPProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = &location
-	var interval int32 = 30
-	this.Interval = &interval
 	var holdtime int32 = 0
 	this.Holdtime = &holdtime
-	var timeout int32 = 5
-	this.Timeout = &timeout
 	var https bool = false
 	this.Https = &https
+	var interval int32 = 30
+	this.Interval = &interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = &location
 	var responseMatch string = ""
 	this.ResponseMatch = &responseMatch
+	var timeout int32 = 5
+	this.Timeout = &timeout
 	return &this
 }
 
@@ -68,275 +68,19 @@ func NewPatchMonitoringHTTPProps() *PatchMonitoringHTTPProps {
 // but it doesn't guarantee that properties required by API are set
 func NewPatchMonitoringHTTPPropsWithDefaults() *PatchMonitoringHTTPProps {
 	this := PatchMonitoringHTTPProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = &location
-	var interval int32 = 30
-	this.Interval = &interval
 	var holdtime int32 = 0
 	this.Holdtime = &holdtime
-	var timeout int32 = 5
-	this.Timeout = &timeout
 	var https bool = false
 	this.Https = &https
+	var interval int32 = 30
+	this.Interval = &interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = &location
 	var responseMatch string = ""
 	this.ResponseMatch = &responseMatch
+	var timeout int32 = 5
+	this.Timeout = &timeout
 	return &this
-}
-
-// GetLocation returns the Location field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetLocation() MonitoringPropsLocation {
-	if o == nil || IsNil(o.Location) {
-		var ret MonitoringPropsLocation
-		return ret
-	}
-	return *o.Location
-}
-
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
-	if o == nil || IsNil(o.Location) {
-		return nil, false
-	}
-	return o.Location, true
-}
-
-// HasLocation returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given MonitoringPropsLocation and assigns it to the Location field.
-func (o *PatchMonitoringHTTPProps) SetLocation(v MonitoringPropsLocation) {
-	o.Location = &v
-}
-
-// GetInterval returns the Interval field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetInterval() int32 {
-	if o == nil || IsNil(o.Interval) {
-		var ret int32
-		return ret
-	}
-	return *o.Interval
-}
-
-// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetIntervalOk() (*int32, bool) {
-	if o == nil || IsNil(o.Interval) {
-		return nil, false
-	}
-	return o.Interval, true
-}
-
-// HasInterval returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasInterval() bool {
-	if o != nil && !IsNil(o.Interval) {
-		return true
-	}
-
-	return false
-}
-
-// SetInterval gets a reference to the given int32 and assigns it to the Interval field.
-func (o *PatchMonitoringHTTPProps) SetInterval(v int32) {
-	o.Interval = &v
-}
-
-// GetHoldtime returns the Holdtime field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetHoldtime() int32 {
-	if o == nil || IsNil(o.Holdtime) {
-		var ret int32
-		return ret
-	}
-	return *o.Holdtime
-}
-
-// GetHoldtimeOk returns a tuple with the Holdtime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetHoldtimeOk() (*int32, bool) {
-	if o == nil || IsNil(o.Holdtime) {
-		return nil, false
-	}
-	return o.Holdtime, true
-}
-
-// HasHoldtime returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasHoldtime() bool {
-	if o != nil && !IsNil(o.Holdtime) {
-		return true
-	}
-
-	return false
-}
-
-// SetHoldtime gets a reference to the given int32 and assigns it to the Holdtime field.
-func (o *PatchMonitoringHTTPProps) SetHoldtime(v int32) {
-	o.Holdtime = &v
-}
-
-// GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetTimeout() int32 {
-	if o == nil || IsNil(o.Timeout) {
-		var ret int32
-		return ret
-	}
-	return *o.Timeout
-}
-
-// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetTimeoutOk() (*int32, bool) {
-	if o == nil || IsNil(o.Timeout) {
-		return nil, false
-	}
-	return o.Timeout, true
-}
-
-// HasTimeout returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasTimeout() bool {
-	if o != nil && !IsNil(o.Timeout) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeout gets a reference to the given int32 and assigns it to the Timeout field.
-func (o *PatchMonitoringHTTPProps) SetTimeout(v int32) {
-	o.Timeout = &v
-}
-
-// GetPort returns the Port field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetPort() int32 {
-	if o == nil || IsNil(o.Port) {
-		var ret int32
-		return ret
-	}
-	return *o.Port
-}
-
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetPortOk() (*int32, bool) {
-	if o == nil || IsNil(o.Port) {
-		return nil, false
-	}
-	return o.Port, true
-}
-
-// HasPort returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasPort() bool {
-	if o != nil && !IsNil(o.Port) {
-		return true
-	}
-
-	return false
-}
-
-// SetPort gets a reference to the given int32 and assigns it to the Port field.
-func (o *PatchMonitoringHTTPProps) SetPort(v int32) {
-	o.Port = &v
-}
-
-// GetHttps returns the Https field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetHttps() bool {
-	if o == nil || IsNil(o.Https) {
-		var ret bool
-		return ret
-	}
-	return *o.Https
-}
-
-// GetHttpsOk returns a tuple with the Https field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetHttpsOk() (*bool, bool) {
-	if o == nil || IsNil(o.Https) {
-		return nil, false
-	}
-	return o.Https, true
-}
-
-// HasHttps returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasHttps() bool {
-	if o != nil && !IsNil(o.Https) {
-		return true
-	}
-
-	return false
-}
-
-// SetHttps gets a reference to the given bool and assigns it to the Https field.
-func (o *PatchMonitoringHTTPProps) SetHttps(v bool) {
-	o.Https = &v
-}
-
-// GetTlsSni returns the TlsSni field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetTlsSni() string {
-	if o == nil || IsNil(o.TlsSni) {
-		var ret string
-		return ret
-	}
-	return *o.TlsSni
-}
-
-// GetTlsSniOk returns a tuple with the TlsSni field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetTlsSniOk() (*string, bool) {
-	if o == nil || IsNil(o.TlsSni) {
-		return nil, false
-	}
-	return o.TlsSni, true
-}
-
-// HasTlsSni returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasTlsSni() bool {
-	if o != nil && !IsNil(o.TlsSni) {
-		return true
-	}
-
-	return false
-}
-
-// SetTlsSni gets a reference to the given string and assigns it to the TlsSni field.
-func (o *PatchMonitoringHTTPProps) SetTlsSni(v string) {
-	o.TlsSni = &v
-}
-
-// GetResponseMatch returns the ResponseMatch field value if set, zero value otherwise.
-func (o *PatchMonitoringHTTPProps) GetResponseMatch() string {
-	if o == nil || IsNil(o.ResponseMatch) {
-		var ret string
-		return ret
-	}
-	return *o.ResponseMatch
-}
-
-// GetResponseMatchOk returns a tuple with the ResponseMatch field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringHTTPProps) GetResponseMatchOk() (*string, bool) {
-	if o == nil || IsNil(o.ResponseMatch) {
-		return nil, false
-	}
-	return o.ResponseMatch, true
-}
-
-// HasResponseMatch returns a boolean if a field has been set.
-func (o *PatchMonitoringHTTPProps) HasResponseMatch() bool {
-	if o != nil && !IsNil(o.ResponseMatch) {
-		return true
-	}
-
-	return false
-}
-
-// SetResponseMatch gets a reference to the given string and assigns it to the ResponseMatch field.
-func (o *PatchMonitoringHTTPProps) SetResponseMatch(v string) {
-	o.ResponseMatch = &v
 }
 
 // GetHeaders returns the Headers field value if set, zero value otherwise.
@@ -371,6 +115,134 @@ func (o *PatchMonitoringHTTPProps) SetHeaders(v []MonitoringPropsHeader) {
 	o.Headers = v
 }
 
+// GetHoldtime returns the Holdtime field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetHoldtime() int32 {
+	if o == nil || IsNil(o.Holdtime) {
+		var ret int32
+		return ret
+	}
+	return *o.Holdtime
+}
+
+// GetHoldtimeOk returns a tuple with the Holdtime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetHoldtimeOk() (*int32, bool) {
+	if o == nil || IsNil(o.Holdtime) {
+		return nil, false
+	}
+	return o.Holdtime, true
+}
+
+// HasHoldtime returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasHoldtime() bool {
+	if o != nil && !IsNil(o.Holdtime) {
+		return true
+	}
+
+	return false
+}
+
+// SetHoldtime gets a reference to the given int32 and assigns it to the Holdtime field.
+func (o *PatchMonitoringHTTPProps) SetHoldtime(v int32) {
+	o.Holdtime = &v
+}
+
+// GetHttps returns the Https field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetHttps() bool {
+	if o == nil || IsNil(o.Https) {
+		var ret bool
+		return ret
+	}
+	return *o.Https
+}
+
+// GetHttpsOk returns a tuple with the Https field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetHttpsOk() (*bool, bool) {
+	if o == nil || IsNil(o.Https) {
+		return nil, false
+	}
+	return o.Https, true
+}
+
+// HasHttps returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasHttps() bool {
+	if o != nil && !IsNil(o.Https) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttps gets a reference to the given bool and assigns it to the Https field.
+func (o *PatchMonitoringHTTPProps) SetHttps(v bool) {
+	o.Https = &v
+}
+
+// GetInterval returns the Interval field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetInterval() int32 {
+	if o == nil || IsNil(o.Interval) {
+		var ret int32
+		return ret
+	}
+	return *o.Interval
+}
+
+// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetIntervalOk() (*int32, bool) {
+	if o == nil || IsNil(o.Interval) {
+		return nil, false
+	}
+	return o.Interval, true
+}
+
+// HasInterval returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasInterval() bool {
+	if o != nil && !IsNil(o.Interval) {
+		return true
+	}
+
+	return false
+}
+
+// SetInterval gets a reference to the given int32 and assigns it to the Interval field.
+func (o *PatchMonitoringHTTPProps) SetInterval(v int32) {
+	o.Interval = &v
+}
+
+// GetLocation returns the Location field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetLocation() MonitoringPropsLocation {
+	if o == nil || IsNil(o.Location) {
+		var ret MonitoringPropsLocation
+		return ret
+	}
+	return *o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
+	if o == nil || IsNil(o.Location) {
+		return nil, false
+	}
+	return o.Location, true
+}
+
+// HasLocation returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasLocation() bool {
+	if o != nil && !IsNil(o.Location) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocation gets a reference to the given MonitoringPropsLocation and assigns it to the Location field.
+func (o *PatchMonitoringHTTPProps) SetLocation(v MonitoringPropsLocation) {
+	o.Location = &v
+}
+
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *PatchMonitoringHTTPProps) GetPath() string {
 	if o == nil || IsNil(o.Path) {
@@ -401,6 +273,70 @@ func (o *PatchMonitoringHTTPProps) HasPath() bool {
 // SetPath gets a reference to the given string and assigns it to the Path field.
 func (o *PatchMonitoringHTTPProps) SetPath(v string) {
 	o.Path = &v
+}
+
+// GetPort returns the Port field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetPort() int32 {
+	if o == nil || IsNil(o.Port) {
+		var ret int32
+		return ret
+	}
+	return *o.Port
+}
+
+// GetPortOk returns a tuple with the Port field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetPortOk() (*int32, bool) {
+	if o == nil || IsNil(o.Port) {
+		return nil, false
+	}
+	return o.Port, true
+}
+
+// HasPort returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasPort() bool {
+	if o != nil && !IsNil(o.Port) {
+		return true
+	}
+
+	return false
+}
+
+// SetPort gets a reference to the given int32 and assigns it to the Port field.
+func (o *PatchMonitoringHTTPProps) SetPort(v int32) {
+	o.Port = &v
+}
+
+// GetResponseMatch returns the ResponseMatch field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetResponseMatch() string {
+	if o == nil || IsNil(o.ResponseMatch) {
+		var ret string
+		return ret
+	}
+	return *o.ResponseMatch
+}
+
+// GetResponseMatchOk returns a tuple with the ResponseMatch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetResponseMatchOk() (*string, bool) {
+	if o == nil || IsNil(o.ResponseMatch) {
+		return nil, false
+	}
+	return o.ResponseMatch, true
+}
+
+// HasResponseMatch returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasResponseMatch() bool {
+	if o != nil && !IsNil(o.ResponseMatch) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseMatch gets a reference to the given string and assigns it to the ResponseMatch field.
+func (o *PatchMonitoringHTTPProps) SetResponseMatch(v string) {
+	o.ResponseMatch = &v
 }
 
 // GetStatusCodes returns the StatusCodes field value if set, zero value otherwise.
@@ -435,6 +371,70 @@ func (o *PatchMonitoringHTTPProps) SetStatusCodes(v []string) {
 	o.StatusCodes = v
 }
 
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetTimeout() int32 {
+	if o == nil || IsNil(o.Timeout) {
+		var ret int32
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetTimeoutOk() (*int32, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given int32 and assigns it to the Timeout field.
+func (o *PatchMonitoringHTTPProps) SetTimeout(v int32) {
+	o.Timeout = &v
+}
+
+// GetTlsSni returns the TlsSni field value if set, zero value otherwise.
+func (o *PatchMonitoringHTTPProps) GetTlsSni() string {
+	if o == nil || IsNil(o.TlsSni) {
+		var ret string
+		return ret
+	}
+	return *o.TlsSni
+}
+
+// GetTlsSniOk returns a tuple with the TlsSni field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringHTTPProps) GetTlsSniOk() (*string, bool) {
+	if o == nil || IsNil(o.TlsSni) {
+		return nil, false
+	}
+	return o.TlsSni, true
+}
+
+// HasTlsSni returns a boolean if a field has been set.
+func (o *PatchMonitoringHTTPProps) HasTlsSni() bool {
+	if o != nil && !IsNil(o.TlsSni) {
+		return true
+	}
+
+	return false
+}
+
+// SetTlsSni gets a reference to the given string and assigns it to the TlsSni field.
+func (o *PatchMonitoringHTTPProps) SetTlsSni(v string) {
+	o.TlsSni = &v
+}
+
 func (o PatchMonitoringHTTPProps) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -445,38 +445,38 @@ func (o PatchMonitoringHTTPProps) MarshalJSON() ([]byte, error) {
 
 func (o PatchMonitoringHTTPProps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
-	}
-	if !IsNil(o.Interval) {
-		toSerialize["interval"] = o.Interval
+	if !IsNil(o.Headers) {
+		toSerialize["headers"] = o.Headers
 	}
 	if !IsNil(o.Holdtime) {
 		toSerialize["holdtime"] = o.Holdtime
 	}
-	if !IsNil(o.Timeout) {
-		toSerialize["timeout"] = o.Timeout
-	}
-	if !IsNil(o.Port) {
-		toSerialize["port"] = o.Port
-	}
 	if !IsNil(o.Https) {
 		toSerialize["https"] = o.Https
 	}
-	if !IsNil(o.TlsSni) {
-		toSerialize["tls_sni"] = o.TlsSni
+	if !IsNil(o.Interval) {
+		toSerialize["interval"] = o.Interval
 	}
-	if !IsNil(o.ResponseMatch) {
-		toSerialize["response_match"] = o.ResponseMatch
-	}
-	if !IsNil(o.Headers) {
-		toSerialize["headers"] = o.Headers
+	if !IsNil(o.Location) {
+		toSerialize["location"] = o.Location
 	}
 	if !IsNil(o.Path) {
 		toSerialize["path"] = o.Path
 	}
+	if !IsNil(o.Port) {
+		toSerialize["port"] = o.Port
+	}
+	if !IsNil(o.ResponseMatch) {
+		toSerialize["response_match"] = o.ResponseMatch
+	}
 	if !IsNil(o.StatusCodes) {
 		toSerialize["status_codes"] = o.StatusCodes
+	}
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
+	}
+	if !IsNil(o.TlsSni) {
+		toSerialize["tls_sni"] = o.TlsSni
 	}
 	return toSerialize, nil
 }

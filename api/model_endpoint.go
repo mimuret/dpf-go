@@ -21,26 +21,26 @@ var _ MappedNullable = &Endpoint{}
 
 // Endpoint struct for Endpoint
 type Endpoint struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName string `json:"resource_name"`
-	// エンドポイント名
-	Name string `json:"name"`
-	// 監視ターゲット（IPアドレス形式かホスト名形式）
-	MonitoringTarget string `json:"monitoring_target"`
 	// コメント
 	Description string `json:"description"`
-	// weight
-	Weight int32 `json:"weight"`
+	// 状態
+	Enabled    bool               `json:"enabled"`
+	LiveStatus EndpointLiveStatus `json:"live_status"`
 	// 手動切り戻し設定値
 	ManualFailback bool `json:"manual_failback"`
 	// 手動切り離し設定値
 	ManualFailover bool `json:"manual_failover"`
-	// 状態
-	Enabled     bool                `json:"enabled"`
-	LiveStatus  EndpointLiveStatus  `json:"live_status"`
-	ReadyStatus EndpointReadyStatus `json:"ready_status"`
+	// 監視ターゲット（IPアドレス形式かホスト名形式）
+	MonitoringTarget string `json:"monitoring_target"`
+	// エンドポイント名
+	Name string `json:"name"`
 	// RDATA
-	Rdata []EndpointRdataInner `json:"rdata"`
+	Rdata       []EndpointRdataInner `json:"rdata"`
+	ReadyStatus EndpointReadyStatus  `json:"ready_status"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName string `json:"resource_name"`
+	// weight
+	Weight int32 `json:"weight"`
 }
 
 type _Endpoint Endpoint
@@ -49,19 +49,19 @@ type _Endpoint Endpoint
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEndpoint(resourceName string, name string, monitoringTarget string, description string, weight int32, manualFailback bool, manualFailover bool, enabled bool, liveStatus EndpointLiveStatus, readyStatus EndpointReadyStatus, rdata []EndpointRdataInner) *Endpoint {
+func NewEndpoint(description string, enabled bool, liveStatus EndpointLiveStatus, manualFailback bool, manualFailover bool, monitoringTarget string, name string, rdata []EndpointRdataInner, readyStatus EndpointReadyStatus, resourceName string, weight int32) *Endpoint {
 	this := Endpoint{}
-	this.ResourceName = resourceName
-	this.Name = name
-	this.MonitoringTarget = monitoringTarget
 	this.Description = description
-	this.Weight = weight
-	this.ManualFailback = manualFailback
-	this.ManualFailover = manualFailover
 	this.Enabled = enabled
 	this.LiveStatus = liveStatus
-	this.ReadyStatus = readyStatus
+	this.ManualFailback = manualFailback
+	this.ManualFailover = manualFailover
+	this.MonitoringTarget = monitoringTarget
+	this.Name = name
 	this.Rdata = rdata
+	this.ReadyStatus = readyStatus
+	this.ResourceName = resourceName
+	this.Weight = weight
 	return &this
 }
 
@@ -70,89 +70,17 @@ func NewEndpoint(resourceName string, name string, monitoringTarget string, desc
 // but it doesn't guarantee that properties required by API are set
 func NewEndpointWithDefaults() *Endpoint {
 	this := Endpoint{}
-	var monitoringTarget string = ""
-	this.MonitoringTarget = monitoringTarget
 	var description string = ""
 	this.Description = description
+	var enabled bool = false
+	this.Enabled = enabled
 	var manualFailback bool = false
 	this.ManualFailback = manualFailback
 	var manualFailover bool = false
 	this.ManualFailover = manualFailover
-	var enabled bool = false
-	this.Enabled = enabled
+	var monitoringTarget string = ""
+	this.MonitoringTarget = monitoringTarget
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *Endpoint) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *Endpoint) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *Endpoint) SetResourceName(v string) {
-	o.ResourceName = v
-}
-
-// GetName returns the Name field value
-func (o *Endpoint) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *Endpoint) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *Endpoint) SetName(v string) {
-	o.Name = v
-}
-
-// GetMonitoringTarget returns the MonitoringTarget field value
-func (o *Endpoint) GetMonitoringTarget() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.MonitoringTarget
-}
-
-// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value
-// and a boolean to check if the value has been set.
-func (o *Endpoint) GetMonitoringTargetOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MonitoringTarget, true
-}
-
-// SetMonitoringTarget sets field value
-func (o *Endpoint) SetMonitoringTarget(v string) {
-	o.MonitoringTarget = v
 }
 
 // GetDescription returns the Description field value
@@ -177,78 +105,6 @@ func (o *Endpoint) GetDescriptionOk() (*string, bool) {
 // SetDescription sets field value
 func (o *Endpoint) SetDescription(v string) {
 	o.Description = v
-}
-
-// GetWeight returns the Weight field value
-func (o *Endpoint) GetWeight() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Weight
-}
-
-// GetWeightOk returns a tuple with the Weight field value
-// and a boolean to check if the value has been set.
-func (o *Endpoint) GetWeightOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Weight, true
-}
-
-// SetWeight sets field value
-func (o *Endpoint) SetWeight(v int32) {
-	o.Weight = v
-}
-
-// GetManualFailback returns the ManualFailback field value
-func (o *Endpoint) GetManualFailback() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.ManualFailback
-}
-
-// GetManualFailbackOk returns a tuple with the ManualFailback field value
-// and a boolean to check if the value has been set.
-func (o *Endpoint) GetManualFailbackOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ManualFailback, true
-}
-
-// SetManualFailback sets field value
-func (o *Endpoint) SetManualFailback(v bool) {
-	o.ManualFailback = v
-}
-
-// GetManualFailover returns the ManualFailover field value
-func (o *Endpoint) GetManualFailover() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.ManualFailover
-}
-
-// GetManualFailoverOk returns a tuple with the ManualFailover field value
-// and a boolean to check if the value has been set.
-func (o *Endpoint) GetManualFailoverOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ManualFailover, true
-}
-
-// SetManualFailover sets field value
-func (o *Endpoint) SetManualFailover(v bool) {
-	o.ManualFailover = v
 }
 
 // GetEnabled returns the Enabled field value
@@ -299,28 +155,100 @@ func (o *Endpoint) SetLiveStatus(v EndpointLiveStatus) {
 	o.LiveStatus = v
 }
 
-// GetReadyStatus returns the ReadyStatus field value
-func (o *Endpoint) GetReadyStatus() EndpointReadyStatus {
+// GetManualFailback returns the ManualFailback field value
+func (o *Endpoint) GetManualFailback() bool {
 	if o == nil {
-		var ret EndpointReadyStatus
+		var ret bool
 		return ret
 	}
 
-	return o.ReadyStatus
+	return o.ManualFailback
 }
 
-// GetReadyStatusOk returns a tuple with the ReadyStatus field value
+// GetManualFailbackOk returns a tuple with the ManualFailback field value
 // and a boolean to check if the value has been set.
-func (o *Endpoint) GetReadyStatusOk() (*EndpointReadyStatus, bool) {
+func (o *Endpoint) GetManualFailbackOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ReadyStatus, true
+	return &o.ManualFailback, true
 }
 
-// SetReadyStatus sets field value
-func (o *Endpoint) SetReadyStatus(v EndpointReadyStatus) {
-	o.ReadyStatus = v
+// SetManualFailback sets field value
+func (o *Endpoint) SetManualFailback(v bool) {
+	o.ManualFailback = v
+}
+
+// GetManualFailover returns the ManualFailover field value
+func (o *Endpoint) GetManualFailover() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ManualFailover
+}
+
+// GetManualFailoverOk returns a tuple with the ManualFailover field value
+// and a boolean to check if the value has been set.
+func (o *Endpoint) GetManualFailoverOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ManualFailover, true
+}
+
+// SetManualFailover sets field value
+func (o *Endpoint) SetManualFailover(v bool) {
+	o.ManualFailover = v
+}
+
+// GetMonitoringTarget returns the MonitoringTarget field value
+func (o *Endpoint) GetMonitoringTarget() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.MonitoringTarget
+}
+
+// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value
+// and a boolean to check if the value has been set.
+func (o *Endpoint) GetMonitoringTargetOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.MonitoringTarget, true
+}
+
+// SetMonitoringTarget sets field value
+func (o *Endpoint) SetMonitoringTarget(v string) {
+	o.MonitoringTarget = v
+}
+
+// GetName returns the Name field value
+func (o *Endpoint) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Endpoint) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Endpoint) SetName(v string) {
+	o.Name = v
 }
 
 // GetRdata returns the Rdata field value
@@ -347,6 +275,78 @@ func (o *Endpoint) SetRdata(v []EndpointRdataInner) {
 	o.Rdata = v
 }
 
+// GetReadyStatus returns the ReadyStatus field value
+func (o *Endpoint) GetReadyStatus() EndpointReadyStatus {
+	if o == nil {
+		var ret EndpointReadyStatus
+		return ret
+	}
+
+	return o.ReadyStatus
+}
+
+// GetReadyStatusOk returns a tuple with the ReadyStatus field value
+// and a boolean to check if the value has been set.
+func (o *Endpoint) GetReadyStatusOk() (*EndpointReadyStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ReadyStatus, true
+}
+
+// SetReadyStatus sets field value
+func (o *Endpoint) SetReadyStatus(v EndpointReadyStatus) {
+	o.ReadyStatus = v
+}
+
+// GetResourceName returns the ResourceName field value
+func (o *Endpoint) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *Endpoint) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *Endpoint) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
+// GetWeight returns the Weight field value
+func (o *Endpoint) GetWeight() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Weight
+}
+
+// GetWeightOk returns a tuple with the Weight field value
+// and a boolean to check if the value has been set.
+func (o *Endpoint) GetWeightOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Weight, true
+}
+
+// SetWeight sets field value
+func (o *Endpoint) SetWeight(v int32) {
+	o.Weight = v
+}
+
 func (o Endpoint) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -357,17 +357,17 @@ func (o Endpoint) MarshalJSON() ([]byte, error) {
 
 func (o Endpoint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
-	toSerialize["name"] = o.Name
-	toSerialize["monitoring_target"] = o.MonitoringTarget
 	toSerialize["description"] = o.Description
-	toSerialize["weight"] = o.Weight
-	toSerialize["manual_failback"] = o.ManualFailback
-	toSerialize["manual_failover"] = o.ManualFailover
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["live_status"] = o.LiveStatus
-	toSerialize["ready_status"] = o.ReadyStatus
+	toSerialize["manual_failback"] = o.ManualFailback
+	toSerialize["manual_failover"] = o.ManualFailover
+	toSerialize["monitoring_target"] = o.MonitoringTarget
+	toSerialize["name"] = o.Name
 	toSerialize["rdata"] = o.Rdata
+	toSerialize["ready_status"] = o.ReadyStatus
+	toSerialize["resource_name"] = o.ResourceName
+	toSerialize["weight"] = o.Weight
 	return toSerialize, nil
 }
 
@@ -376,17 +376,17 @@ func (o *Endpoint) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
-		"name",
-		"monitoring_target",
 		"description",
-		"weight",
-		"manual_failback",
-		"manual_failover",
 		"enabled",
 		"live_status",
-		"ready_status",
+		"manual_failback",
+		"manual_failover",
+		"monitoring_target",
+		"name",
 		"rdata",
+		"ready_status",
+		"resource_name",
+		"weight",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -22,10 +22,10 @@ var _ MappedNullable = &ZoneHistoryText{}
 
 // ZoneHistoryText struct for ZoneHistoryText
 type ZoneHistoryText struct {
-	Id          int64     `json:"id"`
 	CommittedAt time.Time `json:"committed_at"`
 	// コメント
 	Description string `json:"description"`
+	Id          int64  `json:"id"`
 	// 編集者
 	Operator NullableString `json:"operator"`
 	Text     string         `json:"text"`
@@ -37,11 +37,11 @@ type _ZoneHistoryText ZoneHistoryText
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewZoneHistoryText(id int64, committedAt time.Time, description string, operator NullableString, text string) *ZoneHistoryText {
+func NewZoneHistoryText(committedAt time.Time, description string, id int64, operator NullableString, text string) *ZoneHistoryText {
 	this := ZoneHistoryText{}
-	this.Id = id
 	this.CommittedAt = committedAt
 	this.Description = description
+	this.Id = id
 	this.Operator = operator
 	this.Text = text
 	return &this
@@ -55,30 +55,6 @@ func NewZoneHistoryTextWithDefaults() *ZoneHistoryText {
 	var description string = ""
 	this.Description = description
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *ZoneHistoryText) GetId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *ZoneHistoryText) GetIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *ZoneHistoryText) SetId(v int64) {
-	o.Id = v
 }
 
 // GetCommittedAt returns the CommittedAt field value
@@ -127,6 +103,30 @@ func (o *ZoneHistoryText) GetDescriptionOk() (*string, bool) {
 // SetDescription sets field value
 func (o *ZoneHistoryText) SetDescription(v string) {
 	o.Description = v
+}
+
+// GetId returns the Id field value
+func (o *ZoneHistoryText) GetId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *ZoneHistoryText) GetIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *ZoneHistoryText) SetId(v int64) {
+	o.Id = v
 }
 
 // GetOperator returns the Operator field value
@@ -189,9 +189,9 @@ func (o ZoneHistoryText) MarshalJSON() ([]byte, error) {
 
 func (o ZoneHistoryText) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
 	toSerialize["committed_at"] = o.CommittedAt
 	toSerialize["description"] = o.Description
+	toSerialize["id"] = o.Id
 	toSerialize["operator"] = o.Operator.Get()
 	toSerialize["text"] = o.Text
 	return toSerialize, nil
@@ -202,9 +202,9 @@ func (o *ZoneHistoryText) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"committed_at",
 		"description",
+		"id",
 		"operator",
 		"text",
 	}

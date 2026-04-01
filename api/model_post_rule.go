@@ -21,12 +21,12 @@ var _ MappedNullable = &PostRule{}
 
 // PostRule struct for PostRule
 type PostRule struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName *string `json:"resource_name,omitempty"`
-	// ルール名
-	Name string `json:"name"`
 	// コメント
 	Description *string `json:"description,omitempty"`
+	// ルール名
+	Name string `json:"name"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName *string `json:"resource_name,omitempty"`
 }
 
 type _PostRule PostRule
@@ -37,9 +37,9 @@ type _PostRule PostRule
 // will change when the set of required properties is changed
 func NewPostRule(name string) *PostRule {
 	this := PostRule{}
-	this.Name = name
 	var description string = ""
 	this.Description = &description
+	this.Name = name
 	return &this
 }
 
@@ -51,62 +51,6 @@ func NewPostRuleWithDefaults() *PostRule {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
-func (o *PostRule) GetResourceName() string {
-	if o == nil || IsNil(o.ResourceName) {
-		var ret string
-		return ret
-	}
-	return *o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PostRule) GetResourceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceName) {
-		return nil, false
-	}
-	return o.ResourceName, true
-}
-
-// HasResourceName returns a boolean if a field has been set.
-func (o *PostRule) HasResourceName() bool {
-	if o != nil && !IsNil(o.ResourceName) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
-func (o *PostRule) SetResourceName(v string) {
-	o.ResourceName = &v
-}
-
-// GetName returns the Name field value
-func (o *PostRule) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostRule) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostRule) SetName(v string) {
-	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -141,6 +85,62 @@ func (o *PostRule) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetName returns the Name field value
+func (o *PostRule) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostRule) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostRule) SetName(v string) {
+	o.Name = v
+}
+
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *PostRule) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostRule) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
+		return nil, false
+	}
+	return o.ResourceName, true
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *PostRule) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *PostRule) SetResourceName(v string) {
+	o.ResourceName = &v
+}
+
 func (o PostRule) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -151,12 +151,12 @@ func (o PostRule) MarshalJSON() ([]byte, error) {
 
 func (o PostRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResourceName) {
-		toSerialize["resource_name"] = o.ResourceName
-	}
-	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
+	}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
 	}
 	return toSerialize, nil
 }

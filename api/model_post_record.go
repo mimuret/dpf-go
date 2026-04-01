@@ -21,17 +21,17 @@ var _ MappedNullable = &PostRecord{}
 
 // PostRecord struct for PostRecord
 type PostRecord struct {
-	// name
-	Name string `json:"name"`
-	// TTL
-	Ttl    NullableInt32           `json:"ttl,omitempty"`
-	Rrtype RecordsRrtypeWithoutSoa `json:"rrtype"`
-	// レコードの値
-	Rdata []RecordsRdataInner `json:"rdata"`
 	// コメント
 	Description *string `json:"description,omitempty"`
 	// ラベル
 	Labels *map[string]string `json:"labels,omitempty"`
+	// name
+	Name string `json:"name"`
+	// レコードの値
+	Rdata  []RecordsRdataInner     `json:"rdata"`
+	Rrtype RecordsRrtypeWithoutSoa `json:"rrtype"`
+	// TTL
+	Ttl NullableInt32 `json:"ttl,omitempty"`
 }
 
 type _PostRecord PostRecord
@@ -40,13 +40,13 @@ type _PostRecord PostRecord
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPostRecord(name string, rrtype RecordsRrtypeWithoutSoa, rdata []RecordsRdataInner) *PostRecord {
+func NewPostRecord(name string, rdata []RecordsRdataInner, rrtype RecordsRrtypeWithoutSoa) *PostRecord {
 	this := PostRecord{}
-	this.Name = name
-	this.Rrtype = rrtype
-	this.Rdata = rdata
 	var description string = ""
 	this.Description = &description
+	this.Name = name
+	this.Rdata = rdata
+	this.Rrtype = rrtype
 	return &this
 }
 
@@ -58,121 +58,6 @@ func NewPostRecordWithDefaults() *PostRecord {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *PostRecord) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostRecord) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostRecord) SetName(v string) {
-	o.Name = v
-}
-
-// GetTtl returns the Ttl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PostRecord) GetTtl() int32 {
-	if o == nil || IsNil(o.Ttl.Get()) {
-		var ret int32
-		return ret
-	}
-	return *o.Ttl.Get()
-}
-
-// GetTtlOk returns a tuple with the Ttl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PostRecord) GetTtlOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Ttl.Get(), o.Ttl.IsSet()
-}
-
-// HasTtl returns a boolean if a field has been set.
-func (o *PostRecord) HasTtl() bool {
-	if o != nil && o.Ttl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTtl gets a reference to the given NullableInt32 and assigns it to the Ttl field.
-func (o *PostRecord) SetTtl(v int32) {
-	o.Ttl.Set(&v)
-}
-
-// SetTtlNil sets the value for Ttl to be an explicit nil
-func (o *PostRecord) SetTtlNil() {
-	o.Ttl.Set(nil)
-}
-
-// UnsetTtl ensures that no value is present for Ttl, not even an explicit nil
-func (o *PostRecord) UnsetTtl() {
-	o.Ttl.Unset()
-}
-
-// GetRrtype returns the Rrtype field value
-func (o *PostRecord) GetRrtype() RecordsRrtypeWithoutSoa {
-	if o == nil {
-		var ret RecordsRrtypeWithoutSoa
-		return ret
-	}
-
-	return o.Rrtype
-}
-
-// GetRrtypeOk returns a tuple with the Rrtype field value
-// and a boolean to check if the value has been set.
-func (o *PostRecord) GetRrtypeOk() (*RecordsRrtypeWithoutSoa, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Rrtype, true
-}
-
-// SetRrtype sets field value
-func (o *PostRecord) SetRrtype(v RecordsRrtypeWithoutSoa) {
-	o.Rrtype = v
-}
-
-// GetRdata returns the Rdata field value
-func (o *PostRecord) GetRdata() []RecordsRdataInner {
-	if o == nil {
-		var ret []RecordsRdataInner
-		return ret
-	}
-
-	return o.Rdata
-}
-
-// GetRdataOk returns a tuple with the Rdata field value
-// and a boolean to check if the value has been set.
-func (o *PostRecord) GetRdataOk() ([]RecordsRdataInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Rdata, true
-}
-
-// SetRdata sets field value
-func (o *PostRecord) SetRdata(v []RecordsRdataInner) {
-	o.Rdata = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -239,6 +124,121 @@ func (o *PostRecord) SetLabels(v map[string]string) {
 	o.Labels = &v
 }
 
+// GetName returns the Name field value
+func (o *PostRecord) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostRecord) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostRecord) SetName(v string) {
+	o.Name = v
+}
+
+// GetRdata returns the Rdata field value
+func (o *PostRecord) GetRdata() []RecordsRdataInner {
+	if o == nil {
+		var ret []RecordsRdataInner
+		return ret
+	}
+
+	return o.Rdata
+}
+
+// GetRdataOk returns a tuple with the Rdata field value
+// and a boolean to check if the value has been set.
+func (o *PostRecord) GetRdataOk() ([]RecordsRdataInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Rdata, true
+}
+
+// SetRdata sets field value
+func (o *PostRecord) SetRdata(v []RecordsRdataInner) {
+	o.Rdata = v
+}
+
+// GetRrtype returns the Rrtype field value
+func (o *PostRecord) GetRrtype() RecordsRrtypeWithoutSoa {
+	if o == nil {
+		var ret RecordsRrtypeWithoutSoa
+		return ret
+	}
+
+	return o.Rrtype
+}
+
+// GetRrtypeOk returns a tuple with the Rrtype field value
+// and a boolean to check if the value has been set.
+func (o *PostRecord) GetRrtypeOk() (*RecordsRrtypeWithoutSoa, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Rrtype, true
+}
+
+// SetRrtype sets field value
+func (o *PostRecord) SetRrtype(v RecordsRrtypeWithoutSoa) {
+	o.Rrtype = v
+}
+
+// GetTtl returns the Ttl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PostRecord) GetTtl() int32 {
+	if o == nil || IsNil(o.Ttl.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.Ttl.Get()
+}
+
+// GetTtlOk returns a tuple with the Ttl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PostRecord) GetTtlOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ttl.Get(), o.Ttl.IsSet()
+}
+
+// HasTtl returns a boolean if a field has been set.
+func (o *PostRecord) HasTtl() bool {
+	if o != nil && o.Ttl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTtl gets a reference to the given NullableInt32 and assigns it to the Ttl field.
+func (o *PostRecord) SetTtl(v int32) {
+	o.Ttl.Set(&v)
+}
+
+// SetTtlNil sets the value for Ttl to be an explicit nil
+func (o *PostRecord) SetTtlNil() {
+	o.Ttl.Set(nil)
+}
+
+// UnsetTtl ensures that no value is present for Ttl, not even an explicit nil
+func (o *PostRecord) UnsetTtl() {
+	o.Ttl.Unset()
+}
+
 func (o PostRecord) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -249,17 +249,17 @@ func (o PostRecord) MarshalJSON() ([]byte, error) {
 
 func (o PostRecord) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	if o.Ttl.IsSet() {
-		toSerialize["ttl"] = o.Ttl.Get()
-	}
-	toSerialize["rrtype"] = o.Rrtype
-	toSerialize["rdata"] = o.Rdata
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
+	}
+	toSerialize["name"] = o.Name
+	toSerialize["rdata"] = o.Rdata
+	toSerialize["rrtype"] = o.Rrtype
+	if o.Ttl.IsSet() {
+		toSerialize["ttl"] = o.Ttl.Get()
 	}
 	return toSerialize, nil
 }
@@ -270,8 +270,8 @@ func (o *PostRecord) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"rrtype",
 		"rdata",
+		"rrtype",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -21,11 +21,11 @@ var _ MappedNullable = &CcPrimary{}
 
 // CcPrimary struct for CcPrimary
 type CcPrimary struct {
-	Id int64 `json:"id"`
 	// IPアドレス
 	Address string           `json:"address"`
-	TsigId  NullableInt64    `json:"tsig_id"`
 	Enabled CcPrimaryEnabled `json:"enabled"`
+	Id      int64            `json:"id"`
+	TsigId  NullableInt64    `json:"tsig_id"`
 }
 
 type _CcPrimary CcPrimary
@@ -34,12 +34,12 @@ type _CcPrimary CcPrimary
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCcPrimary(id int64, address string, tsigId NullableInt64, enabled CcPrimaryEnabled) *CcPrimary {
+func NewCcPrimary(address string, enabled CcPrimaryEnabled, id int64, tsigId NullableInt64) *CcPrimary {
 	this := CcPrimary{}
-	this.Id = id
 	this.Address = address
-	this.TsigId = tsigId
 	this.Enabled = enabled
+	this.Id = id
+	this.TsigId = tsigId
 	return &this
 }
 
@@ -49,30 +49,6 @@ func NewCcPrimary(id int64, address string, tsigId NullableInt64, enabled CcPrim
 func NewCcPrimaryWithDefaults() *CcPrimary {
 	this := CcPrimary{}
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *CcPrimary) GetId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *CcPrimary) GetIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *CcPrimary) SetId(v int64) {
-	o.Id = v
 }
 
 // GetAddress returns the Address field value
@@ -97,6 +73,54 @@ func (o *CcPrimary) GetAddressOk() (*string, bool) {
 // SetAddress sets field value
 func (o *CcPrimary) SetAddress(v string) {
 	o.Address = v
+}
+
+// GetEnabled returns the Enabled field value
+func (o *CcPrimary) GetEnabled() CcPrimaryEnabled {
+	if o == nil {
+		var ret CcPrimaryEnabled
+		return ret
+	}
+
+	return o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value
+// and a boolean to check if the value has been set.
+func (o *CcPrimary) GetEnabledOk() (*CcPrimaryEnabled, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Enabled, true
+}
+
+// SetEnabled sets field value
+func (o *CcPrimary) SetEnabled(v CcPrimaryEnabled) {
+	o.Enabled = v
+}
+
+// GetId returns the Id field value
+func (o *CcPrimary) GetId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *CcPrimary) GetIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *CcPrimary) SetId(v int64) {
+	o.Id = v
 }
 
 // GetTsigId returns the TsigId field value
@@ -125,30 +149,6 @@ func (o *CcPrimary) SetTsigId(v int64) {
 	o.TsigId.Set(&v)
 }
 
-// GetEnabled returns the Enabled field value
-func (o *CcPrimary) GetEnabled() CcPrimaryEnabled {
-	if o == nil {
-		var ret CcPrimaryEnabled
-		return ret
-	}
-
-	return o.Enabled
-}
-
-// GetEnabledOk returns a tuple with the Enabled field value
-// and a boolean to check if the value has been set.
-func (o *CcPrimary) GetEnabledOk() (*CcPrimaryEnabled, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Enabled, true
-}
-
-// SetEnabled sets field value
-func (o *CcPrimary) SetEnabled(v CcPrimaryEnabled) {
-	o.Enabled = v
-}
-
 func (o CcPrimary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -159,10 +159,10 @@ func (o CcPrimary) MarshalJSON() ([]byte, error) {
 
 func (o CcPrimary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
 	toSerialize["address"] = o.Address
-	toSerialize["tsig_id"] = o.TsigId.Get()
 	toSerialize["enabled"] = o.Enabled
+	toSerialize["id"] = o.Id
+	toSerialize["tsig_id"] = o.TsigId.Get()
 	return toSerialize, nil
 }
 
@@ -171,10 +171,10 @@ func (o *CcPrimary) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"address",
-		"tsig_id",
 		"enabled",
+		"id",
+		"tsig_id",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -22,8 +22,8 @@ var _ MappedNullable = &GetEndpoints{}
 // GetEndpoints struct for GetEndpoints
 type GetEndpoints struct {
 	// 処理の問い合わせの際のキーになる文字列
-	RequestId string                     `json:"request_id"`
-	Results   []GetEndpointsResultsInner `json:"results"`
+	RequestId string                           `json:"request_id"`
+	Results   []ConfigSitesInnerEndpointsInner `json:"results"`
 }
 
 type _GetEndpoints GetEndpoints
@@ -32,7 +32,7 @@ type _GetEndpoints GetEndpoints
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEndpoints(requestId string, results []GetEndpointsResultsInner) *GetEndpoints {
+func NewGetEndpoints(requestId string, results []ConfigSitesInnerEndpointsInner) *GetEndpoints {
 	this := GetEndpoints{}
 	this.RequestId = requestId
 	this.Results = results
@@ -72,9 +72,9 @@ func (o *GetEndpoints) SetRequestId(v string) {
 }
 
 // GetResults returns the Results field value
-func (o *GetEndpoints) GetResults() []GetEndpointsResultsInner {
+func (o *GetEndpoints) GetResults() []ConfigSitesInnerEndpointsInner {
 	if o == nil {
-		var ret []GetEndpointsResultsInner
+		var ret []ConfigSitesInnerEndpointsInner
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *GetEndpoints) GetResults() []GetEndpointsResultsInner {
 
 // GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *GetEndpoints) GetResultsOk() ([]GetEndpointsResultsInner, bool) {
+func (o *GetEndpoints) GetResultsOk() ([]ConfigSitesInnerEndpointsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *GetEndpoints) GetResultsOk() ([]GetEndpointsResultsInner, bool) {
 }
 
 // SetResults sets field value
-func (o *GetEndpoints) SetResults(v []GetEndpointsResultsInner) {
+func (o *GetEndpoints) SetResults(v []ConfigSitesInnerEndpointsInner) {
 	o.Results = v
 }
 

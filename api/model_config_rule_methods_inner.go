@@ -21,9 +21,9 @@ var _ MappedNullable = &ConfigRuleMethodsInner{}
 
 // ConfigRuleMethodsInner struct for ConfigRuleMethodsInner
 type ConfigRuleMethodsInner struct {
+	Method ConfigRuleMethodsInnerMethod `json:"method"`
 	// 優先度（親メソッドが failover の場合のみ指定）
-	Priority *int32                       `json:"priority,omitempty"`
-	Method   ConfigRuleMethodsInnerMethod `json:"method"`
+	Priority *int32 `json:"priority,omitempty"`
 }
 
 type _ConfigRuleMethodsInner ConfigRuleMethodsInner
@@ -44,6 +44,30 @@ func NewConfigRuleMethodsInner(method ConfigRuleMethodsInnerMethod) *ConfigRuleM
 func NewConfigRuleMethodsInnerWithDefaults() *ConfigRuleMethodsInner {
 	this := ConfigRuleMethodsInner{}
 	return &this
+}
+
+// GetMethod returns the Method field value
+func (o *ConfigRuleMethodsInner) GetMethod() ConfigRuleMethodsInnerMethod {
+	if o == nil {
+		var ret ConfigRuleMethodsInnerMethod
+		return ret
+	}
+
+	return o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value
+// and a boolean to check if the value has been set.
+func (o *ConfigRuleMethodsInner) GetMethodOk() (*ConfigRuleMethodsInnerMethod, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Method, true
+}
+
+// SetMethod sets field value
+func (o *ConfigRuleMethodsInner) SetMethod(v ConfigRuleMethodsInnerMethod) {
+	o.Method = v
 }
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
@@ -78,30 +102,6 @@ func (o *ConfigRuleMethodsInner) SetPriority(v int32) {
 	o.Priority = &v
 }
 
-// GetMethod returns the Method field value
-func (o *ConfigRuleMethodsInner) GetMethod() ConfigRuleMethodsInnerMethod {
-	if o == nil {
-		var ret ConfigRuleMethodsInnerMethod
-		return ret
-	}
-
-	return o.Method
-}
-
-// GetMethodOk returns a tuple with the Method field value
-// and a boolean to check if the value has been set.
-func (o *ConfigRuleMethodsInner) GetMethodOk() (*ConfigRuleMethodsInnerMethod, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Method, true
-}
-
-// SetMethod sets field value
-func (o *ConfigRuleMethodsInner) SetMethod(v ConfigRuleMethodsInnerMethod) {
-	o.Method = v
-}
-
 func (o ConfigRuleMethodsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -112,10 +112,10 @@ func (o ConfigRuleMethodsInner) MarshalJSON() ([]byte, error) {
 
 func (o ConfigRuleMethodsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["method"] = o.Method
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	toSerialize["method"] = o.Method
 	return toSerialize, nil
 }
 

@@ -21,25 +21,25 @@ var _ MappedNullable = &PostEndpoint{}
 
 // PostEndpoint struct for PostEndpoint
 type PostEndpoint struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName *string `json:"resource_name,omitempty"`
-	// エンドポイント名
-	Name string `json:"name"`
-	// 監視ターゲット（IPアドレス形式かホスト名形式）
-	MonitoringTarget *string `json:"monitoring_target,omitempty"`
 	// コメント
 	Description *string `json:"description,omitempty"`
-	// weight
-	Weight int32 `json:"weight"`
+	// 状態
+	Enabled *bool `json:"enabled,omitempty"`
 	// 手動切り戻し設定値
 	ManualFailback *bool `json:"manual_failback,omitempty"`
 	// 手動切り離し設定値
 	ManualFailover *bool `json:"manual_failover,omitempty"`
-	// 状態
-	Enabled *bool `json:"enabled,omitempty"`
+	// 監視ターゲット（IPアドレス形式かホスト名形式）
+	MonitoringTarget *string                        `json:"monitoring_target,omitempty"`
+	Monitorings      []PostEndpointMonitoringsInner `json:"monitorings,omitempty"`
+	// エンドポイント名
+	Name string `json:"name"`
 	// RDATA
-	Rdata       []EndpointRdataInner           `json:"rdata"`
-	Monitorings []PostEndpointMonitoringsInner `json:"monitorings,omitempty"`
+	Rdata []EndpointRdataInner `json:"rdata"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName *string `json:"resource_name,omitempty"`
+	// weight
+	Weight int32 `json:"weight"`
 }
 
 type _PostEndpoint PostEndpoint
@@ -48,21 +48,21 @@ type _PostEndpoint PostEndpoint
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPostEndpoint(name string, weight int32, rdata []EndpointRdataInner) *PostEndpoint {
+func NewPostEndpoint(name string, rdata []EndpointRdataInner, weight int32) *PostEndpoint {
 	this := PostEndpoint{}
-	this.Name = name
-	var monitoringTarget string = ""
-	this.MonitoringTarget = &monitoringTarget
 	var description string = ""
 	this.Description = &description
-	this.Weight = weight
+	var enabled bool = false
+	this.Enabled = &enabled
 	var manualFailback bool = false
 	this.ManualFailback = &manualFailback
 	var manualFailover bool = false
 	this.ManualFailover = &manualFailover
-	var enabled bool = false
-	this.Enabled = &enabled
+	var monitoringTarget string = ""
+	this.MonitoringTarget = &monitoringTarget
+	this.Name = name
 	this.Rdata = rdata
+	this.Weight = weight
 	return &this
 }
 
@@ -71,105 +71,17 @@ func NewPostEndpoint(name string, weight int32, rdata []EndpointRdataInner) *Pos
 // but it doesn't guarantee that properties required by API are set
 func NewPostEndpointWithDefaults() *PostEndpoint {
 	this := PostEndpoint{}
-	var monitoringTarget string = ""
-	this.MonitoringTarget = &monitoringTarget
 	var description string = ""
 	this.Description = &description
+	var enabled bool = false
+	this.Enabled = &enabled
 	var manualFailback bool = false
 	this.ManualFailback = &manualFailback
 	var manualFailover bool = false
 	this.ManualFailover = &manualFailover
-	var enabled bool = false
-	this.Enabled = &enabled
+	var monitoringTarget string = ""
+	this.MonitoringTarget = &monitoringTarget
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
-func (o *PostEndpoint) GetResourceName() string {
-	if o == nil || IsNil(o.ResourceName) {
-		var ret string
-		return ret
-	}
-	return *o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PostEndpoint) GetResourceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceName) {
-		return nil, false
-	}
-	return o.ResourceName, true
-}
-
-// HasResourceName returns a boolean if a field has been set.
-func (o *PostEndpoint) HasResourceName() bool {
-	if o != nil && !IsNil(o.ResourceName) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
-func (o *PostEndpoint) SetResourceName(v string) {
-	o.ResourceName = &v
-}
-
-// GetName returns the Name field value
-func (o *PostEndpoint) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostEndpoint) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostEndpoint) SetName(v string) {
-	o.Name = v
-}
-
-// GetMonitoringTarget returns the MonitoringTarget field value if set, zero value otherwise.
-func (o *PostEndpoint) GetMonitoringTarget() string {
-	if o == nil || IsNil(o.MonitoringTarget) {
-		var ret string
-		return ret
-	}
-	return *o.MonitoringTarget
-}
-
-// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PostEndpoint) GetMonitoringTargetOk() (*string, bool) {
-	if o == nil || IsNil(o.MonitoringTarget) {
-		return nil, false
-	}
-	return o.MonitoringTarget, true
-}
-
-// HasMonitoringTarget returns a boolean if a field has been set.
-func (o *PostEndpoint) HasMonitoringTarget() bool {
-	if o != nil && !IsNil(o.MonitoringTarget) {
-		return true
-	}
-
-	return false
-}
-
-// SetMonitoringTarget gets a reference to the given string and assigns it to the MonitoringTarget field.
-func (o *PostEndpoint) SetMonitoringTarget(v string) {
-	o.MonitoringTarget = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -204,28 +116,36 @@ func (o *PostEndpoint) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetWeight returns the Weight field value
-func (o *PostEndpoint) GetWeight() int32 {
-	if o == nil {
-		var ret int32
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *PostEndpoint) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
 		return ret
 	}
-
-	return o.Weight
+	return *o.Enabled
 }
 
-// GetWeightOk returns a tuple with the Weight field value
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PostEndpoint) GetWeightOk() (*int32, bool) {
-	if o == nil {
+func (o *PostEndpoint) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
-	return &o.Weight, true
+	return o.Enabled, true
 }
 
-// SetWeight sets field value
-func (o *PostEndpoint) SetWeight(v int32) {
-	o.Weight = v
+// HasEnabled returns a boolean if a field has been set.
+func (o *PostEndpoint) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *PostEndpoint) SetEnabled(v bool) {
+	o.Enabled = &v
 }
 
 // GetManualFailback returns the ManualFailback field value if set, zero value otherwise.
@@ -292,60 +212,36 @@ func (o *PostEndpoint) SetManualFailover(v bool) {
 	o.ManualFailover = &v
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *PostEndpoint) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
-		var ret bool
+// GetMonitoringTarget returns the MonitoringTarget field value if set, zero value otherwise.
+func (o *PostEndpoint) GetMonitoringTarget() string {
+	if o == nil || IsNil(o.MonitoringTarget) {
+		var ret string
 		return ret
 	}
-	return *o.Enabled
+	return *o.MonitoringTarget
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PostEndpoint) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+func (o *PostEndpoint) GetMonitoringTargetOk() (*string, bool) {
+	if o == nil || IsNil(o.MonitoringTarget) {
 		return nil, false
 	}
-	return o.Enabled, true
+	return o.MonitoringTarget, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *PostEndpoint) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+// HasMonitoringTarget returns a boolean if a field has been set.
+func (o *PostEndpoint) HasMonitoringTarget() bool {
+	if o != nil && !IsNil(o.MonitoringTarget) {
 		return true
 	}
 
 	return false
 }
 
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *PostEndpoint) SetEnabled(v bool) {
-	o.Enabled = &v
-}
-
-// GetRdata returns the Rdata field value
-func (o *PostEndpoint) GetRdata() []EndpointRdataInner {
-	if o == nil {
-		var ret []EndpointRdataInner
-		return ret
-	}
-
-	return o.Rdata
-}
-
-// GetRdataOk returns a tuple with the Rdata field value
-// and a boolean to check if the value has been set.
-func (o *PostEndpoint) GetRdataOk() ([]EndpointRdataInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Rdata, true
-}
-
-// SetRdata sets field value
-func (o *PostEndpoint) SetRdata(v []EndpointRdataInner) {
-	o.Rdata = v
+// SetMonitoringTarget gets a reference to the given string and assigns it to the MonitoringTarget field.
+func (o *PostEndpoint) SetMonitoringTarget(v string) {
+	o.MonitoringTarget = &v
 }
 
 // GetMonitorings returns the Monitorings field value if set, zero value otherwise.
@@ -380,6 +276,110 @@ func (o *PostEndpoint) SetMonitorings(v []PostEndpointMonitoringsInner) {
 	o.Monitorings = v
 }
 
+// GetName returns the Name field value
+func (o *PostEndpoint) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostEndpoint) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostEndpoint) SetName(v string) {
+	o.Name = v
+}
+
+// GetRdata returns the Rdata field value
+func (o *PostEndpoint) GetRdata() []EndpointRdataInner {
+	if o == nil {
+		var ret []EndpointRdataInner
+		return ret
+	}
+
+	return o.Rdata
+}
+
+// GetRdataOk returns a tuple with the Rdata field value
+// and a boolean to check if the value has been set.
+func (o *PostEndpoint) GetRdataOk() ([]EndpointRdataInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Rdata, true
+}
+
+// SetRdata sets field value
+func (o *PostEndpoint) SetRdata(v []EndpointRdataInner) {
+	o.Rdata = v
+}
+
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *PostEndpoint) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostEndpoint) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
+		return nil, false
+	}
+	return o.ResourceName, true
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *PostEndpoint) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *PostEndpoint) SetResourceName(v string) {
+	o.ResourceName = &v
+}
+
+// GetWeight returns the Weight field value
+func (o *PostEndpoint) GetWeight() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Weight
+}
+
+// GetWeightOk returns a tuple with the Weight field value
+// and a boolean to check if the value has been set.
+func (o *PostEndpoint) GetWeightOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Weight, true
+}
+
+// SetWeight sets field value
+func (o *PostEndpoint) SetWeight(v int32) {
+	o.Weight = v
+}
+
 func (o PostEndpoint) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -390,30 +390,30 @@ func (o PostEndpoint) MarshalJSON() ([]byte, error) {
 
 func (o PostEndpoint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResourceName) {
-		toSerialize["resource_name"] = o.ResourceName
-	}
-	toSerialize["name"] = o.Name
-	if !IsNil(o.MonitoringTarget) {
-		toSerialize["monitoring_target"] = o.MonitoringTarget
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["weight"] = o.Weight
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
 	if !IsNil(o.ManualFailback) {
 		toSerialize["manual_failback"] = o.ManualFailback
 	}
 	if !IsNil(o.ManualFailover) {
 		toSerialize["manual_failover"] = o.ManualFailover
 	}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.MonitoringTarget) {
+		toSerialize["monitoring_target"] = o.MonitoringTarget
 	}
-	toSerialize["rdata"] = o.Rdata
 	if !IsNil(o.Monitorings) {
 		toSerialize["monitorings"] = o.Monitorings
 	}
+	toSerialize["name"] = o.Name
+	toSerialize["rdata"] = o.Rdata
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
+	}
+	toSerialize["weight"] = o.Weight
 	return toSerialize, nil
 }
 
@@ -423,8 +423,8 @@ func (o *PostEndpoint) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"weight",
 		"rdata",
+		"weight",
 	}
 
 	allProperties := make(map[string]interface{})

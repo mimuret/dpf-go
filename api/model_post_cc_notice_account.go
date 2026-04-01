@@ -21,12 +21,12 @@ var _ MappedNullable = &PostCcNoticeAccount{}
 
 // PostCcNoticeAccount struct for PostCcNoticeAccount
 type PostCcNoticeAccount struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName *string `json:"resource_name,omitempty"`
+	Lang CcNoticeAccountLang `json:"lang"`
 	// アカウント名
 	Name  string                `json:"name"`
-	Lang  CcNoticeAccountLang   `json:"lang"`
 	Props *CcNoticeAccountProps `json:"props,omitempty"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName *string `json:"resource_name,omitempty"`
 }
 
 type _PostCcNoticeAccount PostCcNoticeAccount
@@ -35,10 +35,10 @@ type _PostCcNoticeAccount PostCcNoticeAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPostCcNoticeAccount(name string, lang CcNoticeAccountLang) *PostCcNoticeAccount {
+func NewPostCcNoticeAccount(lang CcNoticeAccountLang, name string) *PostCcNoticeAccount {
 	this := PostCcNoticeAccount{}
-	this.Name = name
 	this.Lang = lang
+	this.Name = name
 	return &this
 }
 
@@ -48,62 +48,6 @@ func NewPostCcNoticeAccount(name string, lang CcNoticeAccountLang) *PostCcNotice
 func NewPostCcNoticeAccountWithDefaults() *PostCcNoticeAccount {
 	this := PostCcNoticeAccount{}
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
-func (o *PostCcNoticeAccount) GetResourceName() string {
-	if o == nil || IsNil(o.ResourceName) {
-		var ret string
-		return ret
-	}
-	return *o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PostCcNoticeAccount) GetResourceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceName) {
-		return nil, false
-	}
-	return o.ResourceName, true
-}
-
-// HasResourceName returns a boolean if a field has been set.
-func (o *PostCcNoticeAccount) HasResourceName() bool {
-	if o != nil && !IsNil(o.ResourceName) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
-func (o *PostCcNoticeAccount) SetResourceName(v string) {
-	o.ResourceName = &v
-}
-
-// GetName returns the Name field value
-func (o *PostCcNoticeAccount) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostCcNoticeAccount) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostCcNoticeAccount) SetName(v string) {
-	o.Name = v
 }
 
 // GetLang returns the Lang field value
@@ -128,6 +72,30 @@ func (o *PostCcNoticeAccount) GetLangOk() (*CcNoticeAccountLang, bool) {
 // SetLang sets field value
 func (o *PostCcNoticeAccount) SetLang(v CcNoticeAccountLang) {
 	o.Lang = v
+}
+
+// GetName returns the Name field value
+func (o *PostCcNoticeAccount) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostCcNoticeAccount) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostCcNoticeAccount) SetName(v string) {
+	o.Name = v
 }
 
 // GetProps returns the Props field value if set, zero value otherwise.
@@ -162,6 +130,38 @@ func (o *PostCcNoticeAccount) SetProps(v CcNoticeAccountProps) {
 	o.Props = &v
 }
 
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *PostCcNoticeAccount) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostCcNoticeAccount) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
+		return nil, false
+	}
+	return o.ResourceName, true
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *PostCcNoticeAccount) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *PostCcNoticeAccount) SetResourceName(v string) {
+	o.ResourceName = &v
+}
+
 func (o PostCcNoticeAccount) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -172,13 +172,13 @@ func (o PostCcNoticeAccount) MarshalJSON() ([]byte, error) {
 
 func (o PostCcNoticeAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResourceName) {
-		toSerialize["resource_name"] = o.ResourceName
-	}
-	toSerialize["name"] = o.Name
 	toSerialize["lang"] = o.Lang
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Props) {
 		toSerialize["props"] = o.Props
+	}
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
 	}
 	return toSerialize, nil
 }
@@ -188,8 +188,8 @@ func (o *PostCcNoticeAccount) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
 		"lang",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})

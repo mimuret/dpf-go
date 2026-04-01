@@ -21,14 +21,14 @@ var _ MappedNullable = &PutConfigSitesInner{}
 
 // PutConfigSitesInner struct for PutConfigSitesInner
 type PutConfigSitesInner struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName string `json:"resource_name"`
-	// サイト名
-	Name   string     `json:"name"`
-	Rrtype SiteRrtype `json:"rrtype"`
 	// コメント
 	Description string                              `json:"description"`
 	Endpoints   []PutConfigSitesInnerEndpointsInner `json:"endpoints"`
+	// サイト名
+	Name string `json:"name"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName string     `json:"resource_name"`
+	Rrtype       SiteRrtype `json:"rrtype"`
 }
 
 type _PutConfigSitesInner PutConfigSitesInner
@@ -37,13 +37,13 @@ type _PutConfigSitesInner PutConfigSitesInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPutConfigSitesInner(resourceName string, name string, rrtype SiteRrtype, description string, endpoints []PutConfigSitesInnerEndpointsInner) *PutConfigSitesInner {
+func NewPutConfigSitesInner(description string, endpoints []PutConfigSitesInnerEndpointsInner, name string, resourceName string, rrtype SiteRrtype) *PutConfigSitesInner {
 	this := PutConfigSitesInner{}
-	this.ResourceName = resourceName
-	this.Name = name
-	this.Rrtype = rrtype
 	this.Description = description
 	this.Endpoints = endpoints
+	this.Name = name
+	this.ResourceName = resourceName
+	this.Rrtype = rrtype
 	return &this
 }
 
@@ -53,78 +53,6 @@ func NewPutConfigSitesInner(resourceName string, name string, rrtype SiteRrtype,
 func NewPutConfigSitesInnerWithDefaults() *PutConfigSitesInner {
 	this := PutConfigSitesInner{}
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *PutConfigSitesInner) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInner) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *PutConfigSitesInner) SetResourceName(v string) {
-	o.ResourceName = v
-}
-
-// GetName returns the Name field value
-func (o *PutConfigSitesInner) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInner) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PutConfigSitesInner) SetName(v string) {
-	o.Name = v
-}
-
-// GetRrtype returns the Rrtype field value
-func (o *PutConfigSitesInner) GetRrtype() SiteRrtype {
-	if o == nil {
-		var ret SiteRrtype
-		return ret
-	}
-
-	return o.Rrtype
-}
-
-// GetRrtypeOk returns a tuple with the Rrtype field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInner) GetRrtypeOk() (*SiteRrtype, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Rrtype, true
-}
-
-// SetRrtype sets field value
-func (o *PutConfigSitesInner) SetRrtype(v SiteRrtype) {
-	o.Rrtype = v
 }
 
 // GetDescription returns the Description field value
@@ -175,6 +103,78 @@ func (o *PutConfigSitesInner) SetEndpoints(v []PutConfigSitesInnerEndpointsInner
 	o.Endpoints = v
 }
 
+// GetName returns the Name field value
+func (o *PutConfigSitesInner) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInner) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PutConfigSitesInner) SetName(v string) {
+	o.Name = v
+}
+
+// GetResourceName returns the ResourceName field value
+func (o *PutConfigSitesInner) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInner) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *PutConfigSitesInner) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
+// GetRrtype returns the Rrtype field value
+func (o *PutConfigSitesInner) GetRrtype() SiteRrtype {
+	if o == nil {
+		var ret SiteRrtype
+		return ret
+	}
+
+	return o.Rrtype
+}
+
+// GetRrtypeOk returns a tuple with the Rrtype field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInner) GetRrtypeOk() (*SiteRrtype, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Rrtype, true
+}
+
+// SetRrtype sets field value
+func (o *PutConfigSitesInner) SetRrtype(v SiteRrtype) {
+	o.Rrtype = v
+}
+
 func (o PutConfigSitesInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -185,11 +185,11 @@ func (o PutConfigSitesInner) MarshalJSON() ([]byte, error) {
 
 func (o PutConfigSitesInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
-	toSerialize["name"] = o.Name
-	toSerialize["rrtype"] = o.Rrtype
 	toSerialize["description"] = o.Description
 	toSerialize["endpoints"] = o.Endpoints
+	toSerialize["name"] = o.Name
+	toSerialize["resource_name"] = o.ResourceName
+	toSerialize["rrtype"] = o.Rrtype
 	return toSerialize, nil
 }
 
@@ -198,11 +198,11 @@ func (o *PutConfigSitesInner) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
-		"name",
-		"rrtype",
 		"description",
 		"endpoints",
+		"name",
+		"resource_name",
+		"rrtype",
 	}
 
 	allProperties := make(map[string]interface{})

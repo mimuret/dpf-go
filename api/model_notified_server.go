@@ -21,9 +21,9 @@ var _ MappedNullable = &NotifiedServer{}
 
 // NotifiedServer struct for NotifiedServer
 type NotifiedServer struct {
-	Id int64 `json:"id"`
 	// IPアドレス
 	Address string        `json:"address"`
+	Id      int64         `json:"id"`
 	TsigId  NullableInt64 `json:"tsig_id"`
 }
 
@@ -33,10 +33,10 @@ type _NotifiedServer NotifiedServer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotifiedServer(id int64, address string, tsigId NullableInt64) *NotifiedServer {
+func NewNotifiedServer(address string, id int64, tsigId NullableInt64) *NotifiedServer {
 	this := NotifiedServer{}
-	this.Id = id
 	this.Address = address
+	this.Id = id
 	this.TsigId = tsigId
 	return &this
 }
@@ -47,30 +47,6 @@ func NewNotifiedServer(id int64, address string, tsigId NullableInt64) *Notified
 func NewNotifiedServerWithDefaults() *NotifiedServer {
 	this := NotifiedServer{}
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *NotifiedServer) GetId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *NotifiedServer) GetIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *NotifiedServer) SetId(v int64) {
-	o.Id = v
 }
 
 // GetAddress returns the Address field value
@@ -95,6 +71,30 @@ func (o *NotifiedServer) GetAddressOk() (*string, bool) {
 // SetAddress sets field value
 func (o *NotifiedServer) SetAddress(v string) {
 	o.Address = v
+}
+
+// GetId returns the Id field value
+func (o *NotifiedServer) GetId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *NotifiedServer) GetIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *NotifiedServer) SetId(v int64) {
+	o.Id = v
 }
 
 // GetTsigId returns the TsigId field value
@@ -133,8 +133,8 @@ func (o NotifiedServer) MarshalJSON() ([]byte, error) {
 
 func (o NotifiedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
 	toSerialize["address"] = o.Address
+	toSerialize["id"] = o.Id
 	toSerialize["tsig_id"] = o.TsigId.Get()
 	return toSerialize, nil
 }
@@ -144,8 +144,8 @@ func (o *NotifiedServer) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"address",
+		"id",
 		"tsig_id",
 	}
 

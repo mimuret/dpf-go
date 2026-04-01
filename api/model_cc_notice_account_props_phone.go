@@ -17,21 +17,21 @@ import (
 
 // CcNoticeAccountPropsPhone - struct for CcNoticeAccountPropsPhone
 type CcNoticeAccountPropsPhone struct {
-	CcNoticeAccountPropsPhoneOneOf  *CcNoticeAccountPropsPhoneOneOf
-	CcNoticeAccountPropsPhoneOneOf1 *CcNoticeAccountPropsPhoneOneOf1
+	CcNoticeAccountEmptyPhone *CcNoticeAccountEmptyPhone
+	CcNoticeAccountPhone      *CcNoticeAccountPhone
 }
 
-// CcNoticeAccountPropsPhoneOneOfAsCcNoticeAccountPropsPhone is a convenience function that returns CcNoticeAccountPropsPhoneOneOf wrapped in CcNoticeAccountPropsPhone
-func CcNoticeAccountPropsPhoneOneOfAsCcNoticeAccountPropsPhone(v *CcNoticeAccountPropsPhoneOneOf) CcNoticeAccountPropsPhone {
+// CcNoticeAccountEmptyPhoneAsCcNoticeAccountPropsPhone is a convenience function that returns CcNoticeAccountEmptyPhone wrapped in CcNoticeAccountPropsPhone
+func CcNoticeAccountEmptyPhoneAsCcNoticeAccountPropsPhone(v *CcNoticeAccountEmptyPhone) CcNoticeAccountPropsPhone {
 	return CcNoticeAccountPropsPhone{
-		CcNoticeAccountPropsPhoneOneOf: v,
+		CcNoticeAccountEmptyPhone: v,
 	}
 }
 
-// CcNoticeAccountPropsPhoneOneOf1AsCcNoticeAccountPropsPhone is a convenience function that returns CcNoticeAccountPropsPhoneOneOf1 wrapped in CcNoticeAccountPropsPhone
-func CcNoticeAccountPropsPhoneOneOf1AsCcNoticeAccountPropsPhone(v *CcNoticeAccountPropsPhoneOneOf1) CcNoticeAccountPropsPhone {
+// CcNoticeAccountPhoneAsCcNoticeAccountPropsPhone is a convenience function that returns CcNoticeAccountPhone wrapped in CcNoticeAccountPropsPhone
+func CcNoticeAccountPhoneAsCcNoticeAccountPropsPhone(v *CcNoticeAccountPhone) CcNoticeAccountPropsPhone {
 	return CcNoticeAccountPropsPhone{
-		CcNoticeAccountPropsPhoneOneOf1: v,
+		CcNoticeAccountPhone: v,
 	}
 }
 
@@ -39,36 +39,36 @@ func CcNoticeAccountPropsPhoneOneOf1AsCcNoticeAccountPropsPhone(v *CcNoticeAccou
 func (dst *CcNoticeAccountPropsPhone) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into CcNoticeAccountPropsPhoneOneOf
-	err = newStrictDecoder(data).Decode(&dst.CcNoticeAccountPropsPhoneOneOf)
+	// try to unmarshal data into CcNoticeAccountEmptyPhone
+	err = newStrictDecoder(data).Decode(&dst.CcNoticeAccountEmptyPhone)
 	if err == nil {
-		jsonCcNoticeAccountPropsPhoneOneOf, _ := json.Marshal(dst.CcNoticeAccountPropsPhoneOneOf)
-		if string(jsonCcNoticeAccountPropsPhoneOneOf) == "{}" { // empty struct
-			dst.CcNoticeAccountPropsPhoneOneOf = nil
+		jsonCcNoticeAccountEmptyPhone, _ := json.Marshal(dst.CcNoticeAccountEmptyPhone)
+		if string(jsonCcNoticeAccountEmptyPhone) == "{}" { // empty struct
+			dst.CcNoticeAccountEmptyPhone = nil
 		} else {
 			match++
 		}
 	} else {
-		dst.CcNoticeAccountPropsPhoneOneOf = nil
+		dst.CcNoticeAccountEmptyPhone = nil
 	}
 
-	// try to unmarshal data into CcNoticeAccountPropsPhoneOneOf1
-	err = newStrictDecoder(data).Decode(&dst.CcNoticeAccountPropsPhoneOneOf1)
+	// try to unmarshal data into CcNoticeAccountPhone
+	err = newStrictDecoder(data).Decode(&dst.CcNoticeAccountPhone)
 	if err == nil {
-		jsonCcNoticeAccountPropsPhoneOneOf1, _ := json.Marshal(dst.CcNoticeAccountPropsPhoneOneOf1)
-		if string(jsonCcNoticeAccountPropsPhoneOneOf1) == "{}" { // empty struct
-			dst.CcNoticeAccountPropsPhoneOneOf1 = nil
+		jsonCcNoticeAccountPhone, _ := json.Marshal(dst.CcNoticeAccountPhone)
+		if string(jsonCcNoticeAccountPhone) == "{}" { // empty struct
+			dst.CcNoticeAccountPhone = nil
 		} else {
 			match++
 		}
 	} else {
-		dst.CcNoticeAccountPropsPhoneOneOf1 = nil
+		dst.CcNoticeAccountPhone = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.CcNoticeAccountPropsPhoneOneOf = nil
-		dst.CcNoticeAccountPropsPhoneOneOf1 = nil
+		dst.CcNoticeAccountEmptyPhone = nil
+		dst.CcNoticeAccountPhone = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(CcNoticeAccountPropsPhone)")
 	} else if match == 1 {
@@ -80,12 +80,12 @@ func (dst *CcNoticeAccountPropsPhone) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src CcNoticeAccountPropsPhone) MarshalJSON() ([]byte, error) {
-	if src.CcNoticeAccountPropsPhoneOneOf != nil {
-		return json.Marshal(&src.CcNoticeAccountPropsPhoneOneOf)
+	if src.CcNoticeAccountEmptyPhone != nil {
+		return json.Marshal(&src.CcNoticeAccountEmptyPhone)
 	}
 
-	if src.CcNoticeAccountPropsPhoneOneOf1 != nil {
-		return json.Marshal(&src.CcNoticeAccountPropsPhoneOneOf1)
+	if src.CcNoticeAccountPhone != nil {
+		return json.Marshal(&src.CcNoticeAccountPhone)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -96,12 +96,12 @@ func (obj *CcNoticeAccountPropsPhone) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
-	if obj.CcNoticeAccountPropsPhoneOneOf != nil {
-		return obj.CcNoticeAccountPropsPhoneOneOf
+	if obj.CcNoticeAccountEmptyPhone != nil {
+		return obj.CcNoticeAccountEmptyPhone
 	}
 
-	if obj.CcNoticeAccountPropsPhoneOneOf1 != nil {
-		return obj.CcNoticeAccountPropsPhoneOneOf1
+	if obj.CcNoticeAccountPhone != nil {
+		return obj.CcNoticeAccountPhone
 	}
 
 	// all schemas are nil

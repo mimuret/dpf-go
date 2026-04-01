@@ -21,10 +21,10 @@ var _ MappedNullable = &PutConfigSitesInnerEndpointsInnerMonitoringsInner{}
 
 // PutConfigSitesInnerEndpointsInnerMonitoringsInner struct for PutConfigSitesInnerEndpointsInnerMonitoringsInner
 type PutConfigSitesInnerEndpointsInnerMonitoringsInner struct {
-	// 紐付ける監視のリソース名
-	ResourceName string `json:"resource_name"`
 	// エンドポイントと監視の紐付け状態
 	Enabled bool `json:"enabled"`
+	// 紐付ける監視のリソース名
+	ResourceName string `json:"resource_name"`
 }
 
 type _PutConfigSitesInnerEndpointsInnerMonitoringsInner PutConfigSitesInnerEndpointsInnerMonitoringsInner
@@ -33,10 +33,10 @@ type _PutConfigSitesInnerEndpointsInnerMonitoringsInner PutConfigSitesInnerEndpo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPutConfigSitesInnerEndpointsInnerMonitoringsInner(resourceName string, enabled bool) *PutConfigSitesInnerEndpointsInnerMonitoringsInner {
+func NewPutConfigSitesInnerEndpointsInnerMonitoringsInner(enabled bool, resourceName string) *PutConfigSitesInnerEndpointsInnerMonitoringsInner {
 	this := PutConfigSitesInnerEndpointsInnerMonitoringsInner{}
-	this.ResourceName = resourceName
 	this.Enabled = enabled
+	this.ResourceName = resourceName
 	return &this
 }
 
@@ -46,30 +46,6 @@ func NewPutConfigSitesInnerEndpointsInnerMonitoringsInner(resourceName string, e
 func NewPutConfigSitesInnerEndpointsInnerMonitoringsInnerWithDefaults() *PutConfigSitesInnerEndpointsInnerMonitoringsInner {
 	this := PutConfigSitesInnerEndpointsInnerMonitoringsInner{}
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) SetResourceName(v string) {
-	o.ResourceName = v
 }
 
 // GetEnabled returns the Enabled field value
@@ -96,6 +72,30 @@ func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
+// GetResourceName returns the ResourceName field value
+func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
 func (o PutConfigSitesInnerEndpointsInnerMonitoringsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -106,8 +106,8 @@ func (o PutConfigSitesInnerEndpointsInnerMonitoringsInner) MarshalJSON() ([]byte
 
 func (o PutConfigSitesInnerEndpointsInnerMonitoringsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
 	toSerialize["enabled"] = o.Enabled
+	toSerialize["resource_name"] = o.ResourceName
 	return toSerialize, nil
 }
 
@@ -116,8 +116,8 @@ func (o *PutConfigSitesInnerEndpointsInnerMonitoringsInner) UnmarshalJSON(data [
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
 		"enabled",
+		"resource_name",
 	}
 
 	allProperties := make(map[string]interface{})

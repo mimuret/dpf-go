@@ -21,25 +21,25 @@ var _ MappedNullable = &PutConfigSitesInnerEndpointsInner{}
 
 // PutConfigSitesInnerEndpointsInner struct for PutConfigSitesInnerEndpointsInner
 type PutConfigSitesInnerEndpointsInner struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName string `json:"resource_name"`
-	// エンドポイント名
-	Name string `json:"name"`
-	// 監視ターゲット（IPアドレス形式かホスト名形式）
-	MonitoringTarget string `json:"monitoring_target"`
 	// コメント
 	Description string `json:"description"`
-	// weight
-	Weight int32 `json:"weight"`
+	// 状態
+	Enabled bool `json:"enabled"`
 	// 手動切り戻し設定値
 	ManualFailback bool `json:"manual_failback"`
 	// 手動切り離し設定値
 	ManualFailover bool `json:"manual_failover"`
-	// 状態
-	Enabled bool `json:"enabled"`
+	// 監視ターゲット（IPアドレス形式かホスト名形式）
+	MonitoringTarget string                                              `json:"monitoring_target"`
+	Monitorings      []PutConfigSitesInnerEndpointsInnerMonitoringsInner `json:"monitorings"`
+	// エンドポイント名
+	Name string `json:"name"`
 	// RDATA
-	Rdata       []EndpointRdataInner                                `json:"rdata"`
-	Monitorings []PutConfigSitesInnerEndpointsInnerMonitoringsInner `json:"monitorings"`
+	Rdata []EndpointRdataInner `json:"rdata"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName string `json:"resource_name"`
+	// weight
+	Weight int32 `json:"weight"`
 }
 
 type _PutConfigSitesInnerEndpointsInner PutConfigSitesInnerEndpointsInner
@@ -48,18 +48,18 @@ type _PutConfigSitesInnerEndpointsInner PutConfigSitesInnerEndpointsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPutConfigSitesInnerEndpointsInner(resourceName string, name string, monitoringTarget string, description string, weight int32, manualFailback bool, manualFailover bool, enabled bool, rdata []EndpointRdataInner, monitorings []PutConfigSitesInnerEndpointsInnerMonitoringsInner) *PutConfigSitesInnerEndpointsInner {
+func NewPutConfigSitesInnerEndpointsInner(description string, enabled bool, manualFailback bool, manualFailover bool, monitoringTarget string, monitorings []PutConfigSitesInnerEndpointsInnerMonitoringsInner, name string, rdata []EndpointRdataInner, resourceName string, weight int32) *PutConfigSitesInnerEndpointsInner {
 	this := PutConfigSitesInnerEndpointsInner{}
-	this.ResourceName = resourceName
-	this.Name = name
-	this.MonitoringTarget = monitoringTarget
 	this.Description = description
-	this.Weight = weight
+	this.Enabled = enabled
 	this.ManualFailback = manualFailback
 	this.ManualFailover = manualFailover
-	this.Enabled = enabled
-	this.Rdata = rdata
+	this.MonitoringTarget = monitoringTarget
 	this.Monitorings = monitorings
+	this.Name = name
+	this.Rdata = rdata
+	this.ResourceName = resourceName
+	this.Weight = weight
 	return &this
 }
 
@@ -69,78 +69,6 @@ func NewPutConfigSitesInnerEndpointsInner(resourceName string, name string, moni
 func NewPutConfigSitesInnerEndpointsInnerWithDefaults() *PutConfigSitesInnerEndpointsInner {
 	this := PutConfigSitesInnerEndpointsInner{}
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *PutConfigSitesInnerEndpointsInner) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInnerEndpointsInner) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *PutConfigSitesInnerEndpointsInner) SetResourceName(v string) {
-	o.ResourceName = v
-}
-
-// GetName returns the Name field value
-func (o *PutConfigSitesInnerEndpointsInner) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInnerEndpointsInner) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PutConfigSitesInnerEndpointsInner) SetName(v string) {
-	o.Name = v
-}
-
-// GetMonitoringTarget returns the MonitoringTarget field value
-func (o *PutConfigSitesInnerEndpointsInner) GetMonitoringTarget() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.MonitoringTarget
-}
-
-// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInnerEndpointsInner) GetMonitoringTargetOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MonitoringTarget, true
-}
-
-// SetMonitoringTarget sets field value
-func (o *PutConfigSitesInnerEndpointsInner) SetMonitoringTarget(v string) {
-	o.MonitoringTarget = v
 }
 
 // GetDescription returns the Description field value
@@ -167,28 +95,28 @@ func (o *PutConfigSitesInnerEndpointsInner) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetWeight returns the Weight field value
-func (o *PutConfigSitesInnerEndpointsInner) GetWeight() int32 {
+// GetEnabled returns the Enabled field value
+func (o *PutConfigSitesInnerEndpointsInner) GetEnabled() bool {
 	if o == nil {
-		var ret int32
+		var ret bool
 		return ret
 	}
 
-	return o.Weight
+	return o.Enabled
 }
 
-// GetWeightOk returns a tuple with the Weight field value
+// GetEnabledOk returns a tuple with the Enabled field value
 // and a boolean to check if the value has been set.
-func (o *PutConfigSitesInnerEndpointsInner) GetWeightOk() (*int32, bool) {
+func (o *PutConfigSitesInnerEndpointsInner) GetEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Weight, true
+	return &o.Enabled, true
 }
 
-// SetWeight sets field value
-func (o *PutConfigSitesInnerEndpointsInner) SetWeight(v int32) {
-	o.Weight = v
+// SetEnabled sets field value
+func (o *PutConfigSitesInnerEndpointsInner) SetEnabled(v bool) {
+	o.Enabled = v
 }
 
 // GetManualFailback returns the ManualFailback field value
@@ -239,52 +167,28 @@ func (o *PutConfigSitesInnerEndpointsInner) SetManualFailover(v bool) {
 	o.ManualFailover = v
 }
 
-// GetEnabled returns the Enabled field value
-func (o *PutConfigSitesInnerEndpointsInner) GetEnabled() bool {
+// GetMonitoringTarget returns the MonitoringTarget field value
+func (o *PutConfigSitesInnerEndpointsInner) GetMonitoringTarget() string {
 	if o == nil {
-		var ret bool
+		var ret string
 		return ret
 	}
 
-	return o.Enabled
+	return o.MonitoringTarget
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value
+// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value
 // and a boolean to check if the value has been set.
-func (o *PutConfigSitesInnerEndpointsInner) GetEnabledOk() (*bool, bool) {
+func (o *PutConfigSitesInnerEndpointsInner) GetMonitoringTargetOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Enabled, true
+	return &o.MonitoringTarget, true
 }
 
-// SetEnabled sets field value
-func (o *PutConfigSitesInnerEndpointsInner) SetEnabled(v bool) {
-	o.Enabled = v
-}
-
-// GetRdata returns the Rdata field value
-func (o *PutConfigSitesInnerEndpointsInner) GetRdata() []EndpointRdataInner {
-	if o == nil {
-		var ret []EndpointRdataInner
-		return ret
-	}
-
-	return o.Rdata
-}
-
-// GetRdataOk returns a tuple with the Rdata field value
-// and a boolean to check if the value has been set.
-func (o *PutConfigSitesInnerEndpointsInner) GetRdataOk() ([]EndpointRdataInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Rdata, true
-}
-
-// SetRdata sets field value
-func (o *PutConfigSitesInnerEndpointsInner) SetRdata(v []EndpointRdataInner) {
-	o.Rdata = v
+// SetMonitoringTarget sets field value
+func (o *PutConfigSitesInnerEndpointsInner) SetMonitoringTarget(v string) {
+	o.MonitoringTarget = v
 }
 
 // GetMonitorings returns the Monitorings field value
@@ -311,6 +215,102 @@ func (o *PutConfigSitesInnerEndpointsInner) SetMonitorings(v []PutConfigSitesInn
 	o.Monitorings = v
 }
 
+// GetName returns the Name field value
+func (o *PutConfigSitesInnerEndpointsInner) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInnerEndpointsInner) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PutConfigSitesInnerEndpointsInner) SetName(v string) {
+	o.Name = v
+}
+
+// GetRdata returns the Rdata field value
+func (o *PutConfigSitesInnerEndpointsInner) GetRdata() []EndpointRdataInner {
+	if o == nil {
+		var ret []EndpointRdataInner
+		return ret
+	}
+
+	return o.Rdata
+}
+
+// GetRdataOk returns a tuple with the Rdata field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInnerEndpointsInner) GetRdataOk() ([]EndpointRdataInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Rdata, true
+}
+
+// SetRdata sets field value
+func (o *PutConfigSitesInnerEndpointsInner) SetRdata(v []EndpointRdataInner) {
+	o.Rdata = v
+}
+
+// GetResourceName returns the ResourceName field value
+func (o *PutConfigSitesInnerEndpointsInner) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInnerEndpointsInner) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *PutConfigSitesInnerEndpointsInner) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
+// GetWeight returns the Weight field value
+func (o *PutConfigSitesInnerEndpointsInner) GetWeight() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Weight
+}
+
+// GetWeightOk returns a tuple with the Weight field value
+// and a boolean to check if the value has been set.
+func (o *PutConfigSitesInnerEndpointsInner) GetWeightOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Weight, true
+}
+
+// SetWeight sets field value
+func (o *PutConfigSitesInnerEndpointsInner) SetWeight(v int32) {
+	o.Weight = v
+}
+
 func (o PutConfigSitesInnerEndpointsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -321,16 +321,16 @@ func (o PutConfigSitesInnerEndpointsInner) MarshalJSON() ([]byte, error) {
 
 func (o PutConfigSitesInnerEndpointsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
-	toSerialize["name"] = o.Name
-	toSerialize["monitoring_target"] = o.MonitoringTarget
 	toSerialize["description"] = o.Description
-	toSerialize["weight"] = o.Weight
+	toSerialize["enabled"] = o.Enabled
 	toSerialize["manual_failback"] = o.ManualFailback
 	toSerialize["manual_failover"] = o.ManualFailover
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["rdata"] = o.Rdata
+	toSerialize["monitoring_target"] = o.MonitoringTarget
 	toSerialize["monitorings"] = o.Monitorings
+	toSerialize["name"] = o.Name
+	toSerialize["rdata"] = o.Rdata
+	toSerialize["resource_name"] = o.ResourceName
+	toSerialize["weight"] = o.Weight
 	return toSerialize, nil
 }
 
@@ -339,16 +339,16 @@ func (o *PutConfigSitesInnerEndpointsInner) UnmarshalJSON(data []byte) (err erro
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
-		"name",
-		"monitoring_target",
 		"description",
-		"weight",
+		"enabled",
 		"manual_failback",
 		"manual_failover",
-		"enabled",
-		"rdata",
+		"monitoring_target",
 		"monitorings",
+		"name",
+		"rdata",
+		"resource_name",
+		"weight",
 	}
 
 	allProperties := make(map[string]interface{})

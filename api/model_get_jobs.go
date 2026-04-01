@@ -21,16 +21,16 @@ var _ MappedNullable = &GetJobs{}
 
 // GetJobs struct for GetJobs
 type GetJobs struct {
-	// 処理の問い合わせの際のキーになる文字列
-	RequestId string `json:"request_id"`
-	// 詳細説明は[**こちら**](#tag/jobs)
-	Status string `json:"status"`
-	// status: SUCCESSFULの場合のみ、レスポンスに含まれます
-	ResourcesUrl *string `json:"resources_url,omitempty"`
-	// status: FAILEDの場合のみ、レスポンスに含まれます
-	ErrorType *string `json:"error_type,omitempty"`
 	// status: FAILEDの場合のみ、レスポンスに含まれます
 	ErrorMessage *string `json:"error_message,omitempty"`
+	// status: FAILEDの場合のみ、レスポンスに含まれます
+	ErrorType *string `json:"error_type,omitempty"`
+	// 処理の問い合わせの際のキーになる文字列
+	RequestId string `json:"request_id"`
+	// status: SUCCESSFULの場合のみ、レスポンスに含まれます
+	ResourcesUrl *string `json:"resources_url,omitempty"`
+	// 詳細説明は[**こちら**](#tag/jobs)
+	Status string `json:"status"`
 }
 
 type _GetJobs GetJobs
@@ -52,118 +52,6 @@ func NewGetJobs(requestId string, status string) *GetJobs {
 func NewGetJobsWithDefaults() *GetJobs {
 	this := GetJobs{}
 	return &this
-}
-
-// GetRequestId returns the RequestId field value
-func (o *GetJobs) GetRequestId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RequestId
-}
-
-// GetRequestIdOk returns a tuple with the RequestId field value
-// and a boolean to check if the value has been set.
-func (o *GetJobs) GetRequestIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RequestId, true
-}
-
-// SetRequestId sets field value
-func (o *GetJobs) SetRequestId(v string) {
-	o.RequestId = v
-}
-
-// GetStatus returns the Status field value
-func (o *GetJobs) GetStatus() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value
-// and a boolean to check if the value has been set.
-func (o *GetJobs) GetStatusOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Status, true
-}
-
-// SetStatus sets field value
-func (o *GetJobs) SetStatus(v string) {
-	o.Status = v
-}
-
-// GetResourcesUrl returns the ResourcesUrl field value if set, zero value otherwise.
-func (o *GetJobs) GetResourcesUrl() string {
-	if o == nil || IsNil(o.ResourcesUrl) {
-		var ret string
-		return ret
-	}
-	return *o.ResourcesUrl
-}
-
-// GetResourcesUrlOk returns a tuple with the ResourcesUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetJobs) GetResourcesUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourcesUrl) {
-		return nil, false
-	}
-	return o.ResourcesUrl, true
-}
-
-// HasResourcesUrl returns a boolean if a field has been set.
-func (o *GetJobs) HasResourcesUrl() bool {
-	if o != nil && !IsNil(o.ResourcesUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourcesUrl gets a reference to the given string and assigns it to the ResourcesUrl field.
-func (o *GetJobs) SetResourcesUrl(v string) {
-	o.ResourcesUrl = &v
-}
-
-// GetErrorType returns the ErrorType field value if set, zero value otherwise.
-func (o *GetJobs) GetErrorType() string {
-	if o == nil || IsNil(o.ErrorType) {
-		var ret string
-		return ret
-	}
-	return *o.ErrorType
-}
-
-// GetErrorTypeOk returns a tuple with the ErrorType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetJobs) GetErrorTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ErrorType) {
-		return nil, false
-	}
-	return o.ErrorType, true
-}
-
-// HasErrorType returns a boolean if a field has been set.
-func (o *GetJobs) HasErrorType() bool {
-	if o != nil && !IsNil(o.ErrorType) {
-		return true
-	}
-
-	return false
-}
-
-// SetErrorType gets a reference to the given string and assigns it to the ErrorType field.
-func (o *GetJobs) SetErrorType(v string) {
-	o.ErrorType = &v
 }
 
 // GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
@@ -198,6 +86,118 @@ func (o *GetJobs) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetErrorType returns the ErrorType field value if set, zero value otherwise.
+func (o *GetJobs) GetErrorType() string {
+	if o == nil || IsNil(o.ErrorType) {
+		var ret string
+		return ret
+	}
+	return *o.ErrorType
+}
+
+// GetErrorTypeOk returns a tuple with the ErrorType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetJobs) GetErrorTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.ErrorType) {
+		return nil, false
+	}
+	return o.ErrorType, true
+}
+
+// HasErrorType returns a boolean if a field has been set.
+func (o *GetJobs) HasErrorType() bool {
+	if o != nil && !IsNil(o.ErrorType) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorType gets a reference to the given string and assigns it to the ErrorType field.
+func (o *GetJobs) SetErrorType(v string) {
+	o.ErrorType = &v
+}
+
+// GetRequestId returns the RequestId field value
+func (o *GetJobs) GetRequestId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RequestId
+}
+
+// GetRequestIdOk returns a tuple with the RequestId field value
+// and a boolean to check if the value has been set.
+func (o *GetJobs) GetRequestIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RequestId, true
+}
+
+// SetRequestId sets field value
+func (o *GetJobs) SetRequestId(v string) {
+	o.RequestId = v
+}
+
+// GetResourcesUrl returns the ResourcesUrl field value if set, zero value otherwise.
+func (o *GetJobs) GetResourcesUrl() string {
+	if o == nil || IsNil(o.ResourcesUrl) {
+		var ret string
+		return ret
+	}
+	return *o.ResourcesUrl
+}
+
+// GetResourcesUrlOk returns a tuple with the ResourcesUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetJobs) GetResourcesUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourcesUrl) {
+		return nil, false
+	}
+	return o.ResourcesUrl, true
+}
+
+// HasResourcesUrl returns a boolean if a field has been set.
+func (o *GetJobs) HasResourcesUrl() bool {
+	if o != nil && !IsNil(o.ResourcesUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourcesUrl gets a reference to the given string and assigns it to the ResourcesUrl field.
+func (o *GetJobs) SetResourcesUrl(v string) {
+	o.ResourcesUrl = &v
+}
+
+// GetStatus returns the Status field value
+func (o *GetJobs) GetStatus() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *GetJobs) GetStatusOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *GetJobs) SetStatus(v string) {
+	o.Status = v
+}
+
 func (o GetJobs) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -208,17 +208,17 @@ func (o GetJobs) MarshalJSON() ([]byte, error) {
 
 func (o GetJobs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["request_id"] = o.RequestId
-	toSerialize["status"] = o.Status
-	if !IsNil(o.ResourcesUrl) {
-		toSerialize["resources_url"] = o.ResourcesUrl
+	if !IsNil(o.ErrorMessage) {
+		toSerialize["error_message"] = o.ErrorMessage
 	}
 	if !IsNil(o.ErrorType) {
 		toSerialize["error_type"] = o.ErrorType
 	}
-	if !IsNil(o.ErrorMessage) {
-		toSerialize["error_message"] = o.ErrorMessage
+	toSerialize["request_id"] = o.RequestId
+	if !IsNil(o.ResourcesUrl) {
+		toSerialize["resources_url"] = o.ResourcesUrl
 	}
+	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }
 

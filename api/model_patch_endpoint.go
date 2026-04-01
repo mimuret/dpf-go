@@ -19,23 +19,23 @@ var _ MappedNullable = &PatchEndpoint{}
 
 // PatchEndpoint struct for PatchEndpoint
 type PatchEndpoint struct {
-	// エンドポイント名
-	Name *string `json:"name,omitempty"`
-	// 監視ターゲット（IPアドレス形式かホスト名形式）
-	MonitoringTarget *string `json:"monitoring_target,omitempty"`
 	// コメント
 	Description *string `json:"description,omitempty"`
-	// weight
-	Weight *int32 `json:"weight,omitempty"`
+	// 状態
+	Enabled *bool `json:"enabled,omitempty"`
 	// 手動切り戻し設定値
 	ManualFailback *bool `json:"manual_failback,omitempty"`
 	// 手動切り離し設定値
 	ManualFailover *bool `json:"manual_failover,omitempty"`
-	// 状態
-	Enabled *bool `json:"enabled,omitempty"`
+	// 監視ターゲット（IPアドレス形式かホスト名形式）
+	MonitoringTarget *string                         `json:"monitoring_target,omitempty"`
+	Monitorings      []PatchEndpointMonitoringsInner `json:"monitorings,omitempty"`
+	// エンドポイント名
+	Name *string `json:"name,omitempty"`
 	// RDATA
-	Rdata       []EndpointRdataInner            `json:"rdata,omitempty"`
-	Monitorings []PatchEndpointMonitoringsInner `json:"monitorings,omitempty"`
+	Rdata []EndpointRdataInner `json:"rdata,omitempty"`
+	// weight
+	Weight *int32 `json:"weight,omitempty"`
 }
 
 // NewPatchEndpoint instantiates a new PatchEndpoint object
@@ -57,70 +57,6 @@ func NewPatchEndpointWithDefaults() *PatchEndpoint {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *PatchEndpoint) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchEndpoint) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *PatchEndpoint) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *PatchEndpoint) SetName(v string) {
-	o.Name = &v
-}
-
-// GetMonitoringTarget returns the MonitoringTarget field value if set, zero value otherwise.
-func (o *PatchEndpoint) GetMonitoringTarget() string {
-	if o == nil || IsNil(o.MonitoringTarget) {
-		var ret string
-		return ret
-	}
-	return *o.MonitoringTarget
-}
-
-// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchEndpoint) GetMonitoringTargetOk() (*string, bool) {
-	if o == nil || IsNil(o.MonitoringTarget) {
-		return nil, false
-	}
-	return o.MonitoringTarget, true
-}
-
-// HasMonitoringTarget returns a boolean if a field has been set.
-func (o *PatchEndpoint) HasMonitoringTarget() bool {
-	if o != nil && !IsNil(o.MonitoringTarget) {
-		return true
-	}
-
-	return false
-}
-
-// SetMonitoringTarget gets a reference to the given string and assigns it to the MonitoringTarget field.
-func (o *PatchEndpoint) SetMonitoringTarget(v string) {
-	o.MonitoringTarget = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -155,36 +91,36 @@ func (o *PatchEndpoint) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetWeight returns the Weight field value if set, zero value otherwise.
-func (o *PatchEndpoint) GetWeight() int32 {
-	if o == nil || IsNil(o.Weight) {
-		var ret int32
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *PatchEndpoint) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
 		return ret
 	}
-	return *o.Weight
+	return *o.Enabled
 }
 
-// GetWeightOk returns a tuple with the Weight field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PatchEndpoint) GetWeightOk() (*int32, bool) {
-	if o == nil || IsNil(o.Weight) {
+func (o *PatchEndpoint) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
-	return o.Weight, true
+	return o.Enabled, true
 }
 
-// HasWeight returns a boolean if a field has been set.
-func (o *PatchEndpoint) HasWeight() bool {
-	if o != nil && !IsNil(o.Weight) {
+// HasEnabled returns a boolean if a field has been set.
+func (o *PatchEndpoint) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
 	return false
 }
 
-// SetWeight gets a reference to the given int32 and assigns it to the Weight field.
-func (o *PatchEndpoint) SetWeight(v int32) {
-	o.Weight = &v
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *PatchEndpoint) SetEnabled(v bool) {
+	o.Enabled = &v
 }
 
 // GetManualFailback returns the ManualFailback field value if set, zero value otherwise.
@@ -251,68 +187,36 @@ func (o *PatchEndpoint) SetManualFailover(v bool) {
 	o.ManualFailover = &v
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *PatchEndpoint) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
-		var ret bool
+// GetMonitoringTarget returns the MonitoringTarget field value if set, zero value otherwise.
+func (o *PatchEndpoint) GetMonitoringTarget() string {
+	if o == nil || IsNil(o.MonitoringTarget) {
+		var ret string
 		return ret
 	}
-	return *o.Enabled
+	return *o.MonitoringTarget
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetMonitoringTargetOk returns a tuple with the MonitoringTarget field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PatchEndpoint) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+func (o *PatchEndpoint) GetMonitoringTargetOk() (*string, bool) {
+	if o == nil || IsNil(o.MonitoringTarget) {
 		return nil, false
 	}
-	return o.Enabled, true
+	return o.MonitoringTarget, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *PatchEndpoint) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+// HasMonitoringTarget returns a boolean if a field has been set.
+func (o *PatchEndpoint) HasMonitoringTarget() bool {
+	if o != nil && !IsNil(o.MonitoringTarget) {
 		return true
 	}
 
 	return false
 }
 
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *PatchEndpoint) SetEnabled(v bool) {
-	o.Enabled = &v
-}
-
-// GetRdata returns the Rdata field value if set, zero value otherwise.
-func (o *PatchEndpoint) GetRdata() []EndpointRdataInner {
-	if o == nil || IsNil(o.Rdata) {
-		var ret []EndpointRdataInner
-		return ret
-	}
-	return o.Rdata
-}
-
-// GetRdataOk returns a tuple with the Rdata field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchEndpoint) GetRdataOk() ([]EndpointRdataInner, bool) {
-	if o == nil || IsNil(o.Rdata) {
-		return nil, false
-	}
-	return o.Rdata, true
-}
-
-// HasRdata returns a boolean if a field has been set.
-func (o *PatchEndpoint) HasRdata() bool {
-	if o != nil && !IsNil(o.Rdata) {
-		return true
-	}
-
-	return false
-}
-
-// SetRdata gets a reference to the given []EndpointRdataInner and assigns it to the Rdata field.
-func (o *PatchEndpoint) SetRdata(v []EndpointRdataInner) {
-	o.Rdata = v
+// SetMonitoringTarget gets a reference to the given string and assigns it to the MonitoringTarget field.
+func (o *PatchEndpoint) SetMonitoringTarget(v string) {
+	o.MonitoringTarget = &v
 }
 
 // GetMonitorings returns the Monitorings field value if set, zero value otherwise.
@@ -347,6 +251,102 @@ func (o *PatchEndpoint) SetMonitorings(v []PatchEndpointMonitoringsInner) {
 	o.Monitorings = v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PatchEndpoint) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchEndpoint) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *PatchEndpoint) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PatchEndpoint) SetName(v string) {
+	o.Name = &v
+}
+
+// GetRdata returns the Rdata field value if set, zero value otherwise.
+func (o *PatchEndpoint) GetRdata() []EndpointRdataInner {
+	if o == nil || IsNil(o.Rdata) {
+		var ret []EndpointRdataInner
+		return ret
+	}
+	return o.Rdata
+}
+
+// GetRdataOk returns a tuple with the Rdata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchEndpoint) GetRdataOk() ([]EndpointRdataInner, bool) {
+	if o == nil || IsNil(o.Rdata) {
+		return nil, false
+	}
+	return o.Rdata, true
+}
+
+// HasRdata returns a boolean if a field has been set.
+func (o *PatchEndpoint) HasRdata() bool {
+	if o != nil && !IsNil(o.Rdata) {
+		return true
+	}
+
+	return false
+}
+
+// SetRdata gets a reference to the given []EndpointRdataInner and assigns it to the Rdata field.
+func (o *PatchEndpoint) SetRdata(v []EndpointRdataInner) {
+	o.Rdata = v
+}
+
+// GetWeight returns the Weight field value if set, zero value otherwise.
+func (o *PatchEndpoint) GetWeight() int32 {
+	if o == nil || IsNil(o.Weight) {
+		var ret int32
+		return ret
+	}
+	return *o.Weight
+}
+
+// GetWeightOk returns a tuple with the Weight field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchEndpoint) GetWeightOk() (*int32, bool) {
+	if o == nil || IsNil(o.Weight) {
+		return nil, false
+	}
+	return o.Weight, true
+}
+
+// HasWeight returns a boolean if a field has been set.
+func (o *PatchEndpoint) HasWeight() bool {
+	if o != nil && !IsNil(o.Weight) {
+		return true
+	}
+
+	return false
+}
+
+// SetWeight gets a reference to the given int32 and assigns it to the Weight field.
+func (o *PatchEndpoint) SetWeight(v int32) {
+	o.Weight = &v
+}
+
 func (o PatchEndpoint) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -357,17 +357,11 @@ func (o PatchEndpoint) MarshalJSON() ([]byte, error) {
 
 func (o PatchEndpoint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.MonitoringTarget) {
-		toSerialize["monitoring_target"] = o.MonitoringTarget
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Weight) {
-		toSerialize["weight"] = o.Weight
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
 	}
 	if !IsNil(o.ManualFailback) {
 		toSerialize["manual_failback"] = o.ManualFailback
@@ -375,14 +369,20 @@ func (o PatchEndpoint) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ManualFailover) {
 		toSerialize["manual_failover"] = o.ManualFailover
 	}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.MonitoringTarget) {
+		toSerialize["monitoring_target"] = o.MonitoringTarget
+	}
+	if !IsNil(o.Monitorings) {
+		toSerialize["monitorings"] = o.Monitorings
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	if !IsNil(o.Rdata) {
 		toSerialize["rdata"] = o.Rdata
 	}
-	if !IsNil(o.Monitorings) {
-		toSerialize["monitorings"] = o.Monitorings
+	if !IsNil(o.Weight) {
+		toSerialize["weight"] = o.Weight
 	}
 	return toSerialize, nil
 }

@@ -21,8 +21,8 @@ var _ MappedNullable = &QpsHistory{}
 
 // QpsHistory struct for QpsHistory
 type QpsHistory struct {
-	ServiceCode string         `json:"service_code"`
 	Name        NullableString `json:"name"`
+	ServiceCode string         `json:"service_code"`
 	Values      []QpsValue     `json:"values"`
 }
 
@@ -32,10 +32,10 @@ type _QpsHistory QpsHistory
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQpsHistory(serviceCode string, name NullableString, values []QpsValue) *QpsHistory {
+func NewQpsHistory(name NullableString, serviceCode string, values []QpsValue) *QpsHistory {
 	this := QpsHistory{}
-	this.ServiceCode = serviceCode
 	this.Name = name
+	this.ServiceCode = serviceCode
 	this.Values = values
 	return &this
 }
@@ -46,30 +46,6 @@ func NewQpsHistory(serviceCode string, name NullableString, values []QpsValue) *
 func NewQpsHistoryWithDefaults() *QpsHistory {
 	this := QpsHistory{}
 	return &this
-}
-
-// GetServiceCode returns the ServiceCode field value
-func (o *QpsHistory) GetServiceCode() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ServiceCode
-}
-
-// GetServiceCodeOk returns a tuple with the ServiceCode field value
-// and a boolean to check if the value has been set.
-func (o *QpsHistory) GetServiceCodeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ServiceCode, true
-}
-
-// SetServiceCode sets field value
-func (o *QpsHistory) SetServiceCode(v string) {
-	o.ServiceCode = v
 }
 
 // GetName returns the Name field value
@@ -96,6 +72,30 @@ func (o *QpsHistory) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *QpsHistory) SetName(v string) {
 	o.Name.Set(&v)
+}
+
+// GetServiceCode returns the ServiceCode field value
+func (o *QpsHistory) GetServiceCode() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ServiceCode
+}
+
+// GetServiceCodeOk returns a tuple with the ServiceCode field value
+// and a boolean to check if the value has been set.
+func (o *QpsHistory) GetServiceCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ServiceCode, true
+}
+
+// SetServiceCode sets field value
+func (o *QpsHistory) SetServiceCode(v string) {
+	o.ServiceCode = v
 }
 
 // GetValues returns the Values field value
@@ -132,8 +132,8 @@ func (o QpsHistory) MarshalJSON() ([]byte, error) {
 
 func (o QpsHistory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["service_code"] = o.ServiceCode
 	toSerialize["name"] = o.Name.Get()
+	toSerialize["service_code"] = o.ServiceCode
 	toSerialize["values"] = o.Values
 	return toSerialize, nil
 }
@@ -143,8 +143,8 @@ func (o *QpsHistory) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"service_code",
 		"name",
+		"service_code",
 		"values",
 	}
 

@@ -21,13 +21,13 @@ var _ MappedNullable = &CommonConfig{}
 
 // CommonConfig struct for CommonConfig
 type CommonConfig struct {
-	Id int64 `json:"id"`
-	// name
-	Name              string              `json:"name"`
-	ManagedDnsEnabled ManagedDnsEnabled   `json:"managed_dns_enabled"`
-	Default           CommonConfigDefault `json:"default"`
+	Default CommonConfigDefault `json:"default"`
 	// コメント
-	Description string `json:"description"`
+	Description       string            `json:"description"`
+	Id                int64             `json:"id"`
+	ManagedDnsEnabled ManagedDnsEnabled `json:"managed_dns_enabled"`
+	// name
+	Name string `json:"name"`
 }
 
 type _CommonConfig CommonConfig
@@ -36,13 +36,13 @@ type _CommonConfig CommonConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommonConfig(id int64, name string, managedDnsEnabled ManagedDnsEnabled, default_ CommonConfigDefault, description string) *CommonConfig {
+func NewCommonConfig(default_ CommonConfigDefault, description string, id int64, managedDnsEnabled ManagedDnsEnabled, name string) *CommonConfig {
 	this := CommonConfig{}
-	this.Id = id
-	this.Name = name
-	this.ManagedDnsEnabled = managedDnsEnabled
 	this.Default = default_
 	this.Description = description
+	this.Id = id
+	this.ManagedDnsEnabled = managedDnsEnabled
+	this.Name = name
 	return &this
 }
 
@@ -54,78 +54,6 @@ func NewCommonConfigWithDefaults() *CommonConfig {
 	var description string = ""
 	this.Description = description
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *CommonConfig) GetId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *CommonConfig) GetIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *CommonConfig) SetId(v int64) {
-	o.Id = v
-}
-
-// GetName returns the Name field value
-func (o *CommonConfig) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *CommonConfig) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *CommonConfig) SetName(v string) {
-	o.Name = v
-}
-
-// GetManagedDnsEnabled returns the ManagedDnsEnabled field value
-func (o *CommonConfig) GetManagedDnsEnabled() ManagedDnsEnabled {
-	if o == nil {
-		var ret ManagedDnsEnabled
-		return ret
-	}
-
-	return o.ManagedDnsEnabled
-}
-
-// GetManagedDnsEnabledOk returns a tuple with the ManagedDnsEnabled field value
-// and a boolean to check if the value has been set.
-func (o *CommonConfig) GetManagedDnsEnabledOk() (*ManagedDnsEnabled, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ManagedDnsEnabled, true
-}
-
-// SetManagedDnsEnabled sets field value
-func (o *CommonConfig) SetManagedDnsEnabled(v ManagedDnsEnabled) {
-	o.ManagedDnsEnabled = v
 }
 
 // GetDefault returns the Default field value
@@ -176,6 +104,78 @@ func (o *CommonConfig) SetDescription(v string) {
 	o.Description = v
 }
 
+// GetId returns the Id field value
+func (o *CommonConfig) GetId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *CommonConfig) GetIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *CommonConfig) SetId(v int64) {
+	o.Id = v
+}
+
+// GetManagedDnsEnabled returns the ManagedDnsEnabled field value
+func (o *CommonConfig) GetManagedDnsEnabled() ManagedDnsEnabled {
+	if o == nil {
+		var ret ManagedDnsEnabled
+		return ret
+	}
+
+	return o.ManagedDnsEnabled
+}
+
+// GetManagedDnsEnabledOk returns a tuple with the ManagedDnsEnabled field value
+// and a boolean to check if the value has been set.
+func (o *CommonConfig) GetManagedDnsEnabledOk() (*ManagedDnsEnabled, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ManagedDnsEnabled, true
+}
+
+// SetManagedDnsEnabled sets field value
+func (o *CommonConfig) SetManagedDnsEnabled(v ManagedDnsEnabled) {
+	o.ManagedDnsEnabled = v
+}
+
+// GetName returns the Name field value
+func (o *CommonConfig) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *CommonConfig) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *CommonConfig) SetName(v string) {
+	o.Name = v
+}
+
 func (o CommonConfig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -186,11 +186,11 @@ func (o CommonConfig) MarshalJSON() ([]byte, error) {
 
 func (o CommonConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
-	toSerialize["managed_dns_enabled"] = o.ManagedDnsEnabled
 	toSerialize["default"] = o.Default
 	toSerialize["description"] = o.Description
+	toSerialize["id"] = o.Id
+	toSerialize["managed_dns_enabled"] = o.ManagedDnsEnabled
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
 }
 
@@ -199,11 +199,11 @@ func (o *CommonConfig) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
-		"name",
-		"managed_dns_enabled",
 		"default",
 		"description",
+		"id",
+		"managed_dns_enabled",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -21,9 +21,9 @@ var _ MappedNullable = &Dnssec{}
 
 // Dnssec struct for Dnssec
 type Dnssec struct {
+	DsState DnssecDsState `json:"ds_state"`
 	Enabled DnssecEnabled `json:"enabled"`
 	State   DnssecState   `json:"state"`
-	DsState DnssecDsState `json:"ds_state"`
 }
 
 type _Dnssec Dnssec
@@ -32,11 +32,11 @@ type _Dnssec Dnssec
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDnssec(enabled DnssecEnabled, state DnssecState, dsState DnssecDsState) *Dnssec {
+func NewDnssec(dsState DnssecDsState, enabled DnssecEnabled, state DnssecState) *Dnssec {
 	this := Dnssec{}
+	this.DsState = dsState
 	this.Enabled = enabled
 	this.State = state
-	this.DsState = dsState
 	return &this
 }
 
@@ -46,6 +46,30 @@ func NewDnssec(enabled DnssecEnabled, state DnssecState, dsState DnssecDsState) 
 func NewDnssecWithDefaults() *Dnssec {
 	this := Dnssec{}
 	return &this
+}
+
+// GetDsState returns the DsState field value
+func (o *Dnssec) GetDsState() DnssecDsState {
+	if o == nil {
+		var ret DnssecDsState
+		return ret
+	}
+
+	return o.DsState
+}
+
+// GetDsStateOk returns a tuple with the DsState field value
+// and a boolean to check if the value has been set.
+func (o *Dnssec) GetDsStateOk() (*DnssecDsState, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DsState, true
+}
+
+// SetDsState sets field value
+func (o *Dnssec) SetDsState(v DnssecDsState) {
+	o.DsState = v
 }
 
 // GetEnabled returns the Enabled field value
@@ -96,30 +120,6 @@ func (o *Dnssec) SetState(v DnssecState) {
 	o.State = v
 }
 
-// GetDsState returns the DsState field value
-func (o *Dnssec) GetDsState() DnssecDsState {
-	if o == nil {
-		var ret DnssecDsState
-		return ret
-	}
-
-	return o.DsState
-}
-
-// GetDsStateOk returns a tuple with the DsState field value
-// and a boolean to check if the value has been set.
-func (o *Dnssec) GetDsStateOk() (*DnssecDsState, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DsState, true
-}
-
-// SetDsState sets field value
-func (o *Dnssec) SetDsState(v DnssecDsState) {
-	o.DsState = v
-}
-
 func (o Dnssec) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -130,9 +130,9 @@ func (o Dnssec) MarshalJSON() ([]byte, error) {
 
 func (o Dnssec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["ds_state"] = o.DsState
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["state"] = o.State
-	toSerialize["ds_state"] = o.DsState
 	return toSerialize, nil
 }
 
@@ -141,9 +141,9 @@ func (o *Dnssec) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"ds_state",
 		"enabled",
 		"state",
-		"ds_state",
 	}
 
 	allProperties := make(map[string]interface{})

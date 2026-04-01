@@ -21,13 +21,13 @@ var _ MappedNullable = &Rule{}
 
 // Rule struct for Rule
 type Rule struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName string `json:"resource_name"`
-	// ルール名
-	Name string `json:"name"`
 	// コメント
 	Description string             `json:"description"`
 	Methods     []RuleMethodsInner `json:"methods"`
+	// ルール名
+	Name string `json:"name"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName string `json:"resource_name"`
 }
 
 type _Rule Rule
@@ -36,12 +36,12 @@ type _Rule Rule
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRule(resourceName string, name string, description string, methods []RuleMethodsInner) *Rule {
+func NewRule(description string, methods []RuleMethodsInner, name string, resourceName string) *Rule {
 	this := Rule{}
-	this.ResourceName = resourceName
-	this.Name = name
 	this.Description = description
 	this.Methods = methods
+	this.Name = name
+	this.ResourceName = resourceName
 	return &this
 }
 
@@ -53,54 +53,6 @@ func NewRuleWithDefaults() *Rule {
 	var description string = ""
 	this.Description = description
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *Rule) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *Rule) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *Rule) SetResourceName(v string) {
-	o.ResourceName = v
-}
-
-// GetName returns the Name field value
-func (o *Rule) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *Rule) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *Rule) SetName(v string) {
-	o.Name = v
 }
 
 // GetDescription returns the Description field value
@@ -151,6 +103,54 @@ func (o *Rule) SetMethods(v []RuleMethodsInner) {
 	o.Methods = v
 }
 
+// GetName returns the Name field value
+func (o *Rule) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Rule) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Rule) SetName(v string) {
+	o.Name = v
+}
+
+// GetResourceName returns the ResourceName field value
+func (o *Rule) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *Rule) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *Rule) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
 func (o Rule) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -161,10 +161,10 @@ func (o Rule) MarshalJSON() ([]byte, error) {
 
 func (o Rule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
-	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
 	toSerialize["methods"] = o.Methods
+	toSerialize["name"] = o.Name
+	toSerialize["resource_name"] = o.ResourceName
 	return toSerialize, nil
 }
 
@@ -173,10 +173,10 @@ func (o *Rule) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
-		"name",
 		"description",
 		"methods",
+		"name",
+		"resource_name",
 	}
 
 	allProperties := make(map[string]interface{})

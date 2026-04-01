@@ -21,15 +21,15 @@ var _ MappedNullable = &SitesSitesInner{}
 
 // SitesSitesInner struct for SitesSitesInner
 type SitesSitesInner struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName string `json:"resource_name"`
-	// サイト名
-	Name   string     `json:"name"`
-	Rrtype SiteRrtype `json:"rrtype"`
 	// コメント
 	Description string         `json:"description"`
-	LiveStatus  SiteLiveStatus `json:"live_status"`
 	Endpoints   []Endpoint     `json:"endpoints"`
+	LiveStatus  SiteLiveStatus `json:"live_status"`
+	// サイト名
+	Name string `json:"name"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName string     `json:"resource_name"`
+	Rrtype       SiteRrtype `json:"rrtype"`
 }
 
 type _SitesSitesInner SitesSitesInner
@@ -38,14 +38,14 @@ type _SitesSitesInner SitesSitesInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSitesSitesInner(resourceName string, name string, rrtype SiteRrtype, description string, liveStatus SiteLiveStatus, endpoints []Endpoint) *SitesSitesInner {
+func NewSitesSitesInner(description string, endpoints []Endpoint, liveStatus SiteLiveStatus, name string, resourceName string, rrtype SiteRrtype) *SitesSitesInner {
 	this := SitesSitesInner{}
-	this.ResourceName = resourceName
-	this.Name = name
-	this.Rrtype = rrtype
 	this.Description = description
-	this.LiveStatus = liveStatus
 	this.Endpoints = endpoints
+	this.LiveStatus = liveStatus
+	this.Name = name
+	this.ResourceName = resourceName
+	this.Rrtype = rrtype
 	return &this
 }
 
@@ -57,78 +57,6 @@ func NewSitesSitesInnerWithDefaults() *SitesSitesInner {
 	var description string = ""
 	this.Description = description
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *SitesSitesInner) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *SitesSitesInner) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *SitesSitesInner) SetResourceName(v string) {
-	o.ResourceName = v
-}
-
-// GetName returns the Name field value
-func (o *SitesSitesInner) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *SitesSitesInner) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *SitesSitesInner) SetName(v string) {
-	o.Name = v
-}
-
-// GetRrtype returns the Rrtype field value
-func (o *SitesSitesInner) GetRrtype() SiteRrtype {
-	if o == nil {
-		var ret SiteRrtype
-		return ret
-	}
-
-	return o.Rrtype
-}
-
-// GetRrtypeOk returns a tuple with the Rrtype field value
-// and a boolean to check if the value has been set.
-func (o *SitesSitesInner) GetRrtypeOk() (*SiteRrtype, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Rrtype, true
-}
-
-// SetRrtype sets field value
-func (o *SitesSitesInner) SetRrtype(v SiteRrtype) {
-	o.Rrtype = v
 }
 
 // GetDescription returns the Description field value
@@ -155,30 +83,6 @@ func (o *SitesSitesInner) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetLiveStatus returns the LiveStatus field value
-func (o *SitesSitesInner) GetLiveStatus() SiteLiveStatus {
-	if o == nil {
-		var ret SiteLiveStatus
-		return ret
-	}
-
-	return o.LiveStatus
-}
-
-// GetLiveStatusOk returns a tuple with the LiveStatus field value
-// and a boolean to check if the value has been set.
-func (o *SitesSitesInner) GetLiveStatusOk() (*SiteLiveStatus, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.LiveStatus, true
-}
-
-// SetLiveStatus sets field value
-func (o *SitesSitesInner) SetLiveStatus(v SiteLiveStatus) {
-	o.LiveStatus = v
-}
-
 // GetEndpoints returns the Endpoints field value
 func (o *SitesSitesInner) GetEndpoints() []Endpoint {
 	if o == nil {
@@ -203,6 +107,102 @@ func (o *SitesSitesInner) SetEndpoints(v []Endpoint) {
 	o.Endpoints = v
 }
 
+// GetLiveStatus returns the LiveStatus field value
+func (o *SitesSitesInner) GetLiveStatus() SiteLiveStatus {
+	if o == nil {
+		var ret SiteLiveStatus
+		return ret
+	}
+
+	return o.LiveStatus
+}
+
+// GetLiveStatusOk returns a tuple with the LiveStatus field value
+// and a boolean to check if the value has been set.
+func (o *SitesSitesInner) GetLiveStatusOk() (*SiteLiveStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LiveStatus, true
+}
+
+// SetLiveStatus sets field value
+func (o *SitesSitesInner) SetLiveStatus(v SiteLiveStatus) {
+	o.LiveStatus = v
+}
+
+// GetName returns the Name field value
+func (o *SitesSitesInner) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *SitesSitesInner) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *SitesSitesInner) SetName(v string) {
+	o.Name = v
+}
+
+// GetResourceName returns the ResourceName field value
+func (o *SitesSitesInner) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *SitesSitesInner) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *SitesSitesInner) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
+// GetRrtype returns the Rrtype field value
+func (o *SitesSitesInner) GetRrtype() SiteRrtype {
+	if o == nil {
+		var ret SiteRrtype
+		return ret
+	}
+
+	return o.Rrtype
+}
+
+// GetRrtypeOk returns a tuple with the Rrtype field value
+// and a boolean to check if the value has been set.
+func (o *SitesSitesInner) GetRrtypeOk() (*SiteRrtype, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Rrtype, true
+}
+
+// SetRrtype sets field value
+func (o *SitesSitesInner) SetRrtype(v SiteRrtype) {
+	o.Rrtype = v
+}
+
 func (o SitesSitesInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -213,12 +213,12 @@ func (o SitesSitesInner) MarshalJSON() ([]byte, error) {
 
 func (o SitesSitesInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
-	toSerialize["name"] = o.Name
-	toSerialize["rrtype"] = o.Rrtype
 	toSerialize["description"] = o.Description
-	toSerialize["live_status"] = o.LiveStatus
 	toSerialize["endpoints"] = o.Endpoints
+	toSerialize["live_status"] = o.LiveStatus
+	toSerialize["name"] = o.Name
+	toSerialize["resource_name"] = o.ResourceName
+	toSerialize["rrtype"] = o.Rrtype
 	return toSerialize, nil
 }
 
@@ -227,12 +227,12 @@ func (o *SitesSitesInner) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
-		"name",
-		"rrtype",
 		"description",
-		"live_status",
 		"endpoints",
+		"live_status",
+		"name",
+		"resource_name",
+		"rrtype",
 	}
 
 	allProperties := make(map[string]interface{})

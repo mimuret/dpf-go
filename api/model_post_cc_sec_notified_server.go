@@ -21,9 +21,9 @@ var _ MappedNullable = &PostCcSecNotifiedServer{}
 
 // PostCcSecNotifiedServer struct for PostCcSecNotifiedServer
 type PostCcSecNotifiedServer struct {
-	TsigId NullableInt64 `json:"tsig_id,omitempty"`
 	// IPアドレス
-	Address string `json:"address"`
+	Address string        `json:"address"`
+	TsigId  NullableInt64 `json:"tsig_id,omitempty"`
 }
 
 type _PostCcSecNotifiedServer PostCcSecNotifiedServer
@@ -44,6 +44,30 @@ func NewPostCcSecNotifiedServer(address string) *PostCcSecNotifiedServer {
 func NewPostCcSecNotifiedServerWithDefaults() *PostCcSecNotifiedServer {
 	this := PostCcSecNotifiedServer{}
 	return &this
+}
+
+// GetAddress returns the Address field value
+func (o *PostCcSecNotifiedServer) GetAddress() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Address
+}
+
+// GetAddressOk returns a tuple with the Address field value
+// and a boolean to check if the value has been set.
+func (o *PostCcSecNotifiedServer) GetAddressOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Address, true
+}
+
+// SetAddress sets field value
+func (o *PostCcSecNotifiedServer) SetAddress(v string) {
+	o.Address = v
 }
 
 // GetTsigId returns the TsigId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -89,30 +113,6 @@ func (o *PostCcSecNotifiedServer) UnsetTsigId() {
 	o.TsigId.Unset()
 }
 
-// GetAddress returns the Address field value
-func (o *PostCcSecNotifiedServer) GetAddress() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Address
-}
-
-// GetAddressOk returns a tuple with the Address field value
-// and a boolean to check if the value has been set.
-func (o *PostCcSecNotifiedServer) GetAddressOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Address, true
-}
-
-// SetAddress sets field value
-func (o *PostCcSecNotifiedServer) SetAddress(v string) {
-	o.Address = v
-}
-
 func (o PostCcSecNotifiedServer) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -123,10 +123,10 @@ func (o PostCcSecNotifiedServer) MarshalJSON() ([]byte, error) {
 
 func (o PostCcSecNotifiedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["address"] = o.Address
 	if o.TsigId.IsSet() {
 		toSerialize["tsig_id"] = o.TsigId.Get()
 	}
-	toSerialize["address"] = o.Address
 	return toSerialize, nil
 }
 

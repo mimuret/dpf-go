@@ -19,9 +19,9 @@ var _ MappedNullable = &PatchCcSecTransferAcl{}
 
 // PatchCcSecTransferAcl struct for PatchCcSecTransferAcl
 type PatchCcSecTransferAcl struct {
-	TsigId NullableInt64 `json:"tsig_id,omitempty"`
 	// IPアドレス/プレフィックス長
-	Network *string `json:"network,omitempty"`
+	Network *string       `json:"network,omitempty"`
+	TsigId  NullableInt64 `json:"tsig_id,omitempty"`
 }
 
 // NewPatchCcSecTransferAcl instantiates a new PatchCcSecTransferAcl object
@@ -39,6 +39,38 @@ func NewPatchCcSecTransferAcl() *PatchCcSecTransferAcl {
 func NewPatchCcSecTransferAclWithDefaults() *PatchCcSecTransferAcl {
 	this := PatchCcSecTransferAcl{}
 	return &this
+}
+
+// GetNetwork returns the Network field value if set, zero value otherwise.
+func (o *PatchCcSecTransferAcl) GetNetwork() string {
+	if o == nil || IsNil(o.Network) {
+		var ret string
+		return ret
+	}
+	return *o.Network
+}
+
+// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchCcSecTransferAcl) GetNetworkOk() (*string, bool) {
+	if o == nil || IsNil(o.Network) {
+		return nil, false
+	}
+	return o.Network, true
+}
+
+// HasNetwork returns a boolean if a field has been set.
+func (o *PatchCcSecTransferAcl) HasNetwork() bool {
+	if o != nil && !IsNil(o.Network) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetwork gets a reference to the given string and assigns it to the Network field.
+func (o *PatchCcSecTransferAcl) SetNetwork(v string) {
+	o.Network = &v
 }
 
 // GetTsigId returns the TsigId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -84,38 +116,6 @@ func (o *PatchCcSecTransferAcl) UnsetTsigId() {
 	o.TsigId.Unset()
 }
 
-// GetNetwork returns the Network field value if set, zero value otherwise.
-func (o *PatchCcSecTransferAcl) GetNetwork() string {
-	if o == nil || IsNil(o.Network) {
-		var ret string
-		return ret
-	}
-	return *o.Network
-}
-
-// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchCcSecTransferAcl) GetNetworkOk() (*string, bool) {
-	if o == nil || IsNil(o.Network) {
-		return nil, false
-	}
-	return o.Network, true
-}
-
-// HasNetwork returns a boolean if a field has been set.
-func (o *PatchCcSecTransferAcl) HasNetwork() bool {
-	if o != nil && !IsNil(o.Network) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetwork gets a reference to the given string and assigns it to the Network field.
-func (o *PatchCcSecTransferAcl) SetNetwork(v string) {
-	o.Network = &v
-}
-
 func (o PatchCcSecTransferAcl) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -126,11 +126,11 @@ func (o PatchCcSecTransferAcl) MarshalJSON() ([]byte, error) {
 
 func (o PatchCcSecTransferAcl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TsigId.IsSet() {
-		toSerialize["tsig_id"] = o.TsigId.Get()
-	}
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
+	}
+	if o.TsigId.IsSet() {
+		toSerialize["tsig_id"] = o.TsigId.Get()
 	}
 	return toSerialize, nil
 }

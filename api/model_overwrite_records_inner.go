@@ -21,17 +21,17 @@ var _ MappedNullable = &OverwriteRecordsInner{}
 
 // OverwriteRecordsInner struct for OverwriteRecordsInner
 type OverwriteRecordsInner struct {
-	// name
-	Name string `json:"name"`
-	// TTL
-	Ttl    NullableInt32 `json:"ttl"`
-	Rrtype RecordsRrtype `json:"rrtype"`
-	// レコードの値
-	Rdata []RecordsRdataInner `json:"rdata"`
 	// コメント
 	Description string `json:"description"`
 	// ラベル
 	Labels map[string]string `json:"labels"`
+	// name
+	Name string `json:"name"`
+	// レコードの値
+	Rdata  []RecordsRdataInner `json:"rdata"`
+	Rrtype RecordsRrtype       `json:"rrtype"`
+	// TTL
+	Ttl NullableInt32 `json:"ttl"`
 }
 
 type _OverwriteRecordsInner OverwriteRecordsInner
@@ -40,14 +40,14 @@ type _OverwriteRecordsInner OverwriteRecordsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOverwriteRecordsInner(name string, ttl NullableInt32, rrtype RecordsRrtype, rdata []RecordsRdataInner, description string, labels map[string]string) *OverwriteRecordsInner {
+func NewOverwriteRecordsInner(description string, labels map[string]string, name string, rdata []RecordsRdataInner, rrtype RecordsRrtype, ttl NullableInt32) *OverwriteRecordsInner {
 	this := OverwriteRecordsInner{}
-	this.Name = name
-	this.Ttl = ttl
-	this.Rrtype = rrtype
-	this.Rdata = rdata
 	this.Description = description
 	this.Labels = labels
+	this.Name = name
+	this.Rdata = rdata
+	this.Rrtype = rrtype
+	this.Ttl = ttl
 	return &this
 }
 
@@ -59,104 +59,6 @@ func NewOverwriteRecordsInnerWithDefaults() *OverwriteRecordsInner {
 	var description string = ""
 	this.Description = description
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *OverwriteRecordsInner) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *OverwriteRecordsInner) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *OverwriteRecordsInner) SetName(v string) {
-	o.Name = v
-}
-
-// GetTtl returns the Ttl field value
-// If the value is explicit nil, the zero value for int32 will be returned
-func (o *OverwriteRecordsInner) GetTtl() int32 {
-	if o == nil || o.Ttl.Get() == nil {
-		var ret int32
-		return ret
-	}
-
-	return *o.Ttl.Get()
-}
-
-// GetTtlOk returns a tuple with the Ttl field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OverwriteRecordsInner) GetTtlOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Ttl.Get(), o.Ttl.IsSet()
-}
-
-// SetTtl sets field value
-func (o *OverwriteRecordsInner) SetTtl(v int32) {
-	o.Ttl.Set(&v)
-}
-
-// GetRrtype returns the Rrtype field value
-func (o *OverwriteRecordsInner) GetRrtype() RecordsRrtype {
-	if o == nil {
-		var ret RecordsRrtype
-		return ret
-	}
-
-	return o.Rrtype
-}
-
-// GetRrtypeOk returns a tuple with the Rrtype field value
-// and a boolean to check if the value has been set.
-func (o *OverwriteRecordsInner) GetRrtypeOk() (*RecordsRrtype, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Rrtype, true
-}
-
-// SetRrtype sets field value
-func (o *OverwriteRecordsInner) SetRrtype(v RecordsRrtype) {
-	o.Rrtype = v
-}
-
-// GetRdata returns the Rdata field value
-func (o *OverwriteRecordsInner) GetRdata() []RecordsRdataInner {
-	if o == nil {
-		var ret []RecordsRdataInner
-		return ret
-	}
-
-	return o.Rdata
-}
-
-// GetRdataOk returns a tuple with the Rdata field value
-// and a boolean to check if the value has been set.
-func (o *OverwriteRecordsInner) GetRdataOk() ([]RecordsRdataInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Rdata, true
-}
-
-// SetRdata sets field value
-func (o *OverwriteRecordsInner) SetRdata(v []RecordsRdataInner) {
-	o.Rdata = v
 }
 
 // GetDescription returns the Description field value
@@ -207,6 +109,104 @@ func (o *OverwriteRecordsInner) SetLabels(v map[string]string) {
 	o.Labels = v
 }
 
+// GetName returns the Name field value
+func (o *OverwriteRecordsInner) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *OverwriteRecordsInner) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *OverwriteRecordsInner) SetName(v string) {
+	o.Name = v
+}
+
+// GetRdata returns the Rdata field value
+func (o *OverwriteRecordsInner) GetRdata() []RecordsRdataInner {
+	if o == nil {
+		var ret []RecordsRdataInner
+		return ret
+	}
+
+	return o.Rdata
+}
+
+// GetRdataOk returns a tuple with the Rdata field value
+// and a boolean to check if the value has been set.
+func (o *OverwriteRecordsInner) GetRdataOk() ([]RecordsRdataInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Rdata, true
+}
+
+// SetRdata sets field value
+func (o *OverwriteRecordsInner) SetRdata(v []RecordsRdataInner) {
+	o.Rdata = v
+}
+
+// GetRrtype returns the Rrtype field value
+func (o *OverwriteRecordsInner) GetRrtype() RecordsRrtype {
+	if o == nil {
+		var ret RecordsRrtype
+		return ret
+	}
+
+	return o.Rrtype
+}
+
+// GetRrtypeOk returns a tuple with the Rrtype field value
+// and a boolean to check if the value has been set.
+func (o *OverwriteRecordsInner) GetRrtypeOk() (*RecordsRrtype, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Rrtype, true
+}
+
+// SetRrtype sets field value
+func (o *OverwriteRecordsInner) SetRrtype(v RecordsRrtype) {
+	o.Rrtype = v
+}
+
+// GetTtl returns the Ttl field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *OverwriteRecordsInner) GetTtl() int32 {
+	if o == nil || o.Ttl.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.Ttl.Get()
+}
+
+// GetTtlOk returns a tuple with the Ttl field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OverwriteRecordsInner) GetTtlOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ttl.Get(), o.Ttl.IsSet()
+}
+
+// SetTtl sets field value
+func (o *OverwriteRecordsInner) SetTtl(v int32) {
+	o.Ttl.Set(&v)
+}
+
 func (o OverwriteRecordsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -217,12 +217,12 @@ func (o OverwriteRecordsInner) MarshalJSON() ([]byte, error) {
 
 func (o OverwriteRecordsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["ttl"] = o.Ttl.Get()
-	toSerialize["rrtype"] = o.Rrtype
-	toSerialize["rdata"] = o.Rdata
 	toSerialize["description"] = o.Description
 	toSerialize["labels"] = o.Labels
+	toSerialize["name"] = o.Name
+	toSerialize["rdata"] = o.Rdata
+	toSerialize["rrtype"] = o.Rrtype
+	toSerialize["ttl"] = o.Ttl.Get()
 	return toSerialize, nil
 }
 
@@ -231,12 +231,12 @@ func (o *OverwriteRecordsInner) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"name",
-		"ttl",
-		"rrtype",
-		"rdata",
 		"description",
 		"labels",
+		"name",
+		"rdata",
+		"rrtype",
+		"ttl",
 	}
 
 	allProperties := make(map[string]interface{})

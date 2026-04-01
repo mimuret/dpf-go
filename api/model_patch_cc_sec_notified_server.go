@@ -19,9 +19,9 @@ var _ MappedNullable = &PatchCcSecNotifiedServer{}
 
 // PatchCcSecNotifiedServer struct for PatchCcSecNotifiedServer
 type PatchCcSecNotifiedServer struct {
-	TsigId NullableInt64 `json:"tsig_id,omitempty"`
 	// IPアドレス
-	Address *string `json:"address,omitempty"`
+	Address *string       `json:"address,omitempty"`
+	TsigId  NullableInt64 `json:"tsig_id,omitempty"`
 }
 
 // NewPatchCcSecNotifiedServer instantiates a new PatchCcSecNotifiedServer object
@@ -39,6 +39,38 @@ func NewPatchCcSecNotifiedServer() *PatchCcSecNotifiedServer {
 func NewPatchCcSecNotifiedServerWithDefaults() *PatchCcSecNotifiedServer {
 	this := PatchCcSecNotifiedServer{}
 	return &this
+}
+
+// GetAddress returns the Address field value if set, zero value otherwise.
+func (o *PatchCcSecNotifiedServer) GetAddress() string {
+	if o == nil || IsNil(o.Address) {
+		var ret string
+		return ret
+	}
+	return *o.Address
+}
+
+// GetAddressOk returns a tuple with the Address field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchCcSecNotifiedServer) GetAddressOk() (*string, bool) {
+	if o == nil || IsNil(o.Address) {
+		return nil, false
+	}
+	return o.Address, true
+}
+
+// HasAddress returns a boolean if a field has been set.
+func (o *PatchCcSecNotifiedServer) HasAddress() bool {
+	if o != nil && !IsNil(o.Address) {
+		return true
+	}
+
+	return false
+}
+
+// SetAddress gets a reference to the given string and assigns it to the Address field.
+func (o *PatchCcSecNotifiedServer) SetAddress(v string) {
+	o.Address = &v
 }
 
 // GetTsigId returns the TsigId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -84,38 +116,6 @@ func (o *PatchCcSecNotifiedServer) UnsetTsigId() {
 	o.TsigId.Unset()
 }
 
-// GetAddress returns the Address field value if set, zero value otherwise.
-func (o *PatchCcSecNotifiedServer) GetAddress() string {
-	if o == nil || IsNil(o.Address) {
-		var ret string
-		return ret
-	}
-	return *o.Address
-}
-
-// GetAddressOk returns a tuple with the Address field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchCcSecNotifiedServer) GetAddressOk() (*string, bool) {
-	if o == nil || IsNil(o.Address) {
-		return nil, false
-	}
-	return o.Address, true
-}
-
-// HasAddress returns a boolean if a field has been set.
-func (o *PatchCcSecNotifiedServer) HasAddress() bool {
-	if o != nil && !IsNil(o.Address) {
-		return true
-	}
-
-	return false
-}
-
-// SetAddress gets a reference to the given string and assigns it to the Address field.
-func (o *PatchCcSecNotifiedServer) SetAddress(v string) {
-	o.Address = &v
-}
-
 func (o PatchCcSecNotifiedServer) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -126,11 +126,11 @@ func (o PatchCcSecNotifiedServer) MarshalJSON() ([]byte, error) {
 
 func (o PatchCcSecNotifiedServer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TsigId.IsSet() {
-		toSerialize["tsig_id"] = o.TsigId.Get()
-	}
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address
+	}
+	if o.TsigId.IsSet() {
+		toSerialize["tsig_id"] = o.TsigId.Get()
 	}
 	return toSerialize, nil
 }

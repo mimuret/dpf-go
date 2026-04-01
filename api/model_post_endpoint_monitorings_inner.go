@@ -21,10 +21,10 @@ var _ MappedNullable = &PostEndpointMonitoringsInner{}
 
 // PostEndpointMonitoringsInner struct for PostEndpointMonitoringsInner
 type PostEndpointMonitoringsInner struct {
-	// 紐付ける監視のリソース名(GET monitorings Schemaにおける resource_name)
-	ResourceName string `json:"resource_name"`
 	// エンドポイントと監視の紐付け状態
 	Enabled *bool `json:"enabled,omitempty"`
+	// 紐付ける監視のリソース名(GET monitorings Schemaにおける resource_name)
+	ResourceName string `json:"resource_name"`
 }
 
 type _PostEndpointMonitoringsInner PostEndpointMonitoringsInner
@@ -35,9 +35,9 @@ type _PostEndpointMonitoringsInner PostEndpointMonitoringsInner
 // will change when the set of required properties is changed
 func NewPostEndpointMonitoringsInner(resourceName string) *PostEndpointMonitoringsInner {
 	this := PostEndpointMonitoringsInner{}
-	this.ResourceName = resourceName
 	var enabled bool = false
 	this.Enabled = &enabled
+	this.ResourceName = resourceName
 	return &this
 }
 
@@ -49,30 +49,6 @@ func NewPostEndpointMonitoringsInnerWithDefaults() *PostEndpointMonitoringsInner
 	var enabled bool = false
 	this.Enabled = &enabled
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *PostEndpointMonitoringsInner) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *PostEndpointMonitoringsInner) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *PostEndpointMonitoringsInner) SetResourceName(v string) {
-	o.ResourceName = v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -107,6 +83,30 @@ func (o *PostEndpointMonitoringsInner) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
+// GetResourceName returns the ResourceName field value
+func (o *PostEndpointMonitoringsInner) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *PostEndpointMonitoringsInner) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *PostEndpointMonitoringsInner) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
 func (o PostEndpointMonitoringsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -117,10 +117,10 @@ func (o PostEndpointMonitoringsInner) MarshalJSON() ([]byte, error) {
 
 func (o PostEndpointMonitoringsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
+	toSerialize["resource_name"] = o.ResourceName
 	return toSerialize, nil
 }
 

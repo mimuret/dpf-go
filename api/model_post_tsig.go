@@ -21,10 +21,10 @@ var _ MappedNullable = &PostTsig{}
 
 // PostTsig struct for PostTsig
 type PostTsig struct {
-	// 先頭末尾がハイフン以外の[a-z0-9]とハイフンで構成された文字列が使用できます
-	Name string `json:"name"`
 	// コメント
 	Description *string `json:"description,omitempty"`
+	// 先頭末尾がハイフン以外の[a-z0-9]とハイフンで構成された文字列が使用できます
+	Name string `json:"name"`
 }
 
 type _PostTsig PostTsig
@@ -35,9 +35,9 @@ type _PostTsig PostTsig
 // will change when the set of required properties is changed
 func NewPostTsig(name string) *PostTsig {
 	this := PostTsig{}
-	this.Name = name
 	var description string = ""
 	this.Description = &description
+	this.Name = name
 	return &this
 }
 
@@ -49,30 +49,6 @@ func NewPostTsigWithDefaults() *PostTsig {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *PostTsig) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostTsig) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostTsig) SetName(v string) {
-	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -107,6 +83,30 @@ func (o *PostTsig) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetName returns the Name field value
+func (o *PostTsig) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostTsig) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostTsig) SetName(v string) {
+	o.Name = v
+}
+
 func (o PostTsig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -117,10 +117,10 @@ func (o PostTsig) MarshalJSON() ([]byte, error) {
 
 func (o PostTsig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
 }
 

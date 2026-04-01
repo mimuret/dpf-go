@@ -19,15 +19,15 @@ var _ MappedNullable = &PatchMonitoringTCPProps{}
 
 // PatchMonitoringTCPProps struct for PatchMonitoringTCPProps
 type PatchMonitoringTCPProps struct {
-	Location *MonitoringPropsLocation `json:"location,omitempty"`
-	// 監視間隔（s）
-	Interval *int32 `json:"interval,omitempty"`
 	// 保留時間（s）
 	Holdtime *int32 `json:"holdtime,omitempty"`
-	// タイムアウト（s）
-	Timeout *int32 `json:"timeout,omitempty"`
+	// 監視間隔（s）
+	Interval *int32                   `json:"interval,omitempty"`
+	Location *MonitoringPropsLocation `json:"location,omitempty"`
 	// ポート番号
 	Port *int32 `json:"port,omitempty"`
+	// タイムアウト（s）
+	Timeout *int32 `json:"timeout,omitempty"`
 	// TLS監視利用フラグ
 	TlsEnabled *bool `json:"tls_enabled,omitempty"`
 	// TLS SNI値、未指定の場合、監視時にSNIとして、Hostヘッダーを利用
@@ -40,12 +40,12 @@ type PatchMonitoringTCPProps struct {
 // will change when the set of required properties is changed
 func NewPatchMonitoringTCPProps() *PatchMonitoringTCPProps {
 	this := PatchMonitoringTCPProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = &location
-	var interval int32 = 30
-	this.Interval = &interval
 	var holdtime int32 = 0
 	this.Holdtime = &holdtime
+	var interval int32 = 30
+	this.Interval = &interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = &location
 	var timeout int32 = 5
 	this.Timeout = &timeout
 	var tlsEnabled bool = false
@@ -58,81 +58,17 @@ func NewPatchMonitoringTCPProps() *PatchMonitoringTCPProps {
 // but it doesn't guarantee that properties required by API are set
 func NewPatchMonitoringTCPPropsWithDefaults() *PatchMonitoringTCPProps {
 	this := PatchMonitoringTCPProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = &location
-	var interval int32 = 30
-	this.Interval = &interval
 	var holdtime int32 = 0
 	this.Holdtime = &holdtime
+	var interval int32 = 30
+	this.Interval = &interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = &location
 	var timeout int32 = 5
 	this.Timeout = &timeout
 	var tlsEnabled bool = false
 	this.TlsEnabled = &tlsEnabled
 	return &this
-}
-
-// GetLocation returns the Location field value if set, zero value otherwise.
-func (o *PatchMonitoringTCPProps) GetLocation() MonitoringPropsLocation {
-	if o == nil || IsNil(o.Location) {
-		var ret MonitoringPropsLocation
-		return ret
-	}
-	return *o.Location
-}
-
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringTCPProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
-	if o == nil || IsNil(o.Location) {
-		return nil, false
-	}
-	return o.Location, true
-}
-
-// HasLocation returns a boolean if a field has been set.
-func (o *PatchMonitoringTCPProps) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given MonitoringPropsLocation and assigns it to the Location field.
-func (o *PatchMonitoringTCPProps) SetLocation(v MonitoringPropsLocation) {
-	o.Location = &v
-}
-
-// GetInterval returns the Interval field value if set, zero value otherwise.
-func (o *PatchMonitoringTCPProps) GetInterval() int32 {
-	if o == nil || IsNil(o.Interval) {
-		var ret int32
-		return ret
-	}
-	return *o.Interval
-}
-
-// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchMonitoringTCPProps) GetIntervalOk() (*int32, bool) {
-	if o == nil || IsNil(o.Interval) {
-		return nil, false
-	}
-	return o.Interval, true
-}
-
-// HasInterval returns a boolean if a field has been set.
-func (o *PatchMonitoringTCPProps) HasInterval() bool {
-	if o != nil && !IsNil(o.Interval) {
-		return true
-	}
-
-	return false
-}
-
-// SetInterval gets a reference to the given int32 and assigns it to the Interval field.
-func (o *PatchMonitoringTCPProps) SetInterval(v int32) {
-	o.Interval = &v
 }
 
 // GetHoldtime returns the Holdtime field value if set, zero value otherwise.
@@ -167,36 +103,68 @@ func (o *PatchMonitoringTCPProps) SetHoldtime(v int32) {
 	o.Holdtime = &v
 }
 
-// GetTimeout returns the Timeout field value if set, zero value otherwise.
-func (o *PatchMonitoringTCPProps) GetTimeout() int32 {
-	if o == nil || IsNil(o.Timeout) {
+// GetInterval returns the Interval field value if set, zero value otherwise.
+func (o *PatchMonitoringTCPProps) GetInterval() int32 {
+	if o == nil || IsNil(o.Interval) {
 		var ret int32
 		return ret
 	}
-	return *o.Timeout
+	return *o.Interval
 }
 
-// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PatchMonitoringTCPProps) GetTimeoutOk() (*int32, bool) {
-	if o == nil || IsNil(o.Timeout) {
+func (o *PatchMonitoringTCPProps) GetIntervalOk() (*int32, bool) {
+	if o == nil || IsNil(o.Interval) {
 		return nil, false
 	}
-	return o.Timeout, true
+	return o.Interval, true
 }
 
-// HasTimeout returns a boolean if a field has been set.
-func (o *PatchMonitoringTCPProps) HasTimeout() bool {
-	if o != nil && !IsNil(o.Timeout) {
+// HasInterval returns a boolean if a field has been set.
+func (o *PatchMonitoringTCPProps) HasInterval() bool {
+	if o != nil && !IsNil(o.Interval) {
 		return true
 	}
 
 	return false
 }
 
-// SetTimeout gets a reference to the given int32 and assigns it to the Timeout field.
-func (o *PatchMonitoringTCPProps) SetTimeout(v int32) {
-	o.Timeout = &v
+// SetInterval gets a reference to the given int32 and assigns it to the Interval field.
+func (o *PatchMonitoringTCPProps) SetInterval(v int32) {
+	o.Interval = &v
+}
+
+// GetLocation returns the Location field value if set, zero value otherwise.
+func (o *PatchMonitoringTCPProps) GetLocation() MonitoringPropsLocation {
+	if o == nil || IsNil(o.Location) {
+		var ret MonitoringPropsLocation
+		return ret
+	}
+	return *o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringTCPProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
+	if o == nil || IsNil(o.Location) {
+		return nil, false
+	}
+	return o.Location, true
+}
+
+// HasLocation returns a boolean if a field has been set.
+func (o *PatchMonitoringTCPProps) HasLocation() bool {
+	if o != nil && !IsNil(o.Location) {
+		return true
+	}
+
+	return false
+}
+
+// SetLocation gets a reference to the given MonitoringPropsLocation and assigns it to the Location field.
+func (o *PatchMonitoringTCPProps) SetLocation(v MonitoringPropsLocation) {
+	o.Location = &v
 }
 
 // GetPort returns the Port field value if set, zero value otherwise.
@@ -229,6 +197,38 @@ func (o *PatchMonitoringTCPProps) HasPort() bool {
 // SetPort gets a reference to the given int32 and assigns it to the Port field.
 func (o *PatchMonitoringTCPProps) SetPort(v int32) {
 	o.Port = &v
+}
+
+// GetTimeout returns the Timeout field value if set, zero value otherwise.
+func (o *PatchMonitoringTCPProps) GetTimeout() int32 {
+	if o == nil || IsNil(o.Timeout) {
+		var ret int32
+		return ret
+	}
+	return *o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchMonitoringTCPProps) GetTimeoutOk() (*int32, bool) {
+	if o == nil || IsNil(o.Timeout) {
+		return nil, false
+	}
+	return o.Timeout, true
+}
+
+// HasTimeout returns a boolean if a field has been set.
+func (o *PatchMonitoringTCPProps) HasTimeout() bool {
+	if o != nil && !IsNil(o.Timeout) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeout gets a reference to the given int32 and assigns it to the Timeout field.
+func (o *PatchMonitoringTCPProps) SetTimeout(v int32) {
+	o.Timeout = &v
 }
 
 // GetTlsEnabled returns the TlsEnabled field value if set, zero value otherwise.
@@ -305,20 +305,20 @@ func (o PatchMonitoringTCPProps) MarshalJSON() ([]byte, error) {
 
 func (o PatchMonitoringTCPProps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
+	if !IsNil(o.Holdtime) {
+		toSerialize["holdtime"] = o.Holdtime
 	}
 	if !IsNil(o.Interval) {
 		toSerialize["interval"] = o.Interval
 	}
-	if !IsNil(o.Holdtime) {
-		toSerialize["holdtime"] = o.Holdtime
-	}
-	if !IsNil(o.Timeout) {
-		toSerialize["timeout"] = o.Timeout
+	if !IsNil(o.Location) {
+		toSerialize["location"] = o.Location
 	}
 	if !IsNil(o.Port) {
 		toSerialize["port"] = o.Port
+	}
+	if !IsNil(o.Timeout) {
+		toSerialize["timeout"] = o.Timeout
 	}
 	if !IsNil(o.TlsEnabled) {
 		toSerialize["tls_enabled"] = o.TlsEnabled

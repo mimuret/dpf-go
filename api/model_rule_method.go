@@ -21,9 +21,9 @@ var _ MappedNullable = &RuleMethod{}
 
 // RuleMethod struct for RuleMethod
 type RuleMethod struct {
+	Method RuleMethodMethod `json:"method"`
 	// 優先度（親メソッドが failover の場合のみ指定）
-	Priority *int32           `json:"priority,omitempty"`
-	Method   RuleMethodMethod `json:"method"`
+	Priority *int32 `json:"priority,omitempty"`
 }
 
 type _RuleMethod RuleMethod
@@ -44,6 +44,30 @@ func NewRuleMethod(method RuleMethodMethod) *RuleMethod {
 func NewRuleMethodWithDefaults() *RuleMethod {
 	this := RuleMethod{}
 	return &this
+}
+
+// GetMethod returns the Method field value
+func (o *RuleMethod) GetMethod() RuleMethodMethod {
+	if o == nil {
+		var ret RuleMethodMethod
+		return ret
+	}
+
+	return o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value
+// and a boolean to check if the value has been set.
+func (o *RuleMethod) GetMethodOk() (*RuleMethodMethod, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Method, true
+}
+
+// SetMethod sets field value
+func (o *RuleMethod) SetMethod(v RuleMethodMethod) {
+	o.Method = v
 }
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
@@ -78,30 +102,6 @@ func (o *RuleMethod) SetPriority(v int32) {
 	o.Priority = &v
 }
 
-// GetMethod returns the Method field value
-func (o *RuleMethod) GetMethod() RuleMethodMethod {
-	if o == nil {
-		var ret RuleMethodMethod
-		return ret
-	}
-
-	return o.Method
-}
-
-// GetMethodOk returns a tuple with the Method field value
-// and a boolean to check if the value has been set.
-func (o *RuleMethod) GetMethodOk() (*RuleMethodMethod, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Method, true
-}
-
-// SetMethod sets field value
-func (o *RuleMethod) SetMethod(v RuleMethodMethod) {
-	o.Method = v
-}
-
 func (o RuleMethod) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -112,10 +112,10 @@ func (o RuleMethod) MarshalJSON() ([]byte, error) {
 
 func (o RuleMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["method"] = o.Method
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	toSerialize["method"] = o.Method
 	return toSerialize, nil
 }
 

@@ -19,11 +19,11 @@ var _ MappedNullable = &PatchMonitoringPingProps{}
 
 // PatchMonitoringPingProps struct for PatchMonitoringPingProps
 type PatchMonitoringPingProps struct {
-	Location *MonitoringPropsLocation `json:"location,omitempty"`
-	// 監視間隔（s）
-	Interval *int32 `json:"interval,omitempty"`
 	// 保留時間（s）
 	Holdtime *int32 `json:"holdtime,omitempty"`
+	// 監視間隔（s）
+	Interval *int32                   `json:"interval,omitempty"`
+	Location *MonitoringPropsLocation `json:"location,omitempty"`
 	// タイムアウト（s）
 	Timeout *int32 `json:"timeout,omitempty"`
 }
@@ -34,12 +34,12 @@ type PatchMonitoringPingProps struct {
 // will change when the set of required properties is changed
 func NewPatchMonitoringPingProps() *PatchMonitoringPingProps {
 	this := PatchMonitoringPingProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = &location
-	var interval int32 = 30
-	this.Interval = &interval
 	var holdtime int32 = 0
 	this.Holdtime = &holdtime
+	var interval int32 = 30
+	this.Interval = &interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = &location
 	var timeout int32 = 5
 	this.Timeout = &timeout
 	return &this
@@ -50,47 +50,47 @@ func NewPatchMonitoringPingProps() *PatchMonitoringPingProps {
 // but it doesn't guarantee that properties required by API are set
 func NewPatchMonitoringPingPropsWithDefaults() *PatchMonitoringPingProps {
 	this := PatchMonitoringPingProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = &location
-	var interval int32 = 30
-	this.Interval = &interval
 	var holdtime int32 = 0
 	this.Holdtime = &holdtime
+	var interval int32 = 30
+	this.Interval = &interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = &location
 	var timeout int32 = 5
 	this.Timeout = &timeout
 	return &this
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
-func (o *PatchMonitoringPingProps) GetLocation() MonitoringPropsLocation {
-	if o == nil || IsNil(o.Location) {
-		var ret MonitoringPropsLocation
+// GetHoldtime returns the Holdtime field value if set, zero value otherwise.
+func (o *PatchMonitoringPingProps) GetHoldtime() int32 {
+	if o == nil || IsNil(o.Holdtime) {
+		var ret int32
 		return ret
 	}
-	return *o.Location
+	return *o.Holdtime
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetHoldtimeOk returns a tuple with the Holdtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PatchMonitoringPingProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
-	if o == nil || IsNil(o.Location) {
+func (o *PatchMonitoringPingProps) GetHoldtimeOk() (*int32, bool) {
+	if o == nil || IsNil(o.Holdtime) {
 		return nil, false
 	}
-	return o.Location, true
+	return o.Holdtime, true
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *PatchMonitoringPingProps) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
+// HasHoldtime returns a boolean if a field has been set.
+func (o *PatchMonitoringPingProps) HasHoldtime() bool {
+	if o != nil && !IsNil(o.Holdtime) {
 		return true
 	}
 
 	return false
 }
 
-// SetLocation gets a reference to the given MonitoringPropsLocation and assigns it to the Location field.
-func (o *PatchMonitoringPingProps) SetLocation(v MonitoringPropsLocation) {
-	o.Location = &v
+// SetHoldtime gets a reference to the given int32 and assigns it to the Holdtime field.
+func (o *PatchMonitoringPingProps) SetHoldtime(v int32) {
+	o.Holdtime = &v
 }
 
 // GetInterval returns the Interval field value if set, zero value otherwise.
@@ -125,36 +125,36 @@ func (o *PatchMonitoringPingProps) SetInterval(v int32) {
 	o.Interval = &v
 }
 
-// GetHoldtime returns the Holdtime field value if set, zero value otherwise.
-func (o *PatchMonitoringPingProps) GetHoldtime() int32 {
-	if o == nil || IsNil(o.Holdtime) {
-		var ret int32
+// GetLocation returns the Location field value if set, zero value otherwise.
+func (o *PatchMonitoringPingProps) GetLocation() MonitoringPropsLocation {
+	if o == nil || IsNil(o.Location) {
+		var ret MonitoringPropsLocation
 		return ret
 	}
-	return *o.Holdtime
+	return *o.Location
 }
 
-// GetHoldtimeOk returns a tuple with the Holdtime field value if set, nil otherwise
+// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PatchMonitoringPingProps) GetHoldtimeOk() (*int32, bool) {
-	if o == nil || IsNil(o.Holdtime) {
+func (o *PatchMonitoringPingProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
+	if o == nil || IsNil(o.Location) {
 		return nil, false
 	}
-	return o.Holdtime, true
+	return o.Location, true
 }
 
-// HasHoldtime returns a boolean if a field has been set.
-func (o *PatchMonitoringPingProps) HasHoldtime() bool {
-	if o != nil && !IsNil(o.Holdtime) {
+// HasLocation returns a boolean if a field has been set.
+func (o *PatchMonitoringPingProps) HasLocation() bool {
+	if o != nil && !IsNil(o.Location) {
 		return true
 	}
 
 	return false
 }
 
-// SetHoldtime gets a reference to the given int32 and assigns it to the Holdtime field.
-func (o *PatchMonitoringPingProps) SetHoldtime(v int32) {
-	o.Holdtime = &v
+// SetLocation gets a reference to the given MonitoringPropsLocation and assigns it to the Location field.
+func (o *PatchMonitoringPingProps) SetLocation(v MonitoringPropsLocation) {
+	o.Location = &v
 }
 
 // GetTimeout returns the Timeout field value if set, zero value otherwise.
@@ -199,14 +199,14 @@ func (o PatchMonitoringPingProps) MarshalJSON() ([]byte, error) {
 
 func (o PatchMonitoringPingProps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
+	if !IsNil(o.Holdtime) {
+		toSerialize["holdtime"] = o.Holdtime
 	}
 	if !IsNil(o.Interval) {
 		toSerialize["interval"] = o.Interval
 	}
-	if !IsNil(o.Holdtime) {
-		toSerialize["holdtime"] = o.Holdtime
+	if !IsNil(o.Location) {
+		toSerialize["location"] = o.Location
 	}
 	if !IsNil(o.Timeout) {
 		toSerialize["timeout"] = o.Timeout

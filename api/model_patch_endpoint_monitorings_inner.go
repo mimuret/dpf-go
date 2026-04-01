@@ -21,10 +21,10 @@ var _ MappedNullable = &PatchEndpointMonitoringsInner{}
 
 // PatchEndpointMonitoringsInner struct for PatchEndpointMonitoringsInner
 type PatchEndpointMonitoringsInner struct {
-	// 紐付ける監視のリソース名(GET monitorings Schemaにおける resource_name)
-	ResourceName string `json:"resource_name"`
 	// エンドポイントと監視の紐付け状態
 	Enabled *bool `json:"enabled,omitempty"`
+	// 紐付ける監視のリソース名(GET monitorings Schemaにおける resource_name)
+	ResourceName string `json:"resource_name"`
 }
 
 type _PatchEndpointMonitoringsInner PatchEndpointMonitoringsInner
@@ -45,30 +45,6 @@ func NewPatchEndpointMonitoringsInner(resourceName string) *PatchEndpointMonitor
 func NewPatchEndpointMonitoringsInnerWithDefaults() *PatchEndpointMonitoringsInner {
 	this := PatchEndpointMonitoringsInner{}
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *PatchEndpointMonitoringsInner) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *PatchEndpointMonitoringsInner) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *PatchEndpointMonitoringsInner) SetResourceName(v string) {
-	o.ResourceName = v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -103,6 +79,30 @@ func (o *PatchEndpointMonitoringsInner) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
+// GetResourceName returns the ResourceName field value
+func (o *PatchEndpointMonitoringsInner) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *PatchEndpointMonitoringsInner) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *PatchEndpointMonitoringsInner) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
 func (o PatchEndpointMonitoringsInner) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -113,10 +113,10 @@ func (o PatchEndpointMonitoringsInner) MarshalJSON() ([]byte, error) {
 
 func (o PatchEndpointMonitoringsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
+	toSerialize["resource_name"] = o.ResourceName
 	return toSerialize, nil
 }
 

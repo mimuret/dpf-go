@@ -21,11 +21,11 @@ var _ MappedNullable = &PutRecord{}
 
 // PutRecord struct for PutRecord
 type PutRecord struct {
-	Records []OverwriteRecordsInner `json:"records"`
 	// 指定されたSOAレコードを取り込むためのフラグ
 	OverwriteSoa *bool `json:"overwrite_soa,omitempty"`
 	// 指定されたZone Apex NSレコードを取り込むためのフラグ
-	OverwriteZoneApexNs *bool `json:"overwrite_zone_apex_ns,omitempty"`
+	OverwriteZoneApexNs *bool                   `json:"overwrite_zone_apex_ns,omitempty"`
+	Records             []OverwriteRecordsInner `json:"records"`
 }
 
 type _PutRecord PutRecord
@@ -36,11 +36,11 @@ type _PutRecord PutRecord
 // will change when the set of required properties is changed
 func NewPutRecord(records []OverwriteRecordsInner) *PutRecord {
 	this := PutRecord{}
-	this.Records = records
 	var overwriteSoa bool = true
 	this.OverwriteSoa = &overwriteSoa
 	var overwriteZoneApexNs bool = true
 	this.OverwriteZoneApexNs = &overwriteZoneApexNs
+	this.Records = records
 	return &this
 }
 
@@ -54,30 +54,6 @@ func NewPutRecordWithDefaults() *PutRecord {
 	var overwriteZoneApexNs bool = true
 	this.OverwriteZoneApexNs = &overwriteZoneApexNs
 	return &this
-}
-
-// GetRecords returns the Records field value
-func (o *PutRecord) GetRecords() []OverwriteRecordsInner {
-	if o == nil {
-		var ret []OverwriteRecordsInner
-		return ret
-	}
-
-	return o.Records
-}
-
-// GetRecordsOk returns a tuple with the Records field value
-// and a boolean to check if the value has been set.
-func (o *PutRecord) GetRecordsOk() ([]OverwriteRecordsInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Records, true
-}
-
-// SetRecords sets field value
-func (o *PutRecord) SetRecords(v []OverwriteRecordsInner) {
-	o.Records = v
 }
 
 // GetOverwriteSoa returns the OverwriteSoa field value if set, zero value otherwise.
@@ -144,6 +120,30 @@ func (o *PutRecord) SetOverwriteZoneApexNs(v bool) {
 	o.OverwriteZoneApexNs = &v
 }
 
+// GetRecords returns the Records field value
+func (o *PutRecord) GetRecords() []OverwriteRecordsInner {
+	if o == nil {
+		var ret []OverwriteRecordsInner
+		return ret
+	}
+
+	return o.Records
+}
+
+// GetRecordsOk returns a tuple with the Records field value
+// and a boolean to check if the value has been set.
+func (o *PutRecord) GetRecordsOk() ([]OverwriteRecordsInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Records, true
+}
+
+// SetRecords sets field value
+func (o *PutRecord) SetRecords(v []OverwriteRecordsInner) {
+	o.Records = v
+}
+
 func (o PutRecord) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -154,13 +154,13 @@ func (o PutRecord) MarshalJSON() ([]byte, error) {
 
 func (o PutRecord) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["records"] = o.Records
 	if !IsNil(o.OverwriteSoa) {
 		toSerialize["overwrite_soa"] = o.OverwriteSoa
 	}
 	if !IsNil(o.OverwriteZoneApexNs) {
 		toSerialize["overwrite_zone_apex_ns"] = o.OverwriteZoneApexNs
 	}
+	toSerialize["records"] = o.Records
 	return toSerialize, nil
 }
 

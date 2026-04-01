@@ -21,16 +21,16 @@ var _ MappedNullable = &Zone{}
 
 // Zone struct for Zone
 type Zone struct {
-	Id             string        `json:"id"`
-	CommonConfigId int64         `json:"common_config_id"`
-	ServiceCode    string        `json:"service_code"`
-	State          ZonesState    `json:"state"`
-	Favorite       ZonesFavorite `json:"favorite"`
-	// name
-	Name    string         `json:"name"`
-	Network NullableString `json:"network"`
+	CommonConfigId int64 `json:"common_config_id"`
 	// コメント
-	Description string `json:"description"`
+	Description string        `json:"description"`
+	Favorite    ZonesFavorite `json:"favorite"`
+	Id          string        `json:"id"`
+	// name
+	Name        string         `json:"name"`
+	Network     NullableString `json:"network"`
+	ServiceCode string         `json:"service_code"`
+	State       ZonesState     `json:"state"`
 }
 
 type _Zone Zone
@@ -39,16 +39,16 @@ type _Zone Zone
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewZone(id string, commonConfigId int64, serviceCode string, state ZonesState, favorite ZonesFavorite, name string, network NullableString, description string) *Zone {
+func NewZone(commonConfigId int64, description string, favorite ZonesFavorite, id string, name string, network NullableString, serviceCode string, state ZonesState) *Zone {
 	this := Zone{}
-	this.Id = id
 	this.CommonConfigId = commonConfigId
-	this.ServiceCode = serviceCode
-	this.State = state
+	this.Description = description
 	this.Favorite = favorite
+	this.Id = id
 	this.Name = name
 	this.Network = network
-	this.Description = description
+	this.ServiceCode = serviceCode
+	this.State = state
 	return &this
 }
 
@@ -60,30 +60,6 @@ func NewZoneWithDefaults() *Zone {
 	var description string = ""
 	this.Description = description
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *Zone) GetId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *Zone) GetIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *Zone) SetId(v string) {
-	o.Id = v
 }
 
 // GetCommonConfigId returns the CommonConfigId field value
@@ -110,52 +86,28 @@ func (o *Zone) SetCommonConfigId(v int64) {
 	o.CommonConfigId = v
 }
 
-// GetServiceCode returns the ServiceCode field value
-func (o *Zone) GetServiceCode() string {
+// GetDescription returns the Description field value
+func (o *Zone) GetDescription() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ServiceCode
+	return o.Description
 }
 
-// GetServiceCodeOk returns a tuple with the ServiceCode field value
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
-func (o *Zone) GetServiceCodeOk() (*string, bool) {
+func (o *Zone) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ServiceCode, true
+	return &o.Description, true
 }
 
-// SetServiceCode sets field value
-func (o *Zone) SetServiceCode(v string) {
-	o.ServiceCode = v
-}
-
-// GetState returns the State field value
-func (o *Zone) GetState() ZonesState {
-	if o == nil {
-		var ret ZonesState
-		return ret
-	}
-
-	return o.State
-}
-
-// GetStateOk returns a tuple with the State field value
-// and a boolean to check if the value has been set.
-func (o *Zone) GetStateOk() (*ZonesState, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.State, true
-}
-
-// SetState sets field value
-func (o *Zone) SetState(v ZonesState) {
-	o.State = v
+// SetDescription sets field value
+func (o *Zone) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetFavorite returns the Favorite field value
@@ -180,6 +132,30 @@ func (o *Zone) GetFavoriteOk() (*ZonesFavorite, bool) {
 // SetFavorite sets field value
 func (o *Zone) SetFavorite(v ZonesFavorite) {
 	o.Favorite = v
+}
+
+// GetId returns the Id field value
+func (o *Zone) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *Zone) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *Zone) SetId(v string) {
+	o.Id = v
 }
 
 // GetName returns the Name field value
@@ -232,28 +208,52 @@ func (o *Zone) SetNetwork(v string) {
 	o.Network.Set(&v)
 }
 
-// GetDescription returns the Description field value
-func (o *Zone) GetDescription() string {
+// GetServiceCode returns the ServiceCode field value
+func (o *Zone) GetServiceCode() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Description
+	return o.ServiceCode
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetServiceCodeOk returns a tuple with the ServiceCode field value
 // and a boolean to check if the value has been set.
-func (o *Zone) GetDescriptionOk() (*string, bool) {
+func (o *Zone) GetServiceCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Description, true
+	return &o.ServiceCode, true
 }
 
-// SetDescription sets field value
-func (o *Zone) SetDescription(v string) {
-	o.Description = v
+// SetServiceCode sets field value
+func (o *Zone) SetServiceCode(v string) {
+	o.ServiceCode = v
+}
+
+// GetState returns the State field value
+func (o *Zone) GetState() ZonesState {
+	if o == nil {
+		var ret ZonesState
+		return ret
+	}
+
+	return o.State
+}
+
+// GetStateOk returns a tuple with the State field value
+// and a boolean to check if the value has been set.
+func (o *Zone) GetStateOk() (*ZonesState, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.State, true
+}
+
+// SetState sets field value
+func (o *Zone) SetState(v ZonesState) {
+	o.State = v
 }
 
 func (o Zone) MarshalJSON() ([]byte, error) {
@@ -266,14 +266,14 @@ func (o Zone) MarshalJSON() ([]byte, error) {
 
 func (o Zone) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
 	toSerialize["common_config_id"] = o.CommonConfigId
-	toSerialize["service_code"] = o.ServiceCode
-	toSerialize["state"] = o.State
+	toSerialize["description"] = o.Description
 	toSerialize["favorite"] = o.Favorite
+	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["network"] = o.Network.Get()
-	toSerialize["description"] = o.Description
+	toSerialize["service_code"] = o.ServiceCode
+	toSerialize["state"] = o.State
 	return toSerialize, nil
 }
 
@@ -282,14 +282,14 @@ func (o *Zone) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"common_config_id",
-		"service_code",
-		"state",
+		"description",
 		"favorite",
+		"id",
 		"name",
 		"network",
-		"description",
+		"service_code",
+		"state",
 	}
 
 	allProperties := make(map[string]interface{})

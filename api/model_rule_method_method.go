@@ -21,20 +21,20 @@ var _ MappedNullable = &RuleMethodMethod{}
 
 // RuleMethodMethod struct for RuleMethodMethod
 type RuleMethodMethod struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName string `json:"resource_name"`
+	// 状態
+	Enabled bool `json:"enabled"`
+	// Live Status
+	LiveStatus string `json:"live_status"`
 	// メソッド種別
 	Mtype string `json:"mtype"`
 	// 親メソッドのリソース名
 	ParentResourceName *string `json:"parent_resource_name,omitempty"`
-	// 状態
-	Enabled bool `json:"enabled"`
-	// 紐付けされているサイトのリソース名（mtype が exit_site の場合のみ指定）
-	SiteResourceName *string `json:"site_resource_name,omitempty"`
-	// Live Status
-	LiveStatus string `json:"live_status"`
 	// Ready Status
 	ReadyStatus string `json:"ready_status"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName string `json:"resource_name"`
+	// 紐付けされているサイトのリソース名（mtype が exit_site の場合のみ指定）
+	SiteResourceName *string `json:"site_resource_name,omitempty"`
 }
 
 type _RuleMethodMethod RuleMethodMethod
@@ -43,13 +43,13 @@ type _RuleMethodMethod RuleMethodMethod
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleMethodMethod(resourceName string, mtype string, enabled bool, liveStatus string, readyStatus string) *RuleMethodMethod {
+func NewRuleMethodMethod(enabled bool, liveStatus string, mtype string, readyStatus string, resourceName string) *RuleMethodMethod {
 	this := RuleMethodMethod{}
-	this.ResourceName = resourceName
-	this.Mtype = mtype
 	this.Enabled = enabled
 	this.LiveStatus = liveStatus
+	this.Mtype = mtype
 	this.ReadyStatus = readyStatus
+	this.ResourceName = resourceName
 	return &this
 }
 
@@ -63,28 +63,52 @@ func NewRuleMethodMethodWithDefaults() *RuleMethodMethod {
 	return &this
 }
 
-// GetResourceName returns the ResourceName field value
-func (o *RuleMethodMethod) GetResourceName() string {
+// GetEnabled returns the Enabled field value
+func (o *RuleMethodMethod) GetEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value
+// and a boolean to check if the value has been set.
+func (o *RuleMethodMethod) GetEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Enabled, true
+}
+
+// SetEnabled sets field value
+func (o *RuleMethodMethod) SetEnabled(v bool) {
+	o.Enabled = v
+}
+
+// GetLiveStatus returns the LiveStatus field value
+func (o *RuleMethodMethod) GetLiveStatus() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ResourceName
+	return o.LiveStatus
 }
 
-// GetResourceNameOk returns a tuple with the ResourceName field value
+// GetLiveStatusOk returns a tuple with the LiveStatus field value
 // and a boolean to check if the value has been set.
-func (o *RuleMethodMethod) GetResourceNameOk() (*string, bool) {
+func (o *RuleMethodMethod) GetLiveStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ResourceName, true
+	return &o.LiveStatus, true
 }
 
-// SetResourceName sets field value
-func (o *RuleMethodMethod) SetResourceName(v string) {
-	o.ResourceName = v
+// SetLiveStatus sets field value
+func (o *RuleMethodMethod) SetLiveStatus(v string) {
+	o.LiveStatus = v
 }
 
 // GetMtype returns the Mtype field value
@@ -143,28 +167,52 @@ func (o *RuleMethodMethod) SetParentResourceName(v string) {
 	o.ParentResourceName = &v
 }
 
-// GetEnabled returns the Enabled field value
-func (o *RuleMethodMethod) GetEnabled() bool {
+// GetReadyStatus returns the ReadyStatus field value
+func (o *RuleMethodMethod) GetReadyStatus() string {
 	if o == nil {
-		var ret bool
+		var ret string
 		return ret
 	}
 
-	return o.Enabled
+	return o.ReadyStatus
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value
+// GetReadyStatusOk returns a tuple with the ReadyStatus field value
 // and a boolean to check if the value has been set.
-func (o *RuleMethodMethod) GetEnabledOk() (*bool, bool) {
+func (o *RuleMethodMethod) GetReadyStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Enabled, true
+	return &o.ReadyStatus, true
 }
 
-// SetEnabled sets field value
-func (o *RuleMethodMethod) SetEnabled(v bool) {
-	o.Enabled = v
+// SetReadyStatus sets field value
+func (o *RuleMethodMethod) SetReadyStatus(v string) {
+	o.ReadyStatus = v
+}
+
+// GetResourceName returns the ResourceName field value
+func (o *RuleMethodMethod) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *RuleMethodMethod) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *RuleMethodMethod) SetResourceName(v string) {
+	o.ResourceName = v
 }
 
 // GetSiteResourceName returns the SiteResourceName field value if set, zero value otherwise.
@@ -199,54 +247,6 @@ func (o *RuleMethodMethod) SetSiteResourceName(v string) {
 	o.SiteResourceName = &v
 }
 
-// GetLiveStatus returns the LiveStatus field value
-func (o *RuleMethodMethod) GetLiveStatus() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.LiveStatus
-}
-
-// GetLiveStatusOk returns a tuple with the LiveStatus field value
-// and a boolean to check if the value has been set.
-func (o *RuleMethodMethod) GetLiveStatusOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.LiveStatus, true
-}
-
-// SetLiveStatus sets field value
-func (o *RuleMethodMethod) SetLiveStatus(v string) {
-	o.LiveStatus = v
-}
-
-// GetReadyStatus returns the ReadyStatus field value
-func (o *RuleMethodMethod) GetReadyStatus() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ReadyStatus
-}
-
-// GetReadyStatusOk returns a tuple with the ReadyStatus field value
-// and a boolean to check if the value has been set.
-func (o *RuleMethodMethod) GetReadyStatusOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ReadyStatus, true
-}
-
-// SetReadyStatus sets field value
-func (o *RuleMethodMethod) SetReadyStatus(v string) {
-	o.ReadyStatus = v
-}
-
 func (o RuleMethodMethod) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -257,17 +257,17 @@ func (o RuleMethodMethod) MarshalJSON() ([]byte, error) {
 
 func (o RuleMethodMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
+	toSerialize["enabled"] = o.Enabled
+	toSerialize["live_status"] = o.LiveStatus
 	toSerialize["mtype"] = o.Mtype
 	if !IsNil(o.ParentResourceName) {
 		toSerialize["parent_resource_name"] = o.ParentResourceName
 	}
-	toSerialize["enabled"] = o.Enabled
+	toSerialize["ready_status"] = o.ReadyStatus
+	toSerialize["resource_name"] = o.ResourceName
 	if !IsNil(o.SiteResourceName) {
 		toSerialize["site_resource_name"] = o.SiteResourceName
 	}
-	toSerialize["live_status"] = o.LiveStatus
-	toSerialize["ready_status"] = o.ReadyStatus
 	return toSerialize, nil
 }
 
@@ -276,11 +276,11 @@ func (o *RuleMethodMethod) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
-		"mtype",
 		"enabled",
 		"live_status",
+		"mtype",
 		"ready_status",
+		"resource_name",
 	}
 
 	allProperties := make(map[string]interface{})

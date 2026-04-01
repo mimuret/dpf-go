@@ -21,15 +21,15 @@ var _ MappedNullable = &MonitoringTCPProps{}
 
 // MonitoringTCPProps struct for MonitoringTCPProps
 type MonitoringTCPProps struct {
-	Location MonitoringPropsLocation `json:"location"`
-	// 監視間隔（s）
-	Interval int32 `json:"interval"`
 	// 保留時間（s）
 	Holdtime int32 `json:"holdtime"`
-	// タイムアウト（s）
-	Timeout int32 `json:"timeout"`
+	// 監視間隔（s）
+	Interval int32                   `json:"interval"`
+	Location MonitoringPropsLocation `json:"location"`
 	// ポート番号
 	Port int32 `json:"port"`
+	// タイムアウト（s）
+	Timeout int32 `json:"timeout"`
 	// TLS監視利用フラグ
 	TlsEnabled bool `json:"tls_enabled"`
 	// TLS SNI値、未指定の場合、監視時にSNIとして、Hostヘッダーを利用
@@ -42,13 +42,13 @@ type _MonitoringTCPProps MonitoringTCPProps
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMonitoringTCPProps(location MonitoringPropsLocation, interval int32, holdtime int32, timeout int32, port int32, tlsEnabled bool, tlsSni string) *MonitoringTCPProps {
+func NewMonitoringTCPProps(holdtime int32, interval int32, location MonitoringPropsLocation, port int32, timeout int32, tlsEnabled bool, tlsSni string) *MonitoringTCPProps {
 	this := MonitoringTCPProps{}
-	this.Location = location
-	this.Interval = interval
 	this.Holdtime = holdtime
-	this.Timeout = timeout
+	this.Interval = interval
+	this.Location = location
 	this.Port = port
+	this.Timeout = timeout
 	this.TlsEnabled = tlsEnabled
 	this.TlsSni = tlsSni
 	return &this
@@ -59,65 +59,17 @@ func NewMonitoringTCPProps(location MonitoringPropsLocation, interval int32, hol
 // but it doesn't guarantee that properties required by API are set
 func NewMonitoringTCPPropsWithDefaults() *MonitoringTCPProps {
 	this := MonitoringTCPProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = location
-	var interval int32 = 30
-	this.Interval = interval
 	var holdtime int32 = 0
 	this.Holdtime = holdtime
+	var interval int32 = 30
+	this.Interval = interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = location
 	var timeout int32 = 5
 	this.Timeout = timeout
 	var tlsEnabled bool = false
 	this.TlsEnabled = tlsEnabled
 	return &this
-}
-
-// GetLocation returns the Location field value
-func (o *MonitoringTCPProps) GetLocation() MonitoringPropsLocation {
-	if o == nil {
-		var ret MonitoringPropsLocation
-		return ret
-	}
-
-	return o.Location
-}
-
-// GetLocationOk returns a tuple with the Location field value
-// and a boolean to check if the value has been set.
-func (o *MonitoringTCPProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Location, true
-}
-
-// SetLocation sets field value
-func (o *MonitoringTCPProps) SetLocation(v MonitoringPropsLocation) {
-	o.Location = v
-}
-
-// GetInterval returns the Interval field value
-func (o *MonitoringTCPProps) GetInterval() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Interval
-}
-
-// GetIntervalOk returns a tuple with the Interval field value
-// and a boolean to check if the value has been set.
-func (o *MonitoringTCPProps) GetIntervalOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Interval, true
-}
-
-// SetInterval sets field value
-func (o *MonitoringTCPProps) SetInterval(v int32) {
-	o.Interval = v
 }
 
 // GetHoldtime returns the Holdtime field value
@@ -144,28 +96,52 @@ func (o *MonitoringTCPProps) SetHoldtime(v int32) {
 	o.Holdtime = v
 }
 
-// GetTimeout returns the Timeout field value
-func (o *MonitoringTCPProps) GetTimeout() int32 {
+// GetInterval returns the Interval field value
+func (o *MonitoringTCPProps) GetInterval() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.Timeout
+	return o.Interval
 }
 
-// GetTimeoutOk returns a tuple with the Timeout field value
+// GetIntervalOk returns a tuple with the Interval field value
 // and a boolean to check if the value has been set.
-func (o *MonitoringTCPProps) GetTimeoutOk() (*int32, bool) {
+func (o *MonitoringTCPProps) GetIntervalOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Timeout, true
+	return &o.Interval, true
 }
 
-// SetTimeout sets field value
-func (o *MonitoringTCPProps) SetTimeout(v int32) {
-	o.Timeout = v
+// SetInterval sets field value
+func (o *MonitoringTCPProps) SetInterval(v int32) {
+	o.Interval = v
+}
+
+// GetLocation returns the Location field value
+func (o *MonitoringTCPProps) GetLocation() MonitoringPropsLocation {
+	if o == nil {
+		var ret MonitoringPropsLocation
+		return ret
+	}
+
+	return o.Location
+}
+
+// GetLocationOk returns a tuple with the Location field value
+// and a boolean to check if the value has been set.
+func (o *MonitoringTCPProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Location, true
+}
+
+// SetLocation sets field value
+func (o *MonitoringTCPProps) SetLocation(v MonitoringPropsLocation) {
+	o.Location = v
 }
 
 // GetPort returns the Port field value
@@ -190,6 +166,30 @@ func (o *MonitoringTCPProps) GetPortOk() (*int32, bool) {
 // SetPort sets field value
 func (o *MonitoringTCPProps) SetPort(v int32) {
 	o.Port = v
+}
+
+// GetTimeout returns the Timeout field value
+func (o *MonitoringTCPProps) GetTimeout() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Timeout
+}
+
+// GetTimeoutOk returns a tuple with the Timeout field value
+// and a boolean to check if the value has been set.
+func (o *MonitoringTCPProps) GetTimeoutOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Timeout, true
+}
+
+// SetTimeout sets field value
+func (o *MonitoringTCPProps) SetTimeout(v int32) {
+	o.Timeout = v
 }
 
 // GetTlsEnabled returns the TlsEnabled field value
@@ -250,11 +250,11 @@ func (o MonitoringTCPProps) MarshalJSON() ([]byte, error) {
 
 func (o MonitoringTCPProps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["location"] = o.Location
-	toSerialize["interval"] = o.Interval
 	toSerialize["holdtime"] = o.Holdtime
-	toSerialize["timeout"] = o.Timeout
+	toSerialize["interval"] = o.Interval
+	toSerialize["location"] = o.Location
 	toSerialize["port"] = o.Port
+	toSerialize["timeout"] = o.Timeout
 	toSerialize["tls_enabled"] = o.TlsEnabled
 	toSerialize["tls_sni"] = o.TlsSni
 	return toSerialize, nil
@@ -265,11 +265,11 @@ func (o *MonitoringTCPProps) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"location",
-		"interval",
 		"holdtime",
-		"timeout",
+		"interval",
+		"location",
 		"port",
+		"timeout",
 		"tls_enabled",
 		"tls_sni",
 	}

@@ -21,12 +21,12 @@ var _ MappedNullable = &Tsig{}
 
 // Tsig struct for Tsig
 type Tsig struct {
-	Id        int64          `json:"id"`
-	Name      string         `json:"name"`
 	Algorithm TsigsAlgorithm `json:"algorithm"`
-	Secret    string         `json:"secret"`
 	// コメント
 	Description string `json:"description"`
+	Id          int64  `json:"id"`
+	Name        string `json:"name"`
+	Secret      string `json:"secret"`
 }
 
 type _Tsig Tsig
@@ -35,13 +35,13 @@ type _Tsig Tsig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTsig(id int64, name string, algorithm TsigsAlgorithm, secret string, description string) *Tsig {
+func NewTsig(algorithm TsigsAlgorithm, description string, id int64, name string, secret string) *Tsig {
 	this := Tsig{}
+	this.Algorithm = algorithm
+	this.Description = description
 	this.Id = id
 	this.Name = name
-	this.Algorithm = algorithm
 	this.Secret = secret
-	this.Description = description
 	return &this
 }
 
@@ -53,6 +53,54 @@ func NewTsigWithDefaults() *Tsig {
 	var description string = ""
 	this.Description = description
 	return &this
+}
+
+// GetAlgorithm returns the Algorithm field value
+func (o *Tsig) GetAlgorithm() TsigsAlgorithm {
+	if o == nil {
+		var ret TsigsAlgorithm
+		return ret
+	}
+
+	return o.Algorithm
+}
+
+// GetAlgorithmOk returns a tuple with the Algorithm field value
+// and a boolean to check if the value has been set.
+func (o *Tsig) GetAlgorithmOk() (*TsigsAlgorithm, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Algorithm, true
+}
+
+// SetAlgorithm sets field value
+func (o *Tsig) SetAlgorithm(v TsigsAlgorithm) {
+	o.Algorithm = v
+}
+
+// GetDescription returns the Description field value
+func (o *Tsig) GetDescription() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value
+// and a boolean to check if the value has been set.
+func (o *Tsig) GetDescriptionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Description, true
+}
+
+// SetDescription sets field value
+func (o *Tsig) SetDescription(v string) {
+	o.Description = v
 }
 
 // GetId returns the Id field value
@@ -103,30 +151,6 @@ func (o *Tsig) SetName(v string) {
 	o.Name = v
 }
 
-// GetAlgorithm returns the Algorithm field value
-func (o *Tsig) GetAlgorithm() TsigsAlgorithm {
-	if o == nil {
-		var ret TsigsAlgorithm
-		return ret
-	}
-
-	return o.Algorithm
-}
-
-// GetAlgorithmOk returns a tuple with the Algorithm field value
-// and a boolean to check if the value has been set.
-func (o *Tsig) GetAlgorithmOk() (*TsigsAlgorithm, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Algorithm, true
-}
-
-// SetAlgorithm sets field value
-func (o *Tsig) SetAlgorithm(v TsigsAlgorithm) {
-	o.Algorithm = v
-}
-
 // GetSecret returns the Secret field value
 func (o *Tsig) GetSecret() string {
 	if o == nil {
@@ -151,30 +175,6 @@ func (o *Tsig) SetSecret(v string) {
 	o.Secret = v
 }
 
-// GetDescription returns the Description field value
-func (o *Tsig) GetDescription() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value
-// and a boolean to check if the value has been set.
-func (o *Tsig) GetDescriptionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Description, true
-}
-
-// SetDescription sets field value
-func (o *Tsig) SetDescription(v string) {
-	o.Description = v
-}
-
 func (o Tsig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -185,11 +185,11 @@ func (o Tsig) MarshalJSON() ([]byte, error) {
 
 func (o Tsig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["algorithm"] = o.Algorithm
+	toSerialize["description"] = o.Description
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["algorithm"] = o.Algorithm
 	toSerialize["secret"] = o.Secret
-	toSerialize["description"] = o.Description
 	return toSerialize, nil
 }
 
@@ -198,11 +198,11 @@ func (o *Tsig) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"algorithm",
+		"description",
 		"id",
 		"name",
-		"algorithm",
 		"secret",
-		"description",
 	}
 
 	allProperties := make(map[string]interface{})

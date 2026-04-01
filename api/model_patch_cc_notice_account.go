@@ -19,9 +19,9 @@ var _ MappedNullable = &PatchCcNoticeAccount{}
 
 // PatchCcNoticeAccount struct for PatchCcNoticeAccount
 type PatchCcNoticeAccount struct {
+	Lang *CcNoticeAccountLang `json:"lang,omitempty"`
 	// アカウント名
 	Name  *string               `json:"name,omitempty"`
-	Lang  *CcNoticeAccountLang  `json:"lang,omitempty"`
 	Props *CcNoticeAccountProps `json:"props,omitempty"`
 }
 
@@ -40,38 +40,6 @@ func NewPatchCcNoticeAccount() *PatchCcNoticeAccount {
 func NewPatchCcNoticeAccountWithDefaults() *PatchCcNoticeAccount {
 	this := PatchCcNoticeAccount{}
 	return &this
-}
-
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *PatchCcNoticeAccount) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchCcNoticeAccount) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *PatchCcNoticeAccount) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *PatchCcNoticeAccount) SetName(v string) {
-	o.Name = &v
 }
 
 // GetLang returns the Lang field value if set, zero value otherwise.
@@ -104,6 +72,38 @@ func (o *PatchCcNoticeAccount) HasLang() bool {
 // SetLang gets a reference to the given CcNoticeAccountLang and assigns it to the Lang field.
 func (o *PatchCcNoticeAccount) SetLang(v CcNoticeAccountLang) {
 	o.Lang = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PatchCcNoticeAccount) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PatchCcNoticeAccount) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *PatchCcNoticeAccount) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PatchCcNoticeAccount) SetName(v string) {
+	o.Name = &v
 }
 
 // GetProps returns the Props field value if set, zero value otherwise.
@@ -148,11 +148,11 @@ func (o PatchCcNoticeAccount) MarshalJSON() ([]byte, error) {
 
 func (o PatchCcNoticeAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
 	if !IsNil(o.Lang) {
 		toSerialize["lang"] = o.Lang
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 	if !IsNil(o.Props) {
 		toSerialize["props"] = o.Props

@@ -21,9 +21,9 @@ var _ MappedNullable = &PostCcSecTransferAcl{}
 
 // PostCcSecTransferAcl struct for PostCcSecTransferAcl
 type PostCcSecTransferAcl struct {
-	TsigId NullableInt64 `json:"tsig_id,omitempty"`
 	// IPアドレス/プレフィックス長
-	Network string `json:"network"`
+	Network string        `json:"network"`
+	TsigId  NullableInt64 `json:"tsig_id,omitempty"`
 }
 
 type _PostCcSecTransferAcl PostCcSecTransferAcl
@@ -44,6 +44,30 @@ func NewPostCcSecTransferAcl(network string) *PostCcSecTransferAcl {
 func NewPostCcSecTransferAclWithDefaults() *PostCcSecTransferAcl {
 	this := PostCcSecTransferAcl{}
 	return &this
+}
+
+// GetNetwork returns the Network field value
+func (o *PostCcSecTransferAcl) GetNetwork() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Network
+}
+
+// GetNetworkOk returns a tuple with the Network field value
+// and a boolean to check if the value has been set.
+func (o *PostCcSecTransferAcl) GetNetworkOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Network, true
+}
+
+// SetNetwork sets field value
+func (o *PostCcSecTransferAcl) SetNetwork(v string) {
+	o.Network = v
 }
 
 // GetTsigId returns the TsigId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -89,30 +113,6 @@ func (o *PostCcSecTransferAcl) UnsetTsigId() {
 	o.TsigId.Unset()
 }
 
-// GetNetwork returns the Network field value
-func (o *PostCcSecTransferAcl) GetNetwork() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Network
-}
-
-// GetNetworkOk returns a tuple with the Network field value
-// and a boolean to check if the value has been set.
-func (o *PostCcSecTransferAcl) GetNetworkOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Network, true
-}
-
-// SetNetwork sets field value
-func (o *PostCcSecTransferAcl) SetNetwork(v string) {
-	o.Network = v
-}
-
 func (o PostCcSecTransferAcl) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -123,10 +123,10 @@ func (o PostCcSecTransferAcl) MarshalJSON() ([]byte, error) {
 
 func (o PostCcSecTransferAcl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["network"] = o.Network
 	if o.TsigId.IsSet() {
 		toSerialize["tsig_id"] = o.TsigId.Get()
 	}
-	toSerialize["network"] = o.Network
 	return toSerialize, nil
 }
 

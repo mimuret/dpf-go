@@ -21,10 +21,10 @@ var _ MappedNullable = &PostCommonConfig{}
 
 // PostCommonConfig struct for PostCommonConfig
 type PostCommonConfig struct {
-	// name
-	Name string `json:"name"`
 	// コメント
 	Description *string `json:"description,omitempty"`
+	// name
+	Name string `json:"name"`
 }
 
 type _PostCommonConfig PostCommonConfig
@@ -35,9 +35,9 @@ type _PostCommonConfig PostCommonConfig
 // will change when the set of required properties is changed
 func NewPostCommonConfig(name string) *PostCommonConfig {
 	this := PostCommonConfig{}
-	this.Name = name
 	var description string = ""
 	this.Description = &description
+	this.Name = name
 	return &this
 }
 
@@ -49,30 +49,6 @@ func NewPostCommonConfigWithDefaults() *PostCommonConfig {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *PostCommonConfig) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostCommonConfig) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostCommonConfig) SetName(v string) {
-	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -107,6 +83,30 @@ func (o *PostCommonConfig) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetName returns the Name field value
+func (o *PostCommonConfig) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostCommonConfig) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostCommonConfig) SetName(v string) {
+	o.Name = v
+}
+
 func (o PostCommonConfig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -117,10 +117,10 @@ func (o PostCommonConfig) MarshalJSON() ([]byte, error) {
 
 func (o PostCommonConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
 }
 

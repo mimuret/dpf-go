@@ -21,9 +21,9 @@ var _ MappedNullable = &PostRuleMethod{}
 
 // PostRuleMethod struct for PostRuleMethod
 type PostRuleMethod struct {
+	Method PostRuleMethodMethod `json:"method"`
 	// 優先度（親メソッドが failover の場合のみ指定）
-	Priority *int32               `json:"priority,omitempty"`
-	Method   PostRuleMethodMethod `json:"method"`
+	Priority *int32 `json:"priority,omitempty"`
 }
 
 type _PostRuleMethod PostRuleMethod
@@ -44,6 +44,30 @@ func NewPostRuleMethod(method PostRuleMethodMethod) *PostRuleMethod {
 func NewPostRuleMethodWithDefaults() *PostRuleMethod {
 	this := PostRuleMethod{}
 	return &this
+}
+
+// GetMethod returns the Method field value
+func (o *PostRuleMethod) GetMethod() PostRuleMethodMethod {
+	if o == nil {
+		var ret PostRuleMethodMethod
+		return ret
+	}
+
+	return o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value
+// and a boolean to check if the value has been set.
+func (o *PostRuleMethod) GetMethodOk() (*PostRuleMethodMethod, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Method, true
+}
+
+// SetMethod sets field value
+func (o *PostRuleMethod) SetMethod(v PostRuleMethodMethod) {
+	o.Method = v
 }
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
@@ -78,30 +102,6 @@ func (o *PostRuleMethod) SetPriority(v int32) {
 	o.Priority = &v
 }
 
-// GetMethod returns the Method field value
-func (o *PostRuleMethod) GetMethod() PostRuleMethodMethod {
-	if o == nil {
-		var ret PostRuleMethodMethod
-		return ret
-	}
-
-	return o.Method
-}
-
-// GetMethodOk returns a tuple with the Method field value
-// and a boolean to check if the value has been set.
-func (o *PostRuleMethod) GetMethodOk() (*PostRuleMethodMethod, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Method, true
-}
-
-// SetMethod sets field value
-func (o *PostRuleMethod) SetMethod(v PostRuleMethodMethod) {
-	o.Method = v
-}
-
 func (o PostRuleMethod) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -112,10 +112,10 @@ func (o PostRuleMethod) MarshalJSON() ([]byte, error) {
 
 func (o PostRuleMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["method"] = o.Method
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	toSerialize["method"] = o.Method
 	return toSerialize, nil
 }
 

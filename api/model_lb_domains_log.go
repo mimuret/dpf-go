@@ -22,15 +22,15 @@ var _ MappedNullable = &LbDomainsLog{}
 
 // LbDomainsLog struct for LbDomainsLog
 type LbDomainsLog struct {
-	Time    time.Time         `json:"time"`
-	LogType LbDomainsLogsType `json:"log_type"`
-	// 編集者
-	Operator  NullableString         `json:"operator"`
+	LogType   LbDomainsLogsType      `json:"log_type"`
 	Operation LbDomainsLogsOperation `json:"operation"`
-	Target    string                 `json:"target"`
+	// 編集者
+	Operator NullableString `json:"operator"`
 	// 処理の問い合わせの際のキーになる文字列
 	RequestId string              `json:"request_id"`
 	Status    LbDomainsLogsStatus `json:"status"`
+	Target    string              `json:"target"`
+	Time      time.Time           `json:"time"`
 }
 
 type _LbDomainsLog LbDomainsLog
@@ -39,15 +39,15 @@ type _LbDomainsLog LbDomainsLog
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLbDomainsLog(time time.Time, logType LbDomainsLogsType, operator NullableString, operation LbDomainsLogsOperation, target string, requestId string, status LbDomainsLogsStatus) *LbDomainsLog {
+func NewLbDomainsLog(logType LbDomainsLogsType, operation LbDomainsLogsOperation, operator NullableString, requestId string, status LbDomainsLogsStatus, target string, time time.Time) *LbDomainsLog {
 	this := LbDomainsLog{}
-	this.Time = time
 	this.LogType = logType
-	this.Operator = operator
 	this.Operation = operation
-	this.Target = target
+	this.Operator = operator
 	this.RequestId = requestId
 	this.Status = status
+	this.Target = target
+	this.Time = time
 	return &this
 }
 
@@ -59,30 +59,6 @@ func NewLbDomainsLogWithDefaults() *LbDomainsLog {
 	var target string = ""
 	this.Target = target
 	return &this
-}
-
-// GetTime returns the Time field value
-func (o *LbDomainsLog) GetTime() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.Time
-}
-
-// GetTimeOk returns a tuple with the Time field value
-// and a boolean to check if the value has been set.
-func (o *LbDomainsLog) GetTimeOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Time, true
-}
-
-// SetTime sets field value
-func (o *LbDomainsLog) SetTime(v time.Time) {
-	o.Time = v
 }
 
 // GetLogType returns the LogType field value
@@ -109,32 +85,6 @@ func (o *LbDomainsLog) SetLogType(v LbDomainsLogsType) {
 	o.LogType = v
 }
 
-// GetOperator returns the Operator field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *LbDomainsLog) GetOperator() string {
-	if o == nil || o.Operator.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.Operator.Get()
-}
-
-// GetOperatorOk returns a tuple with the Operator field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LbDomainsLog) GetOperatorOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Operator.Get(), o.Operator.IsSet()
-}
-
-// SetOperator sets field value
-func (o *LbDomainsLog) SetOperator(v string) {
-	o.Operator.Set(&v)
-}
-
 // GetOperation returns the Operation field value
 func (o *LbDomainsLog) GetOperation() LbDomainsLogsOperation {
 	if o == nil {
@@ -159,28 +109,30 @@ func (o *LbDomainsLog) SetOperation(v LbDomainsLogsOperation) {
 	o.Operation = v
 }
 
-// GetTarget returns the Target field value
-func (o *LbDomainsLog) GetTarget() string {
-	if o == nil {
+// GetOperator returns the Operator field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *LbDomainsLog) GetOperator() string {
+	if o == nil || o.Operator.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Target
+	return *o.Operator.Get()
 }
 
-// GetTargetOk returns a tuple with the Target field value
+// GetOperatorOk returns a tuple with the Operator field value
 // and a boolean to check if the value has been set.
-func (o *LbDomainsLog) GetTargetOk() (*string, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LbDomainsLog) GetOperatorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Target, true
+	return o.Operator.Get(), o.Operator.IsSet()
 }
 
-// SetTarget sets field value
-func (o *LbDomainsLog) SetTarget(v string) {
-	o.Target = v
+// SetOperator sets field value
+func (o *LbDomainsLog) SetOperator(v string) {
+	o.Operator.Set(&v)
 }
 
 // GetRequestId returns the RequestId field value
@@ -231,6 +183,54 @@ func (o *LbDomainsLog) SetStatus(v LbDomainsLogsStatus) {
 	o.Status = v
 }
 
+// GetTarget returns the Target field value
+func (o *LbDomainsLog) GetTarget() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Target
+}
+
+// GetTargetOk returns a tuple with the Target field value
+// and a boolean to check if the value has been set.
+func (o *LbDomainsLog) GetTargetOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Target, true
+}
+
+// SetTarget sets field value
+func (o *LbDomainsLog) SetTarget(v string) {
+	o.Target = v
+}
+
+// GetTime returns the Time field value
+func (o *LbDomainsLog) GetTime() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.Time
+}
+
+// GetTimeOk returns a tuple with the Time field value
+// and a boolean to check if the value has been set.
+func (o *LbDomainsLog) GetTimeOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Time, true
+}
+
+// SetTime sets field value
+func (o *LbDomainsLog) SetTime(v time.Time) {
+	o.Time = v
+}
+
 func (o LbDomainsLog) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -241,13 +241,13 @@ func (o LbDomainsLog) MarshalJSON() ([]byte, error) {
 
 func (o LbDomainsLog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["time"] = o.Time
 	toSerialize["log_type"] = o.LogType
-	toSerialize["operator"] = o.Operator.Get()
 	toSerialize["operation"] = o.Operation
-	toSerialize["target"] = o.Target
+	toSerialize["operator"] = o.Operator.Get()
 	toSerialize["request_id"] = o.RequestId
 	toSerialize["status"] = o.Status
+	toSerialize["target"] = o.Target
+	toSerialize["time"] = o.Time
 	return toSerialize, nil
 }
 
@@ -256,13 +256,13 @@ func (o *LbDomainsLog) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"time",
 		"log_type",
-		"operator",
 		"operation",
-		"target",
+		"operator",
 		"request_id",
 		"status",
+		"target",
+		"time",
 	}
 
 	allProperties := make(map[string]interface{})

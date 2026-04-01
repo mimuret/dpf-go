@@ -49,15 +49,28 @@ func main() {
 }
 
 func fixArrayDefault(content []byte) []byte {
-	re := regexp.MustCompile(`(?m)var defaultValue (\[\].+) = \[\]\s*$`)
-	return re.ReplaceAllFunc(content, func(match []byte) []byte {
+	re := regexp.MustCompile(`(?m)var defaultValue (\[\].+) = \[\](\s*)$`)
+	content = re.ReplaceAllFunc(content, func(match []byte) []byte {
 		submatches := re.FindSubmatch(match)
-		if len(submatches) < 2 {
+		if len(submatches) < 3 {
 			return match
 		}
 		typeStr := string(submatches[1])
-		return []byte(fmt.Sprintf("var defaultValue %s = %s{}", typeStr, typeStr))
+		space := string(submatches[2])
+		return []byte(fmt.Sprintf("var defaultValue %s = %s{}%s", typeStr, typeStr, space))
 	})
+	// Handle cases where it's not at the end of the line (e.g. followed by a comment or just no newline in some contexts)
+	re2 := regexp.MustCompile(`(?m)var defaultValue (\[\].+) = \[\](\s+[^ \r\n[])`)
+	content = re2.ReplaceAllFunc(content, func(match []byte) []byte {
+		submatches := re2.FindSubmatch(match)
+		if len(submatches) < 3 {
+			return match
+		}
+		typeStr := string(submatches[1])
+		rest := string(submatches[2])
+		return []byte(fmt.Sprintf("var defaultValue %s = %s{}%s", typeStr, typeStr, rest))
+	})
+	return content
 }
 
 func addOtelImports(path string, content []byte) []byte {
@@ -118,6 +131,48 @@ func fixClient(content []byte) []byte {
 	if resp.StatusCode >= 400 {
 		span.SetStatus(codes.Error, resp.Status)
 	}`))
+	// Add DPFError helper to GenericOpenAPIError
+	genericErrorRe := regexp.MustCompile(`(?m)// Body returns the raw bytes of the response\nfunc \(e GenericOpenAPIError\) Body\(\) \[\]byte \{\n\treturn e\.body\n\}\n\n// Model returns the unpacked model of the error\nfunc \(e GenericOpenAPIError\) Model\(\) interface\{\} \{\n\treturn e\.model\n\}`)
+	dpfErrorHelper := `// Body returns the raw bytes of the response
+func (e GenericOpenAPIError) Body() []byte {
+	return e.body
+}
+
+// Model returns the unpacked model of the error
+func (e GenericOpenAPIError) Model() interface{} {
+	return e.model
+}
+
+// DPFError returns the structured DPF error if available.
+func (e GenericOpenAPIError) DPFError() DPFError {
+	if e.model == nil {
+		return nil
+	}
+	if v, ok := e.model.(DPFError); ok {
+		return v
+	}
+	// If it's a value type, try to get a pointer to it
+	val := reflect.ValueOf(e.model)
+	if val.Kind() != reflect.Ptr {
+		ptr := reflect.New(val.Type())
+		ptr.Elem().Set(val)
+		if v, ok := ptr.Interface().(DPFError); ok {
+			return v
+		}
+	}
+	return nil
+}`
+	content = genericErrorRe.ReplaceAll(content, []byte(dpfErrorHelper))
+
+	// Update GenericOpenAPIError.Error() to show structured error
+	errorMethodRe := regexp.MustCompile(`(?m)func \(e GenericOpenAPIError\) Error\(\) string \{\n\treturn e\.error\n\}`)
+	newErrorMethod := `func (e GenericOpenAPIError) Error() string {
+	if der := e.DPFError(); der != nil {
+		return der.Error()
+	}
+	return e.error
+}`
+	content = errorMethodRe.ReplaceAll(content, []byte(newErrorMethod))
 
 	return content
 }

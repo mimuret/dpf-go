@@ -21,12 +21,12 @@ var _ MappedNullable = &CcNoticeAccount{}
 
 // CcNoticeAccount struct for CcNoticeAccount
 type CcNoticeAccount struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName string `json:"resource_name"`
+	Lang CcNoticeAccountLang `json:"lang"`
 	// アカウント名
 	Name  string               `json:"name"`
-	Lang  CcNoticeAccountLang  `json:"lang"`
 	Props CcNoticeAccountProps `json:"props"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName string `json:"resource_name"`
 }
 
 type _CcNoticeAccount CcNoticeAccount
@@ -35,12 +35,12 @@ type _CcNoticeAccount CcNoticeAccount
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCcNoticeAccount(resourceName string, name string, lang CcNoticeAccountLang, props CcNoticeAccountProps) *CcNoticeAccount {
+func NewCcNoticeAccount(lang CcNoticeAccountLang, name string, props CcNoticeAccountProps, resourceName string) *CcNoticeAccount {
 	this := CcNoticeAccount{}
-	this.ResourceName = resourceName
-	this.Name = name
 	this.Lang = lang
+	this.Name = name
 	this.Props = props
+	this.ResourceName = resourceName
 	return &this
 }
 
@@ -50,54 +50,6 @@ func NewCcNoticeAccount(resourceName string, name string, lang CcNoticeAccountLa
 func NewCcNoticeAccountWithDefaults() *CcNoticeAccount {
 	this := CcNoticeAccount{}
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value
-func (o *CcNoticeAccount) GetResourceName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value
-// and a boolean to check if the value has been set.
-func (o *CcNoticeAccount) GetResourceNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ResourceName, true
-}
-
-// SetResourceName sets field value
-func (o *CcNoticeAccount) SetResourceName(v string) {
-	o.ResourceName = v
-}
-
-// GetName returns the Name field value
-func (o *CcNoticeAccount) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *CcNoticeAccount) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *CcNoticeAccount) SetName(v string) {
-	o.Name = v
 }
 
 // GetLang returns the Lang field value
@@ -124,6 +76,30 @@ func (o *CcNoticeAccount) SetLang(v CcNoticeAccountLang) {
 	o.Lang = v
 }
 
+// GetName returns the Name field value
+func (o *CcNoticeAccount) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *CcNoticeAccount) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *CcNoticeAccount) SetName(v string) {
+	o.Name = v
+}
+
 // GetProps returns the Props field value
 func (o *CcNoticeAccount) GetProps() CcNoticeAccountProps {
 	if o == nil {
@@ -148,6 +124,30 @@ func (o *CcNoticeAccount) SetProps(v CcNoticeAccountProps) {
 	o.Props = v
 }
 
+// GetResourceName returns the ResourceName field value
+func (o *CcNoticeAccount) GetResourceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value
+// and a boolean to check if the value has been set.
+func (o *CcNoticeAccount) GetResourceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ResourceName, true
+}
+
+// SetResourceName sets field value
+func (o *CcNoticeAccount) SetResourceName(v string) {
+	o.ResourceName = v
+}
+
 func (o CcNoticeAccount) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -158,10 +158,10 @@ func (o CcNoticeAccount) MarshalJSON() ([]byte, error) {
 
 func (o CcNoticeAccount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["resource_name"] = o.ResourceName
-	toSerialize["name"] = o.Name
 	toSerialize["lang"] = o.Lang
+	toSerialize["name"] = o.Name
 	toSerialize["props"] = o.Props
+	toSerialize["resource_name"] = o.ResourceName
 	return toSerialize, nil
 }
 
@@ -170,10 +170,10 @@ func (o *CcNoticeAccount) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"resource_name",
-		"name",
 		"lang",
+		"name",
 		"props",
+		"resource_name",
 	}
 
 	allProperties := make(map[string]interface{})

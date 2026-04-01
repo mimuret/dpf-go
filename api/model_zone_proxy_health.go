@@ -23,9 +23,9 @@ var _ MappedNullable = &ZoneProxyHealth{}
 type ZoneProxyHealth struct {
 	// IPアドレス
 	Address  string           `json:"address"`
+	Enabled  ZoneProxyEnabled `json:"enabled"`
 	Status   ZoneProxyStatus  `json:"status"`
 	TsigName string           `json:"tsig_name"`
-	Enabled  ZoneProxyEnabled `json:"enabled"`
 }
 
 type _ZoneProxyHealth ZoneProxyHealth
@@ -34,12 +34,12 @@ type _ZoneProxyHealth ZoneProxyHealth
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewZoneProxyHealth(address string, status ZoneProxyStatus, tsigName string, enabled ZoneProxyEnabled) *ZoneProxyHealth {
+func NewZoneProxyHealth(address string, enabled ZoneProxyEnabled, status ZoneProxyStatus, tsigName string) *ZoneProxyHealth {
 	this := ZoneProxyHealth{}
 	this.Address = address
+	this.Enabled = enabled
 	this.Status = status
 	this.TsigName = tsigName
-	this.Enabled = enabled
 	return &this
 }
 
@@ -73,6 +73,30 @@ func (o *ZoneProxyHealth) GetAddressOk() (*string, bool) {
 // SetAddress sets field value
 func (o *ZoneProxyHealth) SetAddress(v string) {
 	o.Address = v
+}
+
+// GetEnabled returns the Enabled field value
+func (o *ZoneProxyHealth) GetEnabled() ZoneProxyEnabled {
+	if o == nil {
+		var ret ZoneProxyEnabled
+		return ret
+	}
+
+	return o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value
+// and a boolean to check if the value has been set.
+func (o *ZoneProxyHealth) GetEnabledOk() (*ZoneProxyEnabled, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Enabled, true
+}
+
+// SetEnabled sets field value
+func (o *ZoneProxyHealth) SetEnabled(v ZoneProxyEnabled) {
+	o.Enabled = v
 }
 
 // GetStatus returns the Status field value
@@ -123,30 +147,6 @@ func (o *ZoneProxyHealth) SetTsigName(v string) {
 	o.TsigName = v
 }
 
-// GetEnabled returns the Enabled field value
-func (o *ZoneProxyHealth) GetEnabled() ZoneProxyEnabled {
-	if o == nil {
-		var ret ZoneProxyEnabled
-		return ret
-	}
-
-	return o.Enabled
-}
-
-// GetEnabledOk returns a tuple with the Enabled field value
-// and a boolean to check if the value has been set.
-func (o *ZoneProxyHealth) GetEnabledOk() (*ZoneProxyEnabled, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Enabled, true
-}
-
-// SetEnabled sets field value
-func (o *ZoneProxyHealth) SetEnabled(v ZoneProxyEnabled) {
-	o.Enabled = v
-}
-
 func (o ZoneProxyHealth) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -158,9 +158,9 @@ func (o ZoneProxyHealth) MarshalJSON() ([]byte, error) {
 func (o ZoneProxyHealth) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["address"] = o.Address
+	toSerialize["enabled"] = o.Enabled
 	toSerialize["status"] = o.Status
 	toSerialize["tsig_name"] = o.TsigName
-	toSerialize["enabled"] = o.Enabled
 	return toSerialize, nil
 }
 
@@ -170,9 +170,9 @@ func (o *ZoneProxyHealth) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"address",
+		"enabled",
 		"status",
 		"tsig_name",
-		"enabled",
 	}
 
 	allProperties := make(map[string]interface{})

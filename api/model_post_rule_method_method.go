@@ -21,14 +21,14 @@ var _ MappedNullable = &PostRuleMethodMethod{}
 
 // PostRuleMethodMethod struct for PostRuleMethodMethod
 type PostRuleMethodMethod struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName *string `json:"resource_name,omitempty"`
+	// 状態
+	Enabled *bool `json:"enabled,omitempty"`
 	// メソッド種別
 	Mtype string `json:"mtype"`
 	// 親メソッドのリソース名（mtype が failover/exit_site/exit_sorry の場合は必須）
 	ParentResourceName *string `json:"parent_resource_name,omitempty"`
-	// 状態
-	Enabled *bool `json:"enabled,omitempty"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName *string `json:"resource_name,omitempty"`
 	// 紐付けされているサイトのリソース名（mtype が exit_site の場合のみ指定）
 	SiteResourceName *string `json:"site_resource_name,omitempty"`
 }
@@ -41,9 +41,9 @@ type _PostRuleMethodMethod PostRuleMethodMethod
 // will change when the set of required properties is changed
 func NewPostRuleMethodMethod(mtype string) *PostRuleMethodMethod {
 	this := PostRuleMethodMethod{}
-	this.Mtype = mtype
 	var enabled bool = false
 	this.Enabled = &enabled
+	this.Mtype = mtype
 	return &this
 }
 
@@ -57,36 +57,36 @@ func NewPostRuleMethodMethodWithDefaults() *PostRuleMethodMethod {
 	return &this
 }
 
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
-func (o *PostRuleMethodMethod) GetResourceName() string {
-	if o == nil || IsNil(o.ResourceName) {
-		var ret string
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *PostRuleMethodMethod) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
 		return ret
 	}
-	return *o.ResourceName
+	return *o.Enabled
 }
 
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PostRuleMethodMethod) GetResourceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceName) {
+func (o *PostRuleMethodMethod) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
-	return o.ResourceName, true
+	return o.Enabled, true
 }
 
-// HasResourceName returns a boolean if a field has been set.
-func (o *PostRuleMethodMethod) HasResourceName() bool {
-	if o != nil && !IsNil(o.ResourceName) {
+// HasEnabled returns a boolean if a field has been set.
+func (o *PostRuleMethodMethod) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
 	return false
 }
 
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
-func (o *PostRuleMethodMethod) SetResourceName(v string) {
-	o.ResourceName = &v
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *PostRuleMethodMethod) SetEnabled(v bool) {
+	o.Enabled = &v
 }
 
 // GetMtype returns the Mtype field value
@@ -145,36 +145,36 @@ func (o *PostRuleMethodMethod) SetParentResourceName(v string) {
 	o.ParentResourceName = &v
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *PostRuleMethodMethod) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
-		var ret bool
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *PostRuleMethodMethod) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
 		return ret
 	}
-	return *o.Enabled
+	return *o.ResourceName
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PostRuleMethodMethod) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+func (o *PostRuleMethodMethod) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
 		return nil, false
 	}
-	return o.Enabled, true
+	return o.ResourceName, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *PostRuleMethodMethod) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+// HasResourceName returns a boolean if a field has been set.
+func (o *PostRuleMethodMethod) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
 		return true
 	}
 
 	return false
 }
 
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *PostRuleMethodMethod) SetEnabled(v bool) {
-	o.Enabled = &v
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *PostRuleMethodMethod) SetResourceName(v string) {
+	o.ResourceName = &v
 }
 
 // GetSiteResourceName returns the SiteResourceName field value if set, zero value otherwise.
@@ -219,15 +219,15 @@ func (o PostRuleMethodMethod) MarshalJSON() ([]byte, error) {
 
 func (o PostRuleMethodMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResourceName) {
-		toSerialize["resource_name"] = o.ResourceName
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
 	}
 	toSerialize["mtype"] = o.Mtype
 	if !IsNil(o.ParentResourceName) {
 		toSerialize["parent_resource_name"] = o.ParentResourceName
 	}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
 	}
 	if !IsNil(o.SiteResourceName) {
 		toSerialize["site_resource_name"] = o.SiteResourceName

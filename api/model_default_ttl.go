@@ -21,11 +21,11 @@ var _ MappedNullable = &DefaultTtl{}
 
 // DefaultTtl struct for DefaultTtl
 type DefaultTtl struct {
-	// TTL
-	Value int32           `json:"value"`
-	State DefaultTtlState `json:"state"`
 	// 編集者
-	Operator NullableString `json:"operator"`
+	Operator NullableString  `json:"operator"`
+	State    DefaultTtlState `json:"state"`
+	// TTL
+	Value int32 `json:"value"`
 }
 
 type _DefaultTtl DefaultTtl
@@ -34,11 +34,11 @@ type _DefaultTtl DefaultTtl
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDefaultTtl(value int32, state DefaultTtlState, operator NullableString) *DefaultTtl {
+func NewDefaultTtl(operator NullableString, state DefaultTtlState, value int32) *DefaultTtl {
 	this := DefaultTtl{}
-	this.Value = value
-	this.State = state
 	this.Operator = operator
+	this.State = state
+	this.Value = value
 	return &this
 }
 
@@ -48,54 +48,6 @@ func NewDefaultTtl(value int32, state DefaultTtlState, operator NullableString) 
 func NewDefaultTtlWithDefaults() *DefaultTtl {
 	this := DefaultTtl{}
 	return &this
-}
-
-// GetValue returns the Value field value
-func (o *DefaultTtl) GetValue() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Value
-}
-
-// GetValueOk returns a tuple with the Value field value
-// and a boolean to check if the value has been set.
-func (o *DefaultTtl) GetValueOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Value, true
-}
-
-// SetValue sets field value
-func (o *DefaultTtl) SetValue(v int32) {
-	o.Value = v
-}
-
-// GetState returns the State field value
-func (o *DefaultTtl) GetState() DefaultTtlState {
-	if o == nil {
-		var ret DefaultTtlState
-		return ret
-	}
-
-	return o.State
-}
-
-// GetStateOk returns a tuple with the State field value
-// and a boolean to check if the value has been set.
-func (o *DefaultTtl) GetStateOk() (*DefaultTtlState, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.State, true
-}
-
-// SetState sets field value
-func (o *DefaultTtl) SetState(v DefaultTtlState) {
-	o.State = v
 }
 
 // GetOperator returns the Operator field value
@@ -124,6 +76,54 @@ func (o *DefaultTtl) SetOperator(v string) {
 	o.Operator.Set(&v)
 }
 
+// GetState returns the State field value
+func (o *DefaultTtl) GetState() DefaultTtlState {
+	if o == nil {
+		var ret DefaultTtlState
+		return ret
+	}
+
+	return o.State
+}
+
+// GetStateOk returns a tuple with the State field value
+// and a boolean to check if the value has been set.
+func (o *DefaultTtl) GetStateOk() (*DefaultTtlState, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.State, true
+}
+
+// SetState sets field value
+func (o *DefaultTtl) SetState(v DefaultTtlState) {
+	o.State = v
+}
+
+// GetValue returns the Value field value
+func (o *DefaultTtl) GetValue() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value
+// and a boolean to check if the value has been set.
+func (o *DefaultTtl) GetValueOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Value, true
+}
+
+// SetValue sets field value
+func (o *DefaultTtl) SetValue(v int32) {
+	o.Value = v
+}
+
 func (o DefaultTtl) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -134,9 +134,9 @@ func (o DefaultTtl) MarshalJSON() ([]byte, error) {
 
 func (o DefaultTtl) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["value"] = o.Value
-	toSerialize["state"] = o.State
 	toSerialize["operator"] = o.Operator.Get()
+	toSerialize["state"] = o.State
+	toSerialize["value"] = o.Value
 	return toSerialize, nil
 }
 
@@ -145,9 +145,9 @@ func (o *DefaultTtl) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"value",
-		"state",
 		"operator",
+		"state",
+		"value",
 	}
 
 	allProperties := make(map[string]interface{})

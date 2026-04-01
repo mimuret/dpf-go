@@ -22,8 +22,8 @@ var _ MappedNullable = &Config{}
 // Config struct for Config
 type Config struct {
 	Monitorings []Monitoring       `json:"monitorings"`
-	Sites       []ConfigSitesInner `json:"sites"`
 	Rules       []ConfigRulesInner `json:"rules"`
+	Sites       []ConfigSitesInner `json:"sites"`
 }
 
 type _Config Config
@@ -32,11 +32,11 @@ type _Config Config
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfig(monitorings []Monitoring, sites []ConfigSitesInner, rules []ConfigRulesInner) *Config {
+func NewConfig(monitorings []Monitoring, rules []ConfigRulesInner, sites []ConfigSitesInner) *Config {
 	this := Config{}
 	this.Monitorings = monitorings
-	this.Sites = sites
 	this.Rules = rules
+	this.Sites = sites
 	return &this
 }
 
@@ -72,30 +72,6 @@ func (o *Config) SetMonitorings(v []Monitoring) {
 	o.Monitorings = v
 }
 
-// GetSites returns the Sites field value
-func (o *Config) GetSites() []ConfigSitesInner {
-	if o == nil {
-		var ret []ConfigSitesInner
-		return ret
-	}
-
-	return o.Sites
-}
-
-// GetSitesOk returns a tuple with the Sites field value
-// and a boolean to check if the value has been set.
-func (o *Config) GetSitesOk() ([]ConfigSitesInner, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Sites, true
-}
-
-// SetSites sets field value
-func (o *Config) SetSites(v []ConfigSitesInner) {
-	o.Sites = v
-}
-
 // GetRules returns the Rules field value
 func (o *Config) GetRules() []ConfigRulesInner {
 	if o == nil {
@@ -120,6 +96,30 @@ func (o *Config) SetRules(v []ConfigRulesInner) {
 	o.Rules = v
 }
 
+// GetSites returns the Sites field value
+func (o *Config) GetSites() []ConfigSitesInner {
+	if o == nil {
+		var ret []ConfigSitesInner
+		return ret
+	}
+
+	return o.Sites
+}
+
+// GetSitesOk returns a tuple with the Sites field value
+// and a boolean to check if the value has been set.
+func (o *Config) GetSitesOk() ([]ConfigSitesInner, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Sites, true
+}
+
+// SetSites sets field value
+func (o *Config) SetSites(v []ConfigSitesInner) {
+	o.Sites = v
+}
+
 func (o Config) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -131,8 +131,8 @@ func (o Config) MarshalJSON() ([]byte, error) {
 func (o Config) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["monitorings"] = o.Monitorings
-	toSerialize["sites"] = o.Sites
 	toSerialize["rules"] = o.Rules
+	toSerialize["sites"] = o.Sites
 	return toSerialize, nil
 }
 
@@ -142,8 +142,8 @@ func (o *Config) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"monitorings",
-		"sites",
 		"rules",
+		"sites",
 	}
 
 	allProperties := make(map[string]interface{})

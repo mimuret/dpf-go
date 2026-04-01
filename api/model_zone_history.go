@@ -22,10 +22,10 @@ var _ MappedNullable = &ZoneHistory{}
 
 // ZoneHistory struct for ZoneHistory
 type ZoneHistory struct {
-	Id          int64     `json:"id"`
 	CommittedAt time.Time `json:"committed_at"`
 	// コメント
 	Description string `json:"description"`
+	Id          int64  `json:"id"`
 	// 編集者
 	Operator NullableString `json:"operator"`
 }
@@ -36,11 +36,11 @@ type _ZoneHistory ZoneHistory
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewZoneHistory(id int64, committedAt time.Time, description string, operator NullableString) *ZoneHistory {
+func NewZoneHistory(committedAt time.Time, description string, id int64, operator NullableString) *ZoneHistory {
 	this := ZoneHistory{}
-	this.Id = id
 	this.CommittedAt = committedAt
 	this.Description = description
+	this.Id = id
 	this.Operator = operator
 	return &this
 }
@@ -53,30 +53,6 @@ func NewZoneHistoryWithDefaults() *ZoneHistory {
 	var description string = ""
 	this.Description = description
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *ZoneHistory) GetId() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *ZoneHistory) GetIdOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *ZoneHistory) SetId(v int64) {
-	o.Id = v
 }
 
 // GetCommittedAt returns the CommittedAt field value
@@ -127,6 +103,30 @@ func (o *ZoneHistory) SetDescription(v string) {
 	o.Description = v
 }
 
+// GetId returns the Id field value
+func (o *ZoneHistory) GetId() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *ZoneHistory) GetIdOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *ZoneHistory) SetId(v int64) {
+	o.Id = v
+}
+
 // GetOperator returns the Operator field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *ZoneHistory) GetOperator() string {
@@ -163,9 +163,9 @@ func (o ZoneHistory) MarshalJSON() ([]byte, error) {
 
 func (o ZoneHistory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
 	toSerialize["committed_at"] = o.CommittedAt
 	toSerialize["description"] = o.Description
+	toSerialize["id"] = o.Id
 	toSerialize["operator"] = o.Operator.Get()
 	return toSerialize, nil
 }
@@ -175,9 +175,9 @@ func (o *ZoneHistory) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"committed_at",
 		"description",
+		"id",
 		"operator",
 	}
 

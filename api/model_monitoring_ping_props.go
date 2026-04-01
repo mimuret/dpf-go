@@ -21,11 +21,11 @@ var _ MappedNullable = &MonitoringPingProps{}
 
 // MonitoringPingProps struct for MonitoringPingProps
 type MonitoringPingProps struct {
-	Location MonitoringPropsLocation `json:"location"`
-	// 監視間隔（s）
-	Interval int32 `json:"interval"`
 	// 保留時間（s）
 	Holdtime int32 `json:"holdtime"`
+	// 監視間隔（s）
+	Interval int32                   `json:"interval"`
+	Location MonitoringPropsLocation `json:"location"`
 	// タイムアウト（s）
 	Timeout int32 `json:"timeout"`
 }
@@ -36,11 +36,11 @@ type _MonitoringPingProps MonitoringPingProps
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMonitoringPingProps(location MonitoringPropsLocation, interval int32, holdtime int32, timeout int32) *MonitoringPingProps {
+func NewMonitoringPingProps(holdtime int32, interval int32, location MonitoringPropsLocation, timeout int32) *MonitoringPingProps {
 	this := MonitoringPingProps{}
-	this.Location = location
-	this.Interval = interval
 	this.Holdtime = holdtime
+	this.Interval = interval
+	this.Location = location
 	this.Timeout = timeout
 	return &this
 }
@@ -50,39 +50,39 @@ func NewMonitoringPingProps(location MonitoringPropsLocation, interval int32, ho
 // but it doesn't guarantee that properties required by API are set
 func NewMonitoringPingPropsWithDefaults() *MonitoringPingProps {
 	this := MonitoringPingProps{}
-	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
-	this.Location = location
-	var interval int32 = 30
-	this.Interval = interval
 	var holdtime int32 = 0
 	this.Holdtime = holdtime
+	var interval int32 = 30
+	this.Interval = interval
+	var location MonitoringPropsLocation = MONITORINGPROPSLOCATION_ALL
+	this.Location = location
 	var timeout int32 = 5
 	this.Timeout = timeout
 	return &this
 }
 
-// GetLocation returns the Location field value
-func (o *MonitoringPingProps) GetLocation() MonitoringPropsLocation {
+// GetHoldtime returns the Holdtime field value
+func (o *MonitoringPingProps) GetHoldtime() int32 {
 	if o == nil {
-		var ret MonitoringPropsLocation
+		var ret int32
 		return ret
 	}
 
-	return o.Location
+	return o.Holdtime
 }
 
-// GetLocationOk returns a tuple with the Location field value
+// GetHoldtimeOk returns a tuple with the Holdtime field value
 // and a boolean to check if the value has been set.
-func (o *MonitoringPingProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
+func (o *MonitoringPingProps) GetHoldtimeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Location, true
+	return &o.Holdtime, true
 }
 
-// SetLocation sets field value
-func (o *MonitoringPingProps) SetLocation(v MonitoringPropsLocation) {
-	o.Location = v
+// SetHoldtime sets field value
+func (o *MonitoringPingProps) SetHoldtime(v int32) {
+	o.Holdtime = v
 }
 
 // GetInterval returns the Interval field value
@@ -109,28 +109,28 @@ func (o *MonitoringPingProps) SetInterval(v int32) {
 	o.Interval = v
 }
 
-// GetHoldtime returns the Holdtime field value
-func (o *MonitoringPingProps) GetHoldtime() int32 {
+// GetLocation returns the Location field value
+func (o *MonitoringPingProps) GetLocation() MonitoringPropsLocation {
 	if o == nil {
-		var ret int32
+		var ret MonitoringPropsLocation
 		return ret
 	}
 
-	return o.Holdtime
+	return o.Location
 }
 
-// GetHoldtimeOk returns a tuple with the Holdtime field value
+// GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
-func (o *MonitoringPingProps) GetHoldtimeOk() (*int32, bool) {
+func (o *MonitoringPingProps) GetLocationOk() (*MonitoringPropsLocation, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Holdtime, true
+	return &o.Location, true
 }
 
-// SetHoldtime sets field value
-func (o *MonitoringPingProps) SetHoldtime(v int32) {
-	o.Holdtime = v
+// SetLocation sets field value
+func (o *MonitoringPingProps) SetLocation(v MonitoringPropsLocation) {
+	o.Location = v
 }
 
 // GetTimeout returns the Timeout field value
@@ -167,9 +167,9 @@ func (o MonitoringPingProps) MarshalJSON() ([]byte, error) {
 
 func (o MonitoringPingProps) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["location"] = o.Location
-	toSerialize["interval"] = o.Interval
 	toSerialize["holdtime"] = o.Holdtime
+	toSerialize["interval"] = o.Interval
+	toSerialize["location"] = o.Location
 	toSerialize["timeout"] = o.Timeout
 	return toSerialize, nil
 }
@@ -179,9 +179,9 @@ func (o *MonitoringPingProps) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"location",
-		"interval",
 		"holdtime",
+		"interval",
+		"location",
 		"timeout",
 	}
 

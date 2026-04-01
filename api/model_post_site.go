@@ -21,13 +21,13 @@ var _ MappedNullable = &PostSite{}
 
 // PostSite struct for PostSite
 type PostSite struct {
-	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
-	ResourceName *string `json:"resource_name,omitempty"`
-	// サイト名
-	Name   string     `json:"name"`
-	Rrtype SiteRrtype `json:"rrtype"`
 	// コメント
 	Description *string `json:"description,omitempty"`
+	// サイト名
+	Name string `json:"name"`
+	// 登録可能な文字列は[**こちら**](https://manual.iij.jp/dpf/help/19629152.html#DNS%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%99%BB%E9%8C%B2%E3%83%AB%E3%83%BC%E3%83%AB-%E3%83%9B%E3%82%B9%E3%83%88%E5%90%8D%E3%81%AE%E5%85%B1%E9%80%9A%E3%83%AB%E3%83%BC%E3%83%AB)のホスト名の共通ルールを参照してください。
+	ResourceName *string    `json:"resource_name,omitempty"`
+	Rrtype       SiteRrtype `json:"rrtype"`
 }
 
 type _PostSite PostSite
@@ -38,10 +38,10 @@ type _PostSite PostSite
 // will change when the set of required properties is changed
 func NewPostSite(name string, rrtype SiteRrtype) *PostSite {
 	this := PostSite{}
-	this.Name = name
-	this.Rrtype = rrtype
 	var description string = ""
 	this.Description = &description
+	this.Name = name
+	this.Rrtype = rrtype
 	return &this
 }
 
@@ -53,86 +53,6 @@ func NewPostSiteWithDefaults() *PostSite {
 	var description string = ""
 	this.Description = &description
 	return &this
-}
-
-// GetResourceName returns the ResourceName field value if set, zero value otherwise.
-func (o *PostSite) GetResourceName() string {
-	if o == nil || IsNil(o.ResourceName) {
-		var ret string
-		return ret
-	}
-	return *o.ResourceName
-}
-
-// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PostSite) GetResourceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ResourceName) {
-		return nil, false
-	}
-	return o.ResourceName, true
-}
-
-// HasResourceName returns a boolean if a field has been set.
-func (o *PostSite) HasResourceName() bool {
-	if o != nil && !IsNil(o.ResourceName) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
-func (o *PostSite) SetResourceName(v string) {
-	o.ResourceName = &v
-}
-
-// GetName returns the Name field value
-func (o *PostSite) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *PostSite) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *PostSite) SetName(v string) {
-	o.Name = v
-}
-
-// GetRrtype returns the Rrtype field value
-func (o *PostSite) GetRrtype() SiteRrtype {
-	if o == nil {
-		var ret SiteRrtype
-		return ret
-	}
-
-	return o.Rrtype
-}
-
-// GetRrtypeOk returns a tuple with the Rrtype field value
-// and a boolean to check if the value has been set.
-func (o *PostSite) GetRrtypeOk() (*SiteRrtype, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Rrtype, true
-}
-
-// SetRrtype sets field value
-func (o *PostSite) SetRrtype(v SiteRrtype) {
-	o.Rrtype = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -167,6 +87,86 @@ func (o *PostSite) SetDescription(v string) {
 	o.Description = &v
 }
 
+// GetName returns the Name field value
+func (o *PostSite) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *PostSite) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *PostSite) SetName(v string) {
+	o.Name = v
+}
+
+// GetResourceName returns the ResourceName field value if set, zero value otherwise.
+func (o *PostSite) GetResourceName() string {
+	if o == nil || IsNil(o.ResourceName) {
+		var ret string
+		return ret
+	}
+	return *o.ResourceName
+}
+
+// GetResourceNameOk returns a tuple with the ResourceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostSite) GetResourceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ResourceName) {
+		return nil, false
+	}
+	return o.ResourceName, true
+}
+
+// HasResourceName returns a boolean if a field has been set.
+func (o *PostSite) HasResourceName() bool {
+	if o != nil && !IsNil(o.ResourceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceName gets a reference to the given string and assigns it to the ResourceName field.
+func (o *PostSite) SetResourceName(v string) {
+	o.ResourceName = &v
+}
+
+// GetRrtype returns the Rrtype field value
+func (o *PostSite) GetRrtype() SiteRrtype {
+	if o == nil {
+		var ret SiteRrtype
+		return ret
+	}
+
+	return o.Rrtype
+}
+
+// GetRrtypeOk returns a tuple with the Rrtype field value
+// and a boolean to check if the value has been set.
+func (o *PostSite) GetRrtypeOk() (*SiteRrtype, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Rrtype, true
+}
+
+// SetRrtype sets field value
+func (o *PostSite) SetRrtype(v SiteRrtype) {
+	o.Rrtype = v
+}
+
 func (o PostSite) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -177,14 +177,14 @@ func (o PostSite) MarshalJSON() ([]byte, error) {
 
 func (o PostSite) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ResourceName) {
-		toSerialize["resource_name"] = o.ResourceName
-	}
-	toSerialize["name"] = o.Name
-	toSerialize["rrtype"] = o.Rrtype
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.ResourceName) {
+		toSerialize["resource_name"] = o.ResourceName
+	}
+	toSerialize["rrtype"] = o.Rrtype
 	return toSerialize, nil
 }
 
