@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -104,15 +105,19 @@ func TestGetRecordByName(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			record, _, err := client.RecordsAPI.GetRecordByName(context.Background(), zoneID, tt.targetDomainName, tt.rrtype)
-			if err != nil {
-				t.Fatalf("unexpected error: %v", err)
-			}
 
 			if tt.expectNil {
+				if !errors.Is(err, ErrRecordNotFound) {
+					t.Fatalf("expected ErrRecordNotFound, got %v", err)
+				}
 				if record != nil {
 					t.Errorf("expected nil result, got %s", record.Id)
 				}
 				return
+			}
+
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
 			}
 
 			if record == nil {
@@ -139,4 +144,84 @@ func TestGetRecordByName_Error(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error, got nil")
 	}
+}
+
+func TestUpsertRecord(t *testing.T) {
+	zoneID := "Z0000000000001"
+	recordID := "R0000000000001"
+	existingRecord := Record{Id: recordID, Name: "www.example.jp.", Rrtype: RECORDSRRTYPE_A}
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("X-Request-Id", "test-req-id")
+
+		// GetRecordByName (GetRecordList)
+		if r.Method == http.MethodGet && r.URL.Path == "/zones/"+zoneID+"/records" {
+			name := r.URL.Query().Get("_keywords_name[]")
+			var results []Record
+			if name == "www.example.jp." {
+				results = append(results, existingRecord)
+			}
+			_ = json.NewEncoder(w).Encode(GetRecords{
+				RequestId: "test-req-id",
+				Results:   results,
+			})
+			return
+		}
+
+		// PostRecord
+		if r.Method == http.MethodPost && r.URL.Path == "/zones/"+zoneID+"/records" {
+			var post PostRecord
+			if err := json.NewDecoder(r.Body).Decode(&post); err != nil {
+				t.Errorf("failed to decode post body: %v", err)
+			}
+			_ = json.NewEncoder(w).Encode(AsyncResponse{
+				RequestId: "test-req-id",
+				JobsUrl:   "https://api.dns-platform.jp/dpf/v1/jobs/test-req-id",
+			})
+			return
+		}
+
+		// PatchRecord
+		if r.Method == http.MethodPatch && r.URL.Path == "/zones/"+zoneID+"/records/"+recordID {
+			var patch PatchRecord
+			if err := json.NewDecoder(r.Body).Decode(&patch); err != nil {
+				t.Errorf("failed to decode patch body: %v", err)
+			}
+			_ = json.NewEncoder(w).Encode(AsyncResponse{
+				RequestId: "test-req-id",
+				JobsUrl:   "https://api.dns-platform.jp/dpf/v1/jobs/test-req-id",
+			})
+			return
+		}
+
+		w.WriteHeader(http.StatusNotFound)
+	}))
+	defer ts.Close()
+
+	cfg := NewConfiguration()
+	cfg.Servers = ServerConfigurations{{URL: ts.URL}}
+	client := NewAPIClient(cfg)
+
+	t.Run("新規作成 (PostRecord)", func(t *testing.T) {
+		post := NewPostRecord("new.example.jp.", []RecordsRdataInner{{Value: PtrString("192.0.2.1")}}, RECORDSRRTYPEWITHOUTSOA_A)
+		res, _, err := client.RecordsAPI.UpsertRecord(context.Background(), zoneID, *post)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+		if res.RequestId != "test-req-id" {
+			t.Errorf("expected RequestId test-req-id, got %s", res.RequestId)
+		}
+	})
+
+	t.Run("更新 (PatchRecord)", func(t *testing.T) {
+		post := NewPostRecord("www.example.jp.", []RecordsRdataInner{{Value: PtrString("192.0.2.2")}}, RECORDSRRTYPEWITHOUTSOA_A)
+		res, _, err := client.RecordsAPI.UpsertRecord(context.Background(), zoneID, *post)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+		if res.RequestId != "test-req-id" {
+			t.Errorf("expected RequestId test-req-id, got %s", res.RequestId)
+		}
+	})
 }

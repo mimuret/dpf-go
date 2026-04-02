@@ -12,7 +12,7 @@ import (
 // GetZoneByDomainName は、指定されたドメイン名に対応するゾーンを取得します。
 // domainName をベースに親ドメインを辿り、ロンゲストマッチするゾーンを返します。
 // ds フラグが true の場合は、完全一致するドメイン名のゾーンを除外します。
-// APIエラーの場合は error を返し、ゾーンが見つからない場合は nil を返します。
+// APIエラーの場合は error を返し、ゾーンが見つからない場合は ErrZoneNotFound を返します。
 func (a *ZonesAPIService) GetZoneByDomainName(ctx context.Context, domainName string, ds bool) (bestMatch *Zone, httpResp *http.Response, err error) {
 	ctx, span := a.client.tracer.Start(ctx, "ZonesAPIService.GetZoneByDomainName")
 	defer func() {
@@ -51,6 +51,10 @@ func (a *ZonesAPIService) GetZoneByDomainName(ctx context.Context, domainName st
 				}
 			}
 		}
+	}
+
+	if bestMatch == nil {
+		return nil, httpResp, ErrZoneNotFound
 	}
 
 	return bestMatch, httpResp, nil

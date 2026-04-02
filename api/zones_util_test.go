@@ -50,7 +50,7 @@ func TestGetZoneByDomainName(t *testing.T) {
 		domainName string
 		ds         bool
 		wantName   string
-		expectNil  bool
+		wantErr    error
 	}{
 		{
 			name:       "ロンゲストマッチ: サブドメインから最短の親",
@@ -74,7 +74,7 @@ func TestGetZoneByDomainName(t *testing.T) {
 			name:       "完全一致除外: ds=true",
 			domainName: "example.jp.",
 			ds:         true,
-			expectNil:  true,
+			wantErr:    ErrZoneNotFound,
 		},
 		{
 			name:       "完全一致除外: ds=true (サブドメイン)",
@@ -86,13 +86,13 @@ func TestGetZoneByDomainName(t *testing.T) {
 			name:       "TLDマッチ (TLDは検索対象外のためマッチしない)",
 			domainName: "test.jp.",
 			ds:         false,
-			expectNil:  true,
+			wantErr:    ErrZoneNotFound,
 		},
 		{
 			name:       "マッチなし",
 			domainName: "example.com.",
 			ds:         false,
-			expectNil:  true,
+			wantErr:    ErrZoneNotFound,
 		},
 		{
 			name:       "エスケープされたドットを含むドメイン名",
@@ -105,15 +105,14 @@ func TestGetZoneByDomainName(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			zone, _, err := client.ZonesAPI.GetZoneByDomainName(context.Background(), tt.domainName, tt.ds)
-			if err != nil {
-				t.Fatalf("unexpected error: %v", err)
-			}
-
-			if tt.expectNil {
-				if zone != nil {
-					t.Errorf("expected nil result, got %s", zone.Name)
+			if tt.wantErr != nil {
+				if err != tt.wantErr {
+					t.Errorf("expected error %v, got %v", tt.wantErr, err)
 				}
 				return
+			}
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
 			}
 
 			if zone == nil {
