@@ -8,10 +8,10 @@ import (
 )
 
 func TestIntegrationUpsertRecord(t *testing.T) {
-	token := os.Getenv("DPF_TOKEN")
+	token := os.Getenv("DPF_API_TOKEN")
 	zoneId := os.Getenv("DPF_ZONE_ID")
 	if token == "" || zoneId == "" {
-		t.Skip("DPF_TOKEN and DPF_ZONE_ID are required for integration tests")
+		t.Skip("DPF_API_TOKEN and DPF_ZONE_ID are required for integration tests")
 	}
 
 	cfg := NewConfiguration()

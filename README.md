@@ -41,7 +41,7 @@ func main() {
 	client := api.NewAPIClient(cfg)
 
 	// IIJ ID アクセストークンの設定
-	token := os.Getenv("DPF_TOKEN")
+	token := os.Getenv("DPF_API_TOKEN")
 	ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
 
 	// 全てのゾーンを取得 (ExecuteAll はページネーションを自動で行います)

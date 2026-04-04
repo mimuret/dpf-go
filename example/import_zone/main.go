@@ -98,13 +98,13 @@ func RunImport(ctx context.Context, client *api.APIClient, zoneId string, zoneNa
 }
 
 func main() {
-	token := os.Getenv("DPF_TOKEN")
+	token := os.Getenv("DPF_API_TOKEN")
 	zoneId := os.Getenv("DPF_ZONE_ID")
 	zoneName := os.Getenv("DPF_ZONE_NAME")
 	zoneFile := os.Getenv("ZONE_FILE")
 
 	if token == "" || zoneId == "" || zoneName == "" || zoneFile == "" {
-		log.Fatal("DPF_TOKEN, DPF_ZONE_ID, DPF_ZONE_NAME, and ZONE_FILE environment variables are required")
+		log.Fatal("DPF_API_TOKEN, DPF_ZONE_ID, DPF_ZONE_NAME, and ZONE_FILE environment variables are required")
 	}
 
 	cfg := api.NewConfiguration()

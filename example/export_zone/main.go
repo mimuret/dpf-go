@@ -41,12 +41,12 @@ func RunExport(ctx context.Context, client *api.APIClient, zoneId string, output
 }
 
 func main() {
-	token := os.Getenv("DPF_TOKEN")
+	token := os.Getenv("DPF_API_TOKEN")
 	zoneId := os.Getenv("DPF_ZONE_ID")
 	outputFile := os.Getenv("OUTPUT_FILE")
 
 	if token == "" || zoneId == "" || outputFile == "" {
-		log.Fatal("DPF_TOKEN, DPF_ZONE_ID, and OUTPUT_FILE environment variables are required")
+		log.Fatal("DPF_API_TOKEN, DPF_ZONE_ID, and OUTPUT_FILE environment variables are required")
 	}
 
 	cfg := api.NewConfiguration()
